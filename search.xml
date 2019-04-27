@@ -8,10 +8,10 @@
         <category>supervisor</category>
       </categories>
       <tags>
-        <tag>教程</tag>
-        <tag>springboot</tag>
-        <tag>运维</tag>
         <tag>supervisor</tag>
+        <tag>运维</tag>
+        <tag>springboot</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -136,10 +136,10 @@
         <category>java</category>
       </categories>
       <tags>
+        <tag>springboot</tag>
         <tag>教程</tag>
         <tag>java</tag>
         <tag>spring</tag>
-        <tag>springboot</tag>
       </tags>
   </entry>
   <entry>
@@ -150,9 +150,9 @@
         <category>博客搭建</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>教程</tag>
         <tag>nodejs</tag>
+        <tag>教程</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
