@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/cuphead.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/cuphead.ico?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/cuphead.ico?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/cuphead.ico?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,js,javascript,服务器,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用nodejs 写一个文件服务器(还需改进)">
+<meta name="keywords" content="nodejs,js,javascript,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node js 文件服务器">
+<meta property="og:url" content="https://mylyed.github.io/2017/10/15/nodejs-file-servier/index.html">
+<meta property="og:site_name" content="李磊的笔记本">
+<meta property="og:description" content="用nodejs 写一个文件服务器(还需改进)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T14:37:16.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node js 文件服务器">
+<meta name="twitter:description" content="用nodejs 写一个文件服务器(还需改进)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mylyed.github.io/2017/10/15/nodejs-file-servier/">
+
+
+
+
+
+  <title>Node js 文件服务器 | 李磊的笔记本</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李磊的笔记本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">纸上得来终觉浅，绝知此事要躬行。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mylyed.github.io/2017/10/15/nodejs-file-servier/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李磊">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李磊的笔记本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node js 文件服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T00:00:00+08:00">
+                2017年10月15号
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用nodejs 写一个文件服务器(还需改进)<br> <a id="more"></a></p>
+<h2 id="默认配置如下"><a href="#默认配置如下" class="headerlink" title="默认配置如下"></a>默认配置如下</h2><ul>
+<li>端口号:80</li>
+<li>资源路径为 public</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br><span class="line">797</span><br><span class="line">798</span><br><span class="line">799</span><br><span class="line">800</span><br><span class="line">801</span><br><span class="line">802</span><br><span class="line">803</span><br><span class="line">804</span><br><span class="line">805</span><br><span class="line">806</span><br><span class="line">807</span><br><span class="line">808</span><br><span class="line">809</span><br><span class="line">810</span><br><span class="line">811</span><br><span class="line">812</span><br><span class="line">813</span><br><span class="line">814</span><br><span class="line">815</span><br><span class="line">816</span><br><span class="line">817</span><br><span class="line">818</span><br><span class="line">819</span><br><span class="line">820</span><br><span class="line">821</span><br><span class="line">822</span><br><span class="line">823</span><br><span class="line">824</span><br><span class="line">825</span><br><span class="line">826</span><br><span class="line">827</span><br><span class="line">828</span><br><span class="line">829</span><br><span class="line">830</span><br><span class="line">831</span><br><span class="line">832</span><br><span class="line">833</span><br><span class="line">834</span><br><span class="line">835</span><br><span class="line">836</span><br><span class="line">837</span><br><span class="line">838</span><br><span class="line">839</span><br><span class="line">840</span><br><span class="line">841</span><br><span class="line">842</span><br><span class="line">843</span><br><span class="line">844</span><br><span class="line">845</span><br><span class="line">846</span><br><span class="line">847</span><br><span class="line">848</span><br><span class="line">849</span><br><span class="line">850</span><br><span class="line">851</span><br><span class="line">852</span><br><span class="line">853</span><br><span class="line">854</span><br><span class="line">855</span><br><span class="line">856</span><br><span class="line">857</span><br><span class="line">858</span><br><span class="line">859</span><br><span class="line">860</span><br><span class="line">861</span><br><span class="line">862</span><br><span class="line">863</span><br><span class="line">864</span><br><span class="line">865</span><br><span class="line">866</span><br><span class="line">867</span><br><span class="line">868</span><br><span class="line">869</span><br><span class="line">870</span><br><span class="line">871</span><br><span class="line">872</span><br><span class="line">873</span><br><span class="line">874</span><br><span class="line">875</span><br><span class="line">876</span><br><span class="line">877</span><br><span class="line">878</span><br><span class="line">879</span><br><span class="line">880</span><br><span class="line">881</span><br><span class="line">882</span><br><span class="line">883</span><br><span class="line">884</span><br><span class="line">885</span><br><span class="line">886</span><br><span class="line">887</span><br><span class="line">888</span><br><span class="line">889</span><br><span class="line">890</span><br><span class="line">891</span><br><span class="line">892</span><br><span class="line">893</span><br><span class="line">894</span><br><span class="line">895</span><br><span class="line">896</span><br><span class="line">897</span><br><span class="line">898</span><br><span class="line">899</span><br><span class="line">900</span><br><span class="line">901</span><br><span class="line">902</span><br><span class="line">903</span><br><span class="line">904</span><br><span class="line">905</span><br><span class="line">906</span><br><span class="line">907</span><br><span class="line">908</span><br><span class="line">909</span><br><span class="line">910</span><br><span class="line">911</span><br><span class="line">912</span><br><span class="line">913</span><br><span class="line">914</span><br><span class="line">915</span><br><span class="line">916</span><br><span class="line">917</span><br><span class="line">918</span><br><span class="line">919</span><br><span class="line">920</span><br><span class="line">921</span><br><span class="line">922</span><br><span class="line">923</span><br><span class="line">924</span><br><span class="line">925</span><br><span class="line">926</span><br><span class="line">927</span><br><span class="line">928</span><br><span class="line">929</span><br><span class="line">930</span><br><span class="line">931</span><br><span class="line">932</span><br><span class="line">933</span><br><span class="line">934</span><br><span class="line">935</span><br><span class="line">936</span><br><span class="line">937</span><br><span class="line">938</span><br><span class="line">939</span><br><span class="line">940</span><br><span class="line">941</span><br><span class="line">942</span><br><span class="line">943</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//服务器端口号</span></span><br><span class="line"><span class="keyword">var</span> PORT = <span class="number">80</span>;</span><br><span class="line"><span class="comment">//资源路径</span></span><br><span class="line"><span class="keyword">var</span> RESOURCES_PATH = <span class="string">'public'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//http模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="comment">// 用于解析url</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</span><br><span class="line"><span class="keyword">var</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//支持多进程多核处理</span></span><br><span class="line"><span class="keyword">var</span> CPUS = os.cpus().length;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'cpu核心数:'</span> + CPUS)</span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"master start..."</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; CPUS; i++) &#123;</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    createServer();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建服务器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createServer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> pathname = url.parse(<span class="built_in">decodeURI</span>(request.url)).pathname;</span><br><span class="line">        <span class="keyword">var</span> realPath = path.join(RESOURCES_PATH, pathname);</span><br><span class="line">        <span class="comment">//获取后缀</span></span><br><span class="line">        <span class="keyword">var</span> ext = path.extname(realPath);</span><br><span class="line">        <span class="built_in">console</span>.log(ext)</span><br><span class="line">        <span class="keyword">if</span> (!ext) &#123;</span><br><span class="line">            <span class="comment">//没有后缀</span></span><br><span class="line">            response.writeHead(<span class="number">405</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain;charset=utf-8'</span>&#125;);</span><br><span class="line">            response.write(<span class="string">'NOT SUPOT'</span>);</span><br><span class="line">            response.end();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fs.exists(realPath, <span class="function"><span class="keyword">function</span> (<span class="params">exists</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">                    <span class="comment">//文件不存在</span></span><br><span class="line">                    response.writeHead(<span class="number">404</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain;charset=utf-8'</span>&#125;);</span><br><span class="line">                    response.write(<span class="string">'file not found'</span>);</span><br><span class="line">                    response.end();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    fs.readFile(realPath, <span class="function"><span class="keyword">function</span> (<span class="params">err, file</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                            response.writeHead(<span class="number">500</span>, &#123;</span><br><span class="line">                                <span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span></span><br><span class="line">                            &#125;);</span><br><span class="line">                            response.write(<span class="string">'read file error! try again'</span>);</span><br><span class="line">                            response.end(err);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">var</span> contentType = getType(ext.slice(<span class="number">1</span>));</span><br><span class="line">                            response.writeHead(<span class="number">200</span>, &#123;</span><br><span class="line">                                <span class="string">'Content-Type'</span>: contentType,</span><br><span class="line">                                <span class="string">'X-Powered-By'</span>: <span class="string">'mylyed.github.io'</span></span><br><span class="line">                            &#125;);</span><br><span class="line">                            response.write(file);</span><br><span class="line">                            response.end();</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    server.listen(PORT, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"Server runing at port: "</span> + PORT + <span class="string">"."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------根据文件后缀获取Content-Type</span></span><br><span class="line"><span class="comment">//用于缓存多媒体类型</span></span><br><span class="line"><span class="keyword">var</span> _types = &#123;&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取 多媒体类型</span></span><br><span class="line"><span class="comment"> * @param path 文件后缀名</span></span><br><span class="line"><span class="comment"> * @returns &#123;*&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getType</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">    path = path.toLowerCase();</span><br><span class="line">    <span class="keyword">if</span> (_types[path]) &#123;</span><br><span class="line">        <span class="keyword">return</span> _types[path];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> type <span class="keyword">in</span> mime_type) &#123;</span><br><span class="line">        <span class="keyword">var</span> extensions = mime_type[type];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; extensions.length; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> ext = extensions[i];</span><br><span class="line">            <span class="keyword">if</span> (path === ext) &#123;</span><br><span class="line">                _types[path] = type;</span><br><span class="line">                <span class="keyword">return</span> type;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mime_type = &#123;</span><br><span class="line">    <span class="string">"application/andrew-inset"</span>: [<span class="string">"ez"</span>],</span><br><span class="line">    <span class="string">"application/applixware"</span>: [<span class="string">"aw"</span>],</span><br><span class="line">    <span class="string">"application/atom+xml"</span>: [<span class="string">"atom"</span>],</span><br><span class="line">    <span class="string">"application/atomcat+xml"</span>: [<span class="string">"atomcat"</span>],</span><br><span class="line">    <span class="string">"application/atomsvc+xml"</span>: [<span class="string">"atomsvc"</span>],</span><br><span class="line">    <span class="string">"application/bdoc"</span>: [<span class="string">"bdoc"</span>],</span><br><span class="line">    <span class="string">"application/ccxml+xml"</span>: [<span class="string">"ccxml"</span>],</span><br><span class="line">    <span class="string">"application/cdmi-capability"</span>: [<span class="string">"cdmia"</span>],</span><br><span class="line">    <span class="string">"application/cdmi-container"</span>: [<span class="string">"cdmic"</span>],</span><br><span class="line">    <span class="string">"application/cdmi-domain"</span>: [<span class="string">"cdmid"</span>],</span><br><span class="line">    <span class="string">"application/cdmi-object"</span>: [<span class="string">"cdmio"</span>],</span><br><span class="line">    <span class="string">"application/cdmi-queue"</span>: [<span class="string">"cdmiq"</span>],</span><br><span class="line">    <span class="string">"application/cu-seeme"</span>: [<span class="string">"cu"</span>],</span><br><span class="line">    <span class="string">"application/dash+xml"</span>: [<span class="string">"mpd"</span>],</span><br><span class="line">    <span class="string">"application/davmount+xml"</span>: [<span class="string">"davmount"</span>],</span><br><span class="line">    <span class="string">"application/docbook+xml"</span>: [<span class="string">"dbk"</span>],</span><br><span class="line">    <span class="string">"application/dssc+der"</span>: [<span class="string">"dssc"</span>],</span><br><span class="line">    <span class="string">"application/dssc+xml"</span>: [<span class="string">"xdssc"</span>],</span><br><span class="line">    <span class="string">"application/ecmascript"</span>: [<span class="string">"ecma"</span>],</span><br><span class="line">    <span class="string">"application/emma+xml"</span>: [<span class="string">"emma"</span>],</span><br><span class="line">    <span class="string">"application/epub+zip"</span>: [<span class="string">"epub"</span>],</span><br><span class="line">    <span class="string">"application/exi"</span>: [<span class="string">"exi"</span>],</span><br><span class="line">    <span class="string">"application/font-tdpfr"</span>: [<span class="string">"pfr"</span>],</span><br><span class="line">    <span class="string">"application/font-woff"</span>: [<span class="string">"woff"</span>],</span><br><span class="line">    <span class="string">"application/font-woff2"</span>: [<span class="string">"woff2"</span>],</span><br><span class="line">    <span class="string">"application/geo+json"</span>: [<span class="string">"geojson"</span>],</span><br><span class="line">    <span class="string">"application/gml+xml"</span>: [<span class="string">"gml"</span>],</span><br><span class="line">    <span class="string">"application/gpx+xml"</span>: [<span class="string">"gpx"</span>],</span><br><span class="line">    <span class="string">"application/gxf"</span>: [<span class="string">"gxf"</span>],</span><br><span class="line">    <span class="string">"application/gzip"</span>: [<span class="string">"gz"</span>],</span><br><span class="line">    <span class="string">"application/hyperstudio"</span>: [<span class="string">"stk"</span>],</span><br><span class="line">    <span class="string">"application/inkml+xml"</span>: [<span class="string">"ink"</span>, <span class="string">"inkml"</span>],</span><br><span class="line">    <span class="string">"application/ipfix"</span>: [<span class="string">"ipfix"</span>],</span><br><span class="line">    <span class="string">"application/java-archive"</span>: [<span class="string">"jar"</span>, <span class="string">"war"</span>, <span class="string">"ear"</span>],</span><br><span class="line">    <span class="string">"application/java-serialized-object"</span>: [<span class="string">"ser"</span>],</span><br><span class="line">    <span class="string">"application/java-vm"</span>: [<span class="string">"class"</span>],</span><br><span class="line">    <span class="string">"application/javascript"</span>: [<span class="string">"js"</span>, <span class="string">"mjs"</span>],</span><br><span class="line">    <span class="string">"application/json"</span>: [<span class="string">"json"</span>, <span class="string">"map"</span>],</span><br><span class="line">    <span class="string">"application/json5"</span>: [<span class="string">"json5"</span>],</span><br><span class="line">    <span class="string">"application/jsonml+json"</span>: [<span class="string">"jsonml"</span>],</span><br><span class="line">    <span class="string">"application/ld+json"</span>: [<span class="string">"jsonld"</span>],</span><br><span class="line">    <span class="string">"application/lost+xml"</span>: [<span class="string">"lostxml"</span>],</span><br><span class="line">    <span class="string">"application/mac-binhex40"</span>: [<span class="string">"hqx"</span>],</span><br><span class="line">    <span class="string">"application/mac-compactpro"</span>: [<span class="string">"cpt"</span>],</span><br><span class="line">    <span class="string">"application/mads+xml"</span>: [<span class="string">"mads"</span>],</span><br><span class="line">    <span class="string">"application/manifest+json"</span>: [<span class="string">"webmanifest"</span>],</span><br><span class="line">    <span class="string">"application/marc"</span>: [<span class="string">"mrc"</span>],</span><br><span class="line">    <span class="string">"application/marcxml+xml"</span>: [<span class="string">"mrcx"</span>],</span><br><span class="line">    <span class="string">"application/mathematica"</span>: [<span class="string">"ma"</span>, <span class="string">"nb"</span>, <span class="string">"mb"</span>],</span><br><span class="line">    <span class="string">"application/mathml+xml"</span>: [<span class="string">"mathml"</span>],</span><br><span class="line">    <span class="string">"application/mbox"</span>: [<span class="string">"mbox"</span>],</span><br><span class="line">    <span class="string">"application/mediaservercontrol+xml"</span>: [<span class="string">"mscml"</span>],</span><br><span class="line">    <span class="string">"application/metalink+xml"</span>: [<span class="string">"metalink"</span>],</span><br><span class="line">    <span class="string">"application/metalink4+xml"</span>: [<span class="string">"meta4"</span>],</span><br><span class="line">    <span class="string">"application/mets+xml"</span>: [<span class="string">"mets"</span>],</span><br><span class="line">    <span class="string">"application/mods+xml"</span>: [<span class="string">"mods"</span>],</span><br><span class="line">    <span class="string">"application/mp21"</span>: [<span class="string">"m21"</span>, <span class="string">"mp21"</span>],</span><br><span class="line">    <span class="string">"application/mp4"</span>: [<span class="string">"mp4s"</span>, <span class="string">"m4p"</span>],</span><br><span class="line">    <span class="string">"application/msword"</span>: [<span class="string">"doc"</span>, <span class="string">"dot"</span>],</span><br><span class="line">    <span class="string">"application/mxf"</span>: [<span class="string">"mxf"</span>],</span><br><span class="line">    <span class="string">"application/octet-stream"</span>: [<span class="string">"bin"</span>, <span class="string">"dms"</span>, <span class="string">"lrf"</span>, <span class="string">"mar"</span>, <span class="string">"so"</span>, <span class="string">"dist"</span>, <span class="string">"distz"</span>, <span class="string">"pkg"</span>, <span class="string">"bpk"</span>, <span class="string">"dump"</span>, <span class="string">"elc"</span>, <span class="string">"deploy"</span>, <span class="string">"exe"</span>, <span class="string">"dll"</span>, <span class="string">"deb"</span>, <span class="string">"dmg"</span>, <span class="string">"iso"</span>, <span class="string">"img"</span>, <span class="string">"msi"</span>, <span class="string">"msp"</span>, <span class="string">"msm"</span>, <span class="string">"buffer"</span>],</span><br><span class="line">    <span class="string">"application/oda"</span>: [<span class="string">"oda"</span>],</span><br><span class="line">    <span class="string">"application/oebps-package+xml"</span>: [<span class="string">"opf"</span>],</span><br><span class="line">    <span class="string">"application/ogg"</span>: [<span class="string">"ogx"</span>],</span><br><span class="line">    <span class="string">"application/omdoc+xml"</span>: [<span class="string">"omdoc"</span>],</span><br><span class="line">    <span class="string">"application/onenote"</span>: [<span class="string">"onetoc"</span>, <span class="string">"onetoc2"</span>, <span class="string">"onetmp"</span>, <span class="string">"onepkg"</span>],</span><br><span class="line">    <span class="string">"application/oxps"</span>: [<span class="string">"oxps"</span>],</span><br><span class="line">    <span class="string">"application/patch-ops-error+xml"</span>: [<span class="string">"xer"</span>],</span><br><span class="line">    <span class="string">"application/pdf"</span>: [<span class="string">"pdf"</span>],</span><br><span class="line">    <span class="string">"application/pgp-encrypted"</span>: [<span class="string">"pgp"</span>],</span><br><span class="line">    <span class="string">"application/pgp-signature"</span>: [<span class="string">"asc"</span>, <span class="string">"sig"</span>],</span><br><span class="line">    <span class="string">"application/pics-rules"</span>: [<span class="string">"prf"</span>],</span><br><span class="line">    <span class="string">"application/pkcs10"</span>: [<span class="string">"p10"</span>],</span><br><span class="line">    <span class="string">"application/pkcs7-mime"</span>: [<span class="string">"p7m"</span>, <span class="string">"p7c"</span>],</span><br><span class="line">    <span class="string">"application/pkcs7-signature"</span>: [<span class="string">"p7s"</span>],</span><br><span class="line">    <span class="string">"application/pkcs8"</span>: [<span class="string">"p8"</span>],</span><br><span class="line">    <span class="string">"application/pkix-attr-cert"</span>: [<span class="string">"ac"</span>],</span><br><span class="line">    <span class="string">"application/pkix-cert"</span>: [<span class="string">"cer"</span>],</span><br><span class="line">    <span class="string">"application/pkix-crl"</span>: [<span class="string">"crl"</span>],</span><br><span class="line">    <span class="string">"application/pkix-pkipath"</span>: [<span class="string">"pkipath"</span>],</span><br><span class="line">    <span class="string">"application/pkixcmp"</span>: [<span class="string">"pki"</span>],</span><br><span class="line">    <span class="string">"application/pls+xml"</span>: [<span class="string">"pls"</span>],</span><br><span class="line">    <span class="string">"application/postscript"</span>: [<span class="string">"ai"</span>, <span class="string">"eps"</span>, <span class="string">"ps"</span>],</span><br><span class="line">    <span class="string">"application/pskc+xml"</span>: [<span class="string">"pskcxml"</span>],</span><br><span class="line">    <span class="string">"application/rdf+xml"</span>: [<span class="string">"rdf"</span>],</span><br><span class="line">    <span class="string">"application/reginfo+xml"</span>: [<span class="string">"rif"</span>],</span><br><span class="line">    <span class="string">"application/relax-ng-compact-syntax"</span>: [<span class="string">"rnc"</span>],</span><br><span class="line">    <span class="string">"application/resource-lists+xml"</span>: [<span class="string">"rl"</span>],</span><br><span class="line">    <span class="string">"application/resource-lists-diff+xml"</span>: [<span class="string">"rld"</span>],</span><br><span class="line">    <span class="string">"application/rls-services+xml"</span>: [<span class="string">"rs"</span>],</span><br><span class="line">    <span class="string">"application/rpki-ghostbusters"</span>: [<span class="string">"gbr"</span>],</span><br><span class="line">    <span class="string">"application/rpki-manifest"</span>: [<span class="string">"mft"</span>],</span><br><span class="line">    <span class="string">"application/rpki-roa"</span>: [<span class="string">"roa"</span>],</span><br><span class="line">    <span class="string">"application/rsd+xml"</span>: [<span class="string">"rsd"</span>],</span><br><span class="line">    <span class="string">"application/rss+xml"</span>: [<span class="string">"rss"</span>],</span><br><span class="line">    <span class="string">"application/rtf"</span>: [<span class="string">"rtf"</span>],</span><br><span class="line">    <span class="string">"application/sbml+xml"</span>: [<span class="string">"sbml"</span>],</span><br><span class="line">    <span class="string">"application/scvp-cv-request"</span>: [<span class="string">"scq"</span>],</span><br><span class="line">    <span class="string">"application/scvp-cv-response"</span>: [<span class="string">"scs"</span>],</span><br><span class="line">    <span class="string">"application/scvp-vp-request"</span>: [<span class="string">"spq"</span>],</span><br><span class="line">    <span class="string">"application/scvp-vp-response"</span>: [<span class="string">"spp"</span>],</span><br><span class="line">    <span class="string">"application/sdp"</span>: [<span class="string">"sdp"</span>],</span><br><span class="line">    <span class="string">"application/set-payment-initiation"</span>: [<span class="string">"setpay"</span>],</span><br><span class="line">    <span class="string">"application/set-registration-initiation"</span>: [<span class="string">"setreg"</span>],</span><br><span class="line">    <span class="string">"application/shf+xml"</span>: [<span class="string">"shf"</span>],</span><br><span class="line">    <span class="string">"application/smil+xml"</span>: [<span class="string">"smi"</span>, <span class="string">"smil"</span>],</span><br><span class="line">    <span class="string">"application/sparql-query"</span>: [<span class="string">"rq"</span>],</span><br><span class="line">    <span class="string">"application/sparql-results+xml"</span>: [<span class="string">"srx"</span>],</span><br><span class="line">    <span class="string">"application/srgs"</span>: [<span class="string">"gram"</span>],</span><br><span class="line">    <span class="string">"application/srgs+xml"</span>: [<span class="string">"grxml"</span>],</span><br><span class="line">    <span class="string">"application/sru+xml"</span>: [<span class="string">"sru"</span>],</span><br><span class="line">    <span class="string">"application/ssdl+xml"</span>: [<span class="string">"ssdl"</span>],</span><br><span class="line">    <span class="string">"application/ssml+xml"</span>: [<span class="string">"ssml"</span>],</span><br><span class="line">    <span class="string">"application/tei+xml"</span>: [<span class="string">"tei"</span>, <span class="string">"teicorpus"</span>],</span><br><span class="line">    <span class="string">"application/thraud+xml"</span>: [<span class="string">"tfi"</span>],</span><br><span class="line">    <span class="string">"application/timestamped-data"</span>: [<span class="string">"tsd"</span>],</span><br><span class="line">    <span class="string">"application/voicexml+xml"</span>: [<span class="string">"vxml"</span>],</span><br><span class="line">    <span class="string">"application/widget"</span>: [<span class="string">"wgt"</span>],</span><br><span class="line">    <span class="string">"application/winhlp"</span>: [<span class="string">"hlp"</span>],</span><br><span class="line">    <span class="string">"application/wsdl+xml"</span>: [<span class="string">"wsdl"</span>],</span><br><span class="line">    <span class="string">"application/wspolicy+xml"</span>: [<span class="string">"wspolicy"</span>],</span><br><span class="line">    <span class="string">"application/xaml+xml"</span>: [<span class="string">"xaml"</span>],</span><br><span class="line">    <span class="string">"application/xcap-diff+xml"</span>: [<span class="string">"xdf"</span>],</span><br><span class="line">    <span class="string">"application/xenc+xml"</span>: [<span class="string">"xenc"</span>],</span><br><span class="line">    <span class="string">"application/xhtml+xml"</span>: [<span class="string">"xhtml"</span>, <span class="string">"xht"</span>],</span><br><span class="line">    <span class="string">"application/xml"</span>: [<span class="string">"xml"</span>, <span class="string">"xsl"</span>, <span class="string">"xsd"</span>, <span class="string">"rng"</span>],</span><br><span class="line">    <span class="string">"application/xml-dtd"</span>: [<span class="string">"dtd"</span>],</span><br><span class="line">    <span class="string">"application/xop+xml"</span>: [<span class="string">"xop"</span>],</span><br><span class="line">    <span class="string">"application/xproc+xml"</span>: [<span class="string">"xpl"</span>],</span><br><span class="line">    <span class="string">"application/xslt+xml"</span>: [<span class="string">"xslt"</span>],</span><br><span class="line">    <span class="string">"application/xspf+xml"</span>: [<span class="string">"xspf"</span>],</span><br><span class="line">    <span class="string">"application/xv+xml"</span>: [<span class="string">"mxml"</span>, <span class="string">"xhvml"</span>, <span class="string">"xvml"</span>, <span class="string">"xvm"</span>],</span><br><span class="line">    <span class="string">"application/yang"</span>: [<span class="string">"yang"</span>],</span><br><span class="line">    <span class="string">"application/yin+xml"</span>: [<span class="string">"yin"</span>],</span><br><span class="line">    <span class="string">"application/zip"</span>: [<span class="string">"zip"</span>],</span><br><span class="line">    <span class="string">"audio/3gpp"</span>: [],</span><br><span class="line">    <span class="string">"audio/adpcm"</span>: [<span class="string">"adp"</span>],</span><br><span class="line">    <span class="string">"audio/basic"</span>: [<span class="string">"au"</span>, <span class="string">"snd"</span>],</span><br><span class="line">    <span class="string">"audio/midi"</span>: [<span class="string">"mid"</span>, <span class="string">"midi"</span>, <span class="string">"kar"</span>, <span class="string">"rmi"</span>],</span><br><span class="line">    <span class="string">"audio/mp3"</span>: [],</span><br><span class="line">    <span class="string">"audio/mp4"</span>: [<span class="string">"m4a"</span>, <span class="string">"mp4a"</span>],</span><br><span class="line">    <span class="string">"audio/mpeg"</span>: [<span class="string">"mpga"</span>, <span class="string">"mp2"</span>, <span class="string">"mp2a"</span>, <span class="string">"mp3"</span>, <span class="string">"m2a"</span>, <span class="string">"m3a"</span>],</span><br><span class="line">    <span class="string">"audio/ogg"</span>: [<span class="string">"oga"</span>, <span class="string">"ogg"</span>, <span class="string">"spx"</span>],</span><br><span class="line">    <span class="string">"audio/s3m"</span>: [<span class="string">"s3m"</span>],</span><br><span class="line">    <span class="string">"audio/silk"</span>: [<span class="string">"sil"</span>],</span><br><span class="line">    <span class="string">"audio/wav"</span>: [<span class="string">"wav"</span>],</span><br><span class="line">    <span class="string">"audio/wave"</span>: [],</span><br><span class="line">    <span class="string">"audio/webm"</span>: [<span class="string">"weba"</span>],</span><br><span class="line">    <span class="string">"audio/xm"</span>: [<span class="string">"xm"</span>],</span><br><span class="line">    <span class="string">"font/otf"</span>: [<span class="string">"otf"</span>],</span><br><span class="line">    <span class="string">"image/apng"</span>: [<span class="string">"apng"</span>],</span><br><span class="line">    <span class="string">"image/bmp"</span>: [<span class="string">"bmp"</span>],</span><br><span class="line">    <span class="string">"image/cgm"</span>: [<span class="string">"cgm"</span>],</span><br><span class="line">    <span class="string">"image/g3fax"</span>: [<span class="string">"g3"</span>],</span><br><span class="line">    <span class="string">"image/gif"</span>: [<span class="string">"gif"</span>],</span><br><span class="line">    <span class="string">"image/ief"</span>: [<span class="string">"ief"</span>],</span><br><span class="line">    <span class="string">"image/jpeg"</span>: [<span class="string">"jpeg"</span>, <span class="string">"jpg"</span>, <span class="string">"jpe"</span>],</span><br><span class="line">    <span class="string">"image/ktx"</span>: [<span class="string">"ktx"</span>],</span><br><span class="line">    <span class="string">"image/png"</span>: [<span class="string">"png"</span>],</span><br><span class="line">    <span class="string">"image/sgi"</span>: [<span class="string">"sgi"</span>],</span><br><span class="line">    <span class="string">"image/svg+xml"</span>: [<span class="string">"svg"</span>, <span class="string">"svgz"</span>],</span><br><span class="line">    <span class="string">"image/tiff"</span>: [<span class="string">"tiff"</span>, <span class="string">"tif"</span>],</span><br><span class="line">    <span class="string">"image/webp"</span>: [<span class="string">"webp"</span>],</span><br><span class="line">    <span class="string">"message/rfc822"</span>: [<span class="string">"eml"</span>, <span class="string">"mime"</span>],</span><br><span class="line">    <span class="string">"model/gltf+json"</span>: [<span class="string">"gltf"</span>],</span><br><span class="line">    <span class="string">"model/gltf-binary"</span>: [<span class="string">"glb"</span>],</span><br><span class="line">    <span class="string">"model/iges"</span>: [<span class="string">"igs"</span>, <span class="string">"iges"</span>],</span><br><span class="line">    <span class="string">"model/mesh"</span>: [<span class="string">"msh"</span>, <span class="string">"mesh"</span>, <span class="string">"silo"</span>],</span><br><span class="line">    <span class="string">"model/vrml"</span>: [<span class="string">"wrl"</span>, <span class="string">"vrml"</span>],</span><br><span class="line">    <span class="string">"model/x3d+binary"</span>: [<span class="string">"x3db"</span>, <span class="string">"x3dbz"</span>],</span><br><span class="line">    <span class="string">"model/x3d+vrml"</span>: [<span class="string">"x3dv"</span>, <span class="string">"x3dvz"</span>],</span><br><span class="line">    <span class="string">"model/x3d+xml"</span>: [<span class="string">"x3d"</span>, <span class="string">"x3dz"</span>],</span><br><span class="line">    <span class="string">"text/cache-manifest"</span>: [<span class="string">"appcache"</span>, <span class="string">"manifest"</span>],</span><br><span class="line">    <span class="string">"text/calendar"</span>: [<span class="string">"ics"</span>, <span class="string">"ifb"</span>],</span><br><span class="line">    <span class="string">"text/coffeescript"</span>: [<span class="string">"coffee"</span>, <span class="string">"litcoffee"</span>],</span><br><span class="line">    <span class="string">"text/css"</span>: [<span class="string">"css"</span>],</span><br><span class="line">    <span class="string">"text/csv"</span>: [<span class="string">"csv"</span>],</span><br><span class="line">    <span class="string">"text/hjson"</span>: [<span class="string">"hjson"</span>],</span><br><span class="line">    <span class="string">"text/html"</span>: [<span class="string">"html"</span>, <span class="string">"htm"</span>, <span class="string">"shtml"</span>],</span><br><span class="line">    <span class="string">"text/jade"</span>: [<span class="string">"jade"</span>],</span><br><span class="line">    <span class="string">"text/jsx"</span>: [<span class="string">"jsx"</span>],</span><br><span class="line">    <span class="string">"text/less"</span>: [<span class="string">"less"</span>],</span><br><span class="line">    <span class="string">"text/markdown"</span>: [<span class="string">"markdown"</span>, <span class="string">"md"</span>],</span><br><span class="line">    <span class="string">"text/mathml"</span>: [<span class="string">"mml"</span>],</span><br><span class="line">    <span class="string">"text/n3"</span>: [<span class="string">"n3"</span>],</span><br><span class="line">    <span class="string">"text/plain"</span>: [<span class="string">"txt"</span>, <span class="string">"text"</span>, <span class="string">"conf"</span>, <span class="string">"def"</span>, <span class="string">"list"</span>, <span class="string">"log"</span>, <span class="string">"in"</span>, <span class="string">"ini"</span>],</span><br><span class="line">    <span class="string">"text/richtext"</span>: [<span class="string">"rtx"</span>],</span><br><span class="line">    <span class="string">"text/rtf"</span>: [],</span><br><span class="line">    <span class="string">"text/sgml"</span>: [<span class="string">"sgml"</span>, <span class="string">"sgm"</span>],</span><br><span class="line">    <span class="string">"text/slim"</span>: [<span class="string">"slim"</span>, <span class="string">"slm"</span>],</span><br><span class="line">    <span class="string">"text/stylus"</span>: [<span class="string">"stylus"</span>, <span class="string">"styl"</span>],</span><br><span class="line">    <span class="string">"text/tab-separated-values"</span>: [<span class="string">"tsv"</span>],</span><br><span class="line">    <span class="string">"text/troff"</span>: [<span class="string">"t"</span>, <span class="string">"tr"</span>, <span class="string">"roff"</span>, <span class="string">"man"</span>, <span class="string">"me"</span>, <span class="string">"ms"</span>],</span><br><span class="line">    <span class="string">"text/turtle"</span>: [<span class="string">"ttl"</span>],</span><br><span class="line">    <span class="string">"text/uri-list"</span>: [<span class="string">"uri"</span>, <span class="string">"uris"</span>, <span class="string">"urls"</span>],</span><br><span class="line">    <span class="string">"text/vcard"</span>: [<span class="string">"vcard"</span>],</span><br><span class="line">    <span class="string">"text/vtt"</span>: [<span class="string">"vtt"</span>],</span><br><span class="line">    <span class="string">"text/xml"</span>: [],</span><br><span class="line">    <span class="string">"text/yaml"</span>: [<span class="string">"yaml"</span>, <span class="string">"yml"</span>],</span><br><span class="line">    <span class="string">"video/3gpp"</span>: [<span class="string">"3gp"</span>, <span class="string">"3gpp"</span>],</span><br><span class="line">    <span class="string">"video/3gpp2"</span>: [<span class="string">"3g2"</span>],</span><br><span class="line">    <span class="string">"video/h261"</span>: [<span class="string">"h261"</span>],</span><br><span class="line">    <span class="string">"video/h263"</span>: [<span class="string">"h263"</span>],</span><br><span class="line">    <span class="string">"video/h264"</span>: [<span class="string">"h264"</span>],</span><br><span class="line">    <span class="string">"video/jpeg"</span>: [<span class="string">"jpgv"</span>],</span><br><span class="line">    <span class="string">"video/jpm"</span>: [<span class="string">"jpm"</span>, <span class="string">"jpgm"</span>],</span><br><span class="line">    <span class="string">"video/mj2"</span>: [<span class="string">"mj2"</span>, <span class="string">"mjp2"</span>],</span><br><span class="line">    <span class="string">"video/mp2t"</span>: [<span class="string">"ts"</span>],</span><br><span class="line">    <span class="string">"video/mp4"</span>: [<span class="string">"mp4"</span>, <span class="string">"mp4v"</span>, <span class="string">"mpg4"</span>],</span><br><span class="line">    <span class="string">"video/mpeg"</span>: [<span class="string">"mpeg"</span>, <span class="string">"mpg"</span>, <span class="string">"mpe"</span>, <span class="string">"m1v"</span>, <span class="string">"m2v"</span>],</span><br><span class="line">    <span class="string">"video/ogg"</span>: [<span class="string">"ogv"</span>],</span><br><span class="line">    <span class="string">"video/quicktime"</span>: [<span class="string">"qt"</span>, <span class="string">"mov"</span>],</span><br><span class="line">    <span class="string">"video/webm"</span>: [<span class="string">"webm"</span>],</span><br><span class="line">    <span class="string">"application/prs.cww"</span>: [<span class="string">"cww"</span>],</span><br><span class="line">    <span class="string">"application/vnd.3gpp.pic-bw-large"</span>: [<span class="string">"plb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.3gpp.pic-bw-small"</span>: [<span class="string">"psb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.3gpp.pic-bw-var"</span>: [<span class="string">"pvb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.3gpp2.tcap"</span>: [<span class="string">"tcap"</span>],</span><br><span class="line">    <span class="string">"application/vnd.3m.post-it-notes"</span>: [<span class="string">"pwn"</span>],</span><br><span class="line">    <span class="string">"application/vnd.accpac.simply.aso"</span>: [<span class="string">"aso"</span>],</span><br><span class="line">    <span class="string">"application/vnd.accpac.simply.imp"</span>: [<span class="string">"imp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.acucobol"</span>: [<span class="string">"acu"</span>],</span><br><span class="line">    <span class="string">"application/vnd.acucorp"</span>: [<span class="string">"atc"</span>, <span class="string">"acutc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.adobe.air-application-installer-package+zip"</span>: [<span class="string">"air"</span>],</span><br><span class="line">    <span class="string">"application/vnd.adobe.formscentral.fcdt"</span>: [<span class="string">"fcdt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.adobe.fxp"</span>: [<span class="string">"fxp"</span>, <span class="string">"fxpl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.adobe.xdp+xml"</span>: [<span class="string">"xdp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.adobe.xfdf"</span>: [<span class="string">"xfdf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ahead.space"</span>: [<span class="string">"ahead"</span>],</span><br><span class="line">    <span class="string">"application/vnd.airzip.filesecure.azf"</span>: [<span class="string">"azf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.airzip.filesecure.azs"</span>: [<span class="string">"azs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.amazon.ebook"</span>: [<span class="string">"azw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.americandynamics.acc"</span>: [<span class="string">"acc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.amiga.ami"</span>: [<span class="string">"ami"</span>],</span><br><span class="line">    <span class="string">"application/vnd.android.package-archive"</span>: [<span class="string">"apk"</span>],</span><br><span class="line">    <span class="string">"application/vnd.anser-web-certificate-issue-initiation"</span>: [<span class="string">"cii"</span>],</span><br><span class="line">    <span class="string">"application/vnd.anser-web-funds-transfer-initiation"</span>: [<span class="string">"fti"</span>],</span><br><span class="line">    <span class="string">"application/vnd.antix.game-component"</span>: [<span class="string">"atx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.apple.installer+xml"</span>: [<span class="string">"mpkg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.apple.mpegurl"</span>: [<span class="string">"m3u8"</span>],</span><br><span class="line">    <span class="string">"application/vnd.apple.pkpass"</span>: [<span class="string">"pkpass"</span>],</span><br><span class="line">    <span class="string">"application/vnd.aristanetworks.swi"</span>: [<span class="string">"swi"</span>],</span><br><span class="line">    <span class="string">"application/vnd.astraea-software.iota"</span>: [<span class="string">"iota"</span>],</span><br><span class="line">    <span class="string">"application/vnd.audiograph"</span>: [<span class="string">"aep"</span>],</span><br><span class="line">    <span class="string">"application/vnd.blueice.multipass"</span>: [<span class="string">"mpm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.bmi"</span>: [<span class="string">"bmi"</span>],</span><br><span class="line">    <span class="string">"application/vnd.businessobjects"</span>: [<span class="string">"rep"</span>],</span><br><span class="line">    <span class="string">"application/vnd.chemdraw+xml"</span>: [<span class="string">"cdxml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.chipnuts.karaoke-mmd"</span>: [<span class="string">"mmd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cinderella"</span>: [<span class="string">"cdy"</span>],</span><br><span class="line">    <span class="string">"application/vnd.claymore"</span>: [<span class="string">"cla"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cloanto.rp9"</span>: [<span class="string">"rp9"</span>],</span><br><span class="line">    <span class="string">"application/vnd.clonk.c4group"</span>: [<span class="string">"c4g"</span>, <span class="string">"c4d"</span>, <span class="string">"c4f"</span>, <span class="string">"c4p"</span>, <span class="string">"c4u"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cluetrust.cartomobile-config"</span>: [<span class="string">"c11amc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cluetrust.cartomobile-config-pkg"</span>: [<span class="string">"c11amz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.commonspace"</span>: [<span class="string">"csp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.contact.cmsg"</span>: [<span class="string">"cdbcmsg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cosmocaller"</span>: [<span class="string">"cmc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.crick.clicker"</span>: [<span class="string">"clkx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.crick.clicker.keyboard"</span>: [<span class="string">"clkk"</span>],</span><br><span class="line">    <span class="string">"application/vnd.crick.clicker.palette"</span>: [<span class="string">"clkp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.crick.clicker.template"</span>: [<span class="string">"clkt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.crick.clicker.wordbank"</span>: [<span class="string">"clkw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.criticaltools.wbs+xml"</span>: [<span class="string">"wbs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ctc-posml"</span>: [<span class="string">"pml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.cups-ppd"</span>: [<span class="string">"ppd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.curl.car"</span>: [<span class="string">"car"</span>],</span><br><span class="line">    <span class="string">"application/vnd.curl.pcurl"</span>: [<span class="string">"pcurl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dart"</span>: [<span class="string">"dart"</span>],</span><br><span class="line">    <span class="string">"application/vnd.data-vision.rdz"</span>: [<span class="string">"rdz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dece.data"</span>: [<span class="string">"uvf"</span>, <span class="string">"uvvf"</span>, <span class="string">"uvd"</span>, <span class="string">"uvvd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dece.ttml+xml"</span>: [<span class="string">"uvt"</span>, <span class="string">"uvvt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dece.unspecified"</span>: [<span class="string">"uvx"</span>, <span class="string">"uvvx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dece.zip"</span>: [<span class="string">"uvz"</span>, <span class="string">"uvvz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.denovo.fcselayout-link"</span>: [<span class="string">"fe_launch"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dna"</span>: [<span class="string">"dna"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dolby.mlp"</span>: [<span class="string">"mlp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dpgraph"</span>: [<span class="string">"dpg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dreamfactory"</span>: [<span class="string">"dfac"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ds-keypoint"</span>: [<span class="string">"kpxx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dvb.ait"</span>: [<span class="string">"ait"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dvb.service"</span>: [<span class="string">"svc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.dynageo"</span>: [<span class="string">"geo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ecowin.chart"</span>: [<span class="string">"mag"</span>],</span><br><span class="line">    <span class="string">"application/vnd.enliven"</span>: [<span class="string">"nml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.epson.esf"</span>: [<span class="string">"esf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.epson.msf"</span>: [<span class="string">"msf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.epson.quickanime"</span>: [<span class="string">"qam"</span>],</span><br><span class="line">    <span class="string">"application/vnd.epson.salt"</span>: [<span class="string">"slt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.epson.ssf"</span>: [<span class="string">"ssf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.eszigno3+xml"</span>: [<span class="string">"es3"</span>, <span class="string">"et3"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ezpix-album"</span>: [<span class="string">"ez2"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ezpix-package"</span>: [<span class="string">"ez3"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fdf"</span>: [<span class="string">"fdf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fdsn.mseed"</span>: [<span class="string">"mseed"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fdsn.seed"</span>: [<span class="string">"seed"</span>, <span class="string">"dataless"</span>],</span><br><span class="line">    <span class="string">"application/vnd.flographit"</span>: [<span class="string">"gph"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fluxtime.clip"</span>: [<span class="string">"ftc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.framemaker"</span>: [<span class="string">"fm"</span>, <span class="string">"frame"</span>, <span class="string">"maker"</span>, <span class="string">"book"</span>],</span><br><span class="line">    <span class="string">"application/vnd.frogans.fnc"</span>: [<span class="string">"fnc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.frogans.ltf"</span>: [<span class="string">"ltf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fsc.weblaunch"</span>: [<span class="string">"fsc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujitsu.oasys"</span>: [<span class="string">"oas"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujitsu.oasys2"</span>: [<span class="string">"oa2"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujitsu.oasys3"</span>: [<span class="string">"oa3"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujitsu.oasysgp"</span>: [<span class="string">"fg5"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujitsu.oasysprs"</span>: [<span class="string">"bh2"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujixerox.ddd"</span>: [<span class="string">"ddd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujixerox.docuworks"</span>: [<span class="string">"xdw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fujixerox.docuworks.binder"</span>: [<span class="string">"xbd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.fuzzysheet"</span>: [<span class="string">"fzs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.genomatix.tuxedo"</span>: [<span class="string">"txd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geogebra.file"</span>: [<span class="string">"ggb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geogebra.tool"</span>: [<span class="string">"ggt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geometry-explorer"</span>: [<span class="string">"gex"</span>, <span class="string">"gre"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geonext"</span>: [<span class="string">"gxt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geoplan"</span>: [<span class="string">"g2w"</span>],</span><br><span class="line">    <span class="string">"application/vnd.geospace"</span>: [<span class="string">"g3w"</span>],</span><br><span class="line">    <span class="string">"application/vnd.gmx"</span>: [<span class="string">"gmx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.google-apps.document"</span>: [<span class="string">"gdoc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.google-apps.presentation"</span>: [<span class="string">"gslides"</span>],</span><br><span class="line">    <span class="string">"application/vnd.google-apps.spreadsheet"</span>: [<span class="string">"gsheet"</span>],</span><br><span class="line">    <span class="string">"application/vnd.google-earth.kml+xml"</span>: [<span class="string">"kml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.google-earth.kmz"</span>: [<span class="string">"kmz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.grafeq"</span>: [<span class="string">"gqf"</span>, <span class="string">"gqs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-account"</span>: [<span class="string">"gac"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-help"</span>: [<span class="string">"ghf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-identity-message"</span>: [<span class="string">"gim"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-injector"</span>: [<span class="string">"grv"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-tool-message"</span>: [<span class="string">"gtm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-tool-template"</span>: [<span class="string">"tpl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.groove-vcard"</span>: [<span class="string">"vcg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hal+xml"</span>: [<span class="string">"hal"</span>],</span><br><span class="line">    <span class="string">"application/vnd.handheld-entertainment+xml"</span>: [<span class="string">"zmm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hbci"</span>: [<span class="string">"hbci"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hhe.lesson-player"</span>: [<span class="string">"les"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-hpgl"</span>: [<span class="string">"hpgl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-hpid"</span>: [<span class="string">"hpid"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-hps"</span>: [<span class="string">"hps"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-jlyt"</span>: [<span class="string">"jlt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-pcl"</span>: [<span class="string">"pcl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hp-pclxl"</span>: [<span class="string">"pclxl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.hydrostatix.sof-data"</span>: [<span class="string">"sfd-hdstx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ibm.minipay"</span>: [<span class="string">"mpy"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ibm.modcap"</span>: [<span class="string">"afp"</span>, <span class="string">"listafp"</span>, <span class="string">"list3820"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ibm.rights-management"</span>: [<span class="string">"irm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ibm.secure-container"</span>: [<span class="string">"sc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.iccprofile"</span>: [<span class="string">"icc"</span>, <span class="string">"icm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.igloader"</span>: [<span class="string">"igl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.immervision-ivp"</span>: [<span class="string">"ivp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.immervision-ivu"</span>: [<span class="string">"ivu"</span>],</span><br><span class="line">    <span class="string">"application/vnd.insors.igm"</span>: [<span class="string">"igm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.intercon.formnet"</span>: [<span class="string">"xpw"</span>, <span class="string">"xpx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.intergeo"</span>: [<span class="string">"i2g"</span>],</span><br><span class="line">    <span class="string">"application/vnd.intu.qbo"</span>: [<span class="string">"qbo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.intu.qfx"</span>: [<span class="string">"qfx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ipunplugged.rcprofile"</span>: [<span class="string">"rcprofile"</span>],</span><br><span class="line">    <span class="string">"application/vnd.irepository.package+xml"</span>: [<span class="string">"irp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.is-xpr"</span>: [<span class="string">"xpr"</span>],</span><br><span class="line">    <span class="string">"application/vnd.isac.fcs"</span>: [<span class="string">"fcs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.jam"</span>: [<span class="string">"jam"</span>],</span><br><span class="line">    <span class="string">"application/vnd.jcp.javame.midlet-rms"</span>: [<span class="string">"rms"</span>],</span><br><span class="line">    <span class="string">"application/vnd.jisp"</span>: [<span class="string">"jisp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.joost.joda-archive"</span>: [<span class="string">"joda"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kahootz"</span>: [<span class="string">"ktz"</span>, <span class="string">"ktr"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.karbon"</span>: [<span class="string">"karbon"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kchart"</span>: [<span class="string">"chrt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kformula"</span>: [<span class="string">"kfo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kivio"</span>: [<span class="string">"flw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kontour"</span>: [<span class="string">"kon"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kpresenter"</span>: [<span class="string">"kpr"</span>, <span class="string">"kpt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kspread"</span>: [<span class="string">"ksp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kde.kword"</span>: [<span class="string">"kwd"</span>, <span class="string">"kwt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kenameaapp"</span>: [<span class="string">"htke"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kidspiration"</span>: [<span class="string">"kia"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kinar"</span>: [<span class="string">"kne"</span>, <span class="string">"knp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.koan"</span>: [<span class="string">"skp"</span>, <span class="string">"skd"</span>, <span class="string">"skt"</span>, <span class="string">"skm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.kodak-descriptor"</span>: [<span class="string">"sse"</span>],</span><br><span class="line">    <span class="string">"application/vnd.las.las+xml"</span>: [<span class="string">"lasxml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.llamagraphics.life-balance.desktop"</span>: [<span class="string">"lbd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.llamagraphics.life-balance.exchange+xml"</span>: [<span class="string">"lbe"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-1-2-3"</span>: [<span class="string">"123"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-approach"</span>: [<span class="string">"apr"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-freelance"</span>: [<span class="string">"pre"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-notes"</span>: [<span class="string">"nsf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-organizer"</span>: [<span class="string">"org"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-screencam"</span>: [<span class="string">"scm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.lotus-wordpro"</span>: [<span class="string">"lwp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.macports.portpkg"</span>: [<span class="string">"portpkg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mcd"</span>: [<span class="string">"mcd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.medcalcdata"</span>: [<span class="string">"mc1"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mediastation.cdkey"</span>: [<span class="string">"cdkey"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mfer"</span>: [<span class="string">"mwf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mfmp"</span>: [<span class="string">"mfm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.micrografx.flo"</span>: [<span class="string">"flo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.micrografx.igx"</span>: [<span class="string">"igx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mif"</span>: [<span class="string">"mif"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.daf"</span>: [<span class="string">"daf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.dis"</span>: [<span class="string">"dis"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.mbk"</span>: [<span class="string">"mbk"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.mqy"</span>: [<span class="string">"mqy"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.msl"</span>: [<span class="string">"msl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.plc"</span>: [<span class="string">"plc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mobius.txf"</span>: [<span class="string">"txf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mophun.application"</span>: [<span class="string">"mpn"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mophun.certificate"</span>: [<span class="string">"mpc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mozilla.xul+xml"</span>: [<span class="string">"xul"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-artgalry"</span>: [<span class="string">"cil"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-cab-compressed"</span>: [<span class="string">"cab"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-excel"</span>: [<span class="string">"xls"</span>, <span class="string">"xlm"</span>, <span class="string">"xla"</span>, <span class="string">"xlc"</span>, <span class="string">"xlt"</span>, <span class="string">"xlw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-excel.addin.macroenabled.12"</span>: [<span class="string">"xlam"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-excel.sheet.binary.macroenabled.12"</span>: [<span class="string">"xlsb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-excel.sheet.macroenabled.12"</span>: [<span class="string">"xlsm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-excel.template.macroenabled.12"</span>: [<span class="string">"xltm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-fontobject"</span>: [<span class="string">"eot"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-htmlhelp"</span>: [<span class="string">"chm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-ims"</span>: [<span class="string">"ims"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-lrm"</span>: [<span class="string">"lrm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-officetheme"</span>: [<span class="string">"thmx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-outlook"</span>: [<span class="string">"msg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-pki.seccat"</span>: [<span class="string">"cat"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-pki.stl"</span>: [<span class="string">"stl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint"</span>: [<span class="string">"ppt"</span>, <span class="string">"pps"</span>, <span class="string">"pot"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint.addin.macroenabled.12"</span>: [<span class="string">"ppam"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint.presentation.macroenabled.12"</span>: [<span class="string">"pptm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint.slide.macroenabled.12"</span>: [<span class="string">"sldm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint.slideshow.macroenabled.12"</span>: [<span class="string">"ppsm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-powerpoint.template.macroenabled.12"</span>: [<span class="string">"potm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-project"</span>: [<span class="string">"mpp"</span>, <span class="string">"mpt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-word.document.macroenabled.12"</span>: [<span class="string">"docm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-word.template.macroenabled.12"</span>: [<span class="string">"dotm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-works"</span>: [<span class="string">"wps"</span>, <span class="string">"wks"</span>, <span class="string">"wcm"</span>, <span class="string">"wdb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-wpl"</span>: [<span class="string">"wpl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ms-xpsdocument"</span>: [<span class="string">"xps"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mseq"</span>: [<span class="string">"mseq"</span>],</span><br><span class="line">    <span class="string">"application/vnd.musician"</span>: [<span class="string">"mus"</span>],</span><br><span class="line">    <span class="string">"application/vnd.muvee.style"</span>: [<span class="string">"msty"</span>],</span><br><span class="line">    <span class="string">"application/vnd.mynfc"</span>: [<span class="string">"taglet"</span>],</span><br><span class="line">    <span class="string">"application/vnd.neurolanguage.nlu"</span>: [<span class="string">"nlu"</span>],</span><br><span class="line">    <span class="string">"application/vnd.nitf"</span>: [<span class="string">"ntf"</span>, <span class="string">"nitf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.noblenet-directory"</span>: [<span class="string">"nnd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.noblenet-sealer"</span>: [<span class="string">"nns"</span>],</span><br><span class="line">    <span class="string">"application/vnd.noblenet-web"</span>: [<span class="string">"nnw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.nokia.n-gage.data"</span>: [<span class="string">"ngdat"</span>],</span><br><span class="line">    <span class="string">"application/vnd.nokia.n-gage.symbian.install"</span>: [<span class="string">"n-gage"</span>],</span><br><span class="line">    <span class="string">"application/vnd.nokia.radio-preset"</span>: [<span class="string">"rpst"</span>],</span><br><span class="line">    <span class="string">"application/vnd.nokia.radio-presets"</span>: [<span class="string">"rpss"</span>],</span><br><span class="line">    <span class="string">"application/vnd.novadigm.edm"</span>: [<span class="string">"edm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.novadigm.edx"</span>: [<span class="string">"edx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.novadigm.ext"</span>: [<span class="string">"ext"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.chart"</span>: [<span class="string">"odc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.chart-template"</span>: [<span class="string">"otc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.database"</span>: [<span class="string">"odb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.formula"</span>: [<span class="string">"odf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.formula-template"</span>: [<span class="string">"odft"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.graphics"</span>: [<span class="string">"odg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.graphics-template"</span>: [<span class="string">"otg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.image"</span>: [<span class="string">"odi"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.image-template"</span>: [<span class="string">"oti"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.presentation"</span>: [<span class="string">"odp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.presentation-template"</span>: [<span class="string">"otp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.spreadsheet"</span>: [<span class="string">"ods"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.spreadsheet-template"</span>: [<span class="string">"ots"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.text"</span>: [<span class="string">"odt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.text-master"</span>: [<span class="string">"odm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.text-template"</span>: [<span class="string">"ott"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oasis.opendocument.text-web"</span>: [<span class="string">"oth"</span>],</span><br><span class="line">    <span class="string">"application/vnd.olpc-sugar"</span>: [<span class="string">"xo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.oma.dd2+xml"</span>: [<span class="string">"dd2"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openofficeorg.extension"</span>: [<span class="string">"oxt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.presentationml.presentation"</span>: [<span class="string">"pptx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.presentationml.slide"</span>: [<span class="string">"sldx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.presentationml.slideshow"</span>: [<span class="string">"ppsx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.presentationml.template"</span>: [<span class="string">"potx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"</span>: [<span class="string">"xlsx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.spreadsheetml.template"</span>: [<span class="string">"xltx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.wordprocessingml.document"</span>: [<span class="string">"docx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.openxmlformats-officedocument.wordprocessingml.template"</span>: [<span class="string">"dotx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.osgeo.mapguide.package"</span>: [<span class="string">"mgp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.osgi.dp"</span>: [<span class="string">"dp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.osgi.subsystem"</span>: [<span class="string">"esa"</span>],</span><br><span class="line">    <span class="string">"application/vnd.palm"</span>: [<span class="string">"pdb"</span>, <span class="string">"pqa"</span>, <span class="string">"oprc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pawaafile"</span>: [<span class="string">"paw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pg.format"</span>: [<span class="string">"str"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pg.osasli"</span>: [<span class="string">"ei6"</span>],</span><br><span class="line">    <span class="string">"application/vnd.picsel"</span>: [<span class="string">"efif"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pmi.widget"</span>: [<span class="string">"wg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pocketlearn"</span>: [<span class="string">"plf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.powerbuilder6"</span>: [<span class="string">"pbd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.previewsystems.box"</span>: [<span class="string">"box"</span>],</span><br><span class="line">    <span class="string">"application/vnd.proteus.magazine"</span>: [<span class="string">"mgz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.publishare-delta-tree"</span>: [<span class="string">"qps"</span>],</span><br><span class="line">    <span class="string">"application/vnd.pvi.ptid1"</span>: [<span class="string">"ptid"</span>],</span><br><span class="line">    <span class="string">"application/vnd.quark.quarkxpress"</span>: [<span class="string">"qxd"</span>, <span class="string">"qxt"</span>, <span class="string">"qwd"</span>, <span class="string">"qwt"</span>, <span class="string">"qxl"</span>, <span class="string">"qxb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.realvnc.bed"</span>: [<span class="string">"bed"</span>],</span><br><span class="line">    <span class="string">"application/vnd.recordare.musicxml"</span>: [<span class="string">"mxl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.recordare.musicxml+xml"</span>: [<span class="string">"musicxml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.rig.cryptonote"</span>: [<span class="string">"cryptonote"</span>],</span><br><span class="line">    <span class="string">"application/vnd.rim.cod"</span>: [<span class="string">"cod"</span>],</span><br><span class="line">    <span class="string">"application/vnd.rn-realmedia"</span>: [<span class="string">"rm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.rn-realmedia-vbr"</span>: [<span class="string">"rmvb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.route66.link66+xml"</span>: [<span class="string">"link66"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sailingtracker.track"</span>: [<span class="string">"st"</span>],</span><br><span class="line">    <span class="string">"application/vnd.seemail"</span>: [<span class="string">"see"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sema"</span>: [<span class="string">"sema"</span>],</span><br><span class="line">    <span class="string">"application/vnd.semd"</span>: [<span class="string">"semd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.semf"</span>: [<span class="string">"semf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.shana.informed.formdata"</span>: [<span class="string">"ifm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.shana.informed.formtemplate"</span>: [<span class="string">"itp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.shana.informed.interchange"</span>: [<span class="string">"iif"</span>],</span><br><span class="line">    <span class="string">"application/vnd.shana.informed.package"</span>: [<span class="string">"ipk"</span>],</span><br><span class="line">    <span class="string">"application/vnd.simtech-mindmapper"</span>: [<span class="string">"twd"</span>, <span class="string">"twds"</span>],</span><br><span class="line">    <span class="string">"application/vnd.smaf"</span>: [<span class="string">"mmf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.smart.teacher"</span>: [<span class="string">"teacher"</span>],</span><br><span class="line">    <span class="string">"application/vnd.solent.sdkm+xml"</span>: [<span class="string">"sdkm"</span>, <span class="string">"sdkd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.spotfire.dxp"</span>: [<span class="string">"dxp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.spotfire.sfs"</span>: [<span class="string">"sfs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.calc"</span>: [<span class="string">"sdc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.draw"</span>: [<span class="string">"sda"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.impress"</span>: [<span class="string">"sdd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.math"</span>: [<span class="string">"smf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.writer"</span>: [<span class="string">"sdw"</span>, <span class="string">"vor"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stardivision.writer-global"</span>: [<span class="string">"sgl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stepmania.package"</span>: [<span class="string">"smzip"</span>],</span><br><span class="line">    <span class="string">"application/vnd.stepmania.stepchart"</span>: [<span class="string">"sm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.wadl+xml"</span>: [<span class="string">"wadl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.calc"</span>: [<span class="string">"sxc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.calc.template"</span>: [<span class="string">"stc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.draw"</span>: [<span class="string">"sxd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.draw.template"</span>: [<span class="string">"std"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.impress"</span>: [<span class="string">"sxi"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.impress.template"</span>: [<span class="string">"sti"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.math"</span>: [<span class="string">"sxm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.writer"</span>: [<span class="string">"sxw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.writer.global"</span>: [<span class="string">"sxg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sun.xml.writer.template"</span>: [<span class="string">"stw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.sus-calendar"</span>: [<span class="string">"sus"</span>, <span class="string">"susp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.svd"</span>: [<span class="string">"svd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.symbian.install"</span>: [<span class="string">"sis"</span>, <span class="string">"sisx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.syncml+xml"</span>: [<span class="string">"xsm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.syncml.dm+wbxml"</span>: [<span class="string">"bdm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.syncml.dm+xml"</span>: [<span class="string">"xdm"</span>],</span><br><span class="line">    <span class="string">"application/vnd.tao.intent-module-archive"</span>: [<span class="string">"tao"</span>],</span><br><span class="line">    <span class="string">"application/vnd.tcpdump.pcap"</span>: [<span class="string">"pcap"</span>, <span class="string">"cap"</span>, <span class="string">"dmp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.tmobile-livetv"</span>: [<span class="string">"tmo"</span>],</span><br><span class="line">    <span class="string">"application/vnd.trid.tpt"</span>: [<span class="string">"tpt"</span>],</span><br><span class="line">    <span class="string">"application/vnd.triscape.mxs"</span>: [<span class="string">"mxs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.trueapp"</span>: [<span class="string">"tra"</span>],</span><br><span class="line">    <span class="string">"application/vnd.ufdl"</span>: [<span class="string">"ufd"</span>, <span class="string">"ufdl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.uiq.theme"</span>: [<span class="string">"utz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.umajin"</span>: [<span class="string">"umj"</span>],</span><br><span class="line">    <span class="string">"application/vnd.unity"</span>: [<span class="string">"unityweb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.uoml+xml"</span>: [<span class="string">"uoml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.vcx"</span>: [<span class="string">"vcx"</span>],</span><br><span class="line">    <span class="string">"application/vnd.visio"</span>: [<span class="string">"vsd"</span>, <span class="string">"vst"</span>, <span class="string">"vss"</span>, <span class="string">"vsw"</span>],</span><br><span class="line">    <span class="string">"application/vnd.visionary"</span>: [<span class="string">"vis"</span>],</span><br><span class="line">    <span class="string">"application/vnd.vsf"</span>: [<span class="string">"vsf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wap.wbxml"</span>: [<span class="string">"wbxml"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wap.wmlc"</span>: [<span class="string">"wmlc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wap.wmlscriptc"</span>: [<span class="string">"wmlsc"</span>],</span><br><span class="line">    <span class="string">"application/vnd.webturbo"</span>: [<span class="string">"wtb"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wolfram.player"</span>: [<span class="string">"nbp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wordperfect"</span>: [<span class="string">"wpd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wqd"</span>: [<span class="string">"wqd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.wt.stf"</span>: [<span class="string">"stf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.xara"</span>: [<span class="string">"xar"</span>],</span><br><span class="line">    <span class="string">"application/vnd.xfdl"</span>: [<span class="string">"xfdl"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.hv-dic"</span>: [<span class="string">"hvd"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.hv-script"</span>: [<span class="string">"hvs"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.hv-voice"</span>: [<span class="string">"hvp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.openscoreformat"</span>: [<span class="string">"osf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.openscoreformat.osfpvg+xml"</span>: [<span class="string">"osfpvg"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.smaf-audio"</span>: [<span class="string">"saf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yamaha.smaf-phrase"</span>: [<span class="string">"spf"</span>],</span><br><span class="line">    <span class="string">"application/vnd.yellowriver-custom-menu"</span>: [<span class="string">"cmp"</span>],</span><br><span class="line">    <span class="string">"application/vnd.zul"</span>: [<span class="string">"zir"</span>, <span class="string">"zirz"</span>],</span><br><span class="line">    <span class="string">"application/vnd.zzazz.deck+xml"</span>: [<span class="string">"zaz"</span>],</span><br><span class="line">    <span class="string">"application/x-7z-compressed"</span>: [<span class="string">"7z"</span>],</span><br><span class="line">    <span class="string">"application/x-abiword"</span>: [<span class="string">"abw"</span>],</span><br><span class="line">    <span class="string">"application/x-ace-compressed"</span>: [<span class="string">"ace"</span>],</span><br><span class="line">    <span class="string">"application/x-apple-diskimage"</span>: [],</span><br><span class="line">    <span class="string">"application/x-arj"</span>: [<span class="string">"arj"</span>],</span><br><span class="line">    <span class="string">"application/x-authorware-bin"</span>: [<span class="string">"aab"</span>, <span class="string">"x32"</span>, <span class="string">"u32"</span>, <span class="string">"vox"</span>],</span><br><span class="line">    <span class="string">"application/x-authorware-map"</span>: [<span class="string">"aam"</span>],</span><br><span class="line">    <span class="string">"application/x-authorware-seg"</span>: [<span class="string">"aas"</span>],</span><br><span class="line">    <span class="string">"application/x-bcpio"</span>: [<span class="string">"bcpio"</span>],</span><br><span class="line">    <span class="string">"application/x-bdoc"</span>: [],</span><br><span class="line">    <span class="string">"application/x-bittorrent"</span>: [<span class="string">"torrent"</span>],</span><br><span class="line">    <span class="string">"application/x-blorb"</span>: [<span class="string">"blb"</span>, <span class="string">"blorb"</span>],</span><br><span class="line">    <span class="string">"application/x-bzip"</span>: [<span class="string">"bz"</span>],</span><br><span class="line">    <span class="string">"application/x-bzip2"</span>: [<span class="string">"bz2"</span>, <span class="string">"boz"</span>],</span><br><span class="line">    <span class="string">"application/x-cbr"</span>: [<span class="string">"cbr"</span>, <span class="string">"cba"</span>, <span class="string">"cbt"</span>, <span class="string">"cbz"</span>, <span class="string">"cb7"</span>],</span><br><span class="line">    <span class="string">"application/x-cdlink"</span>: [<span class="string">"vcd"</span>],</span><br><span class="line">    <span class="string">"application/x-cfs-compressed"</span>: [<span class="string">"cfs"</span>],</span><br><span class="line">    <span class="string">"application/x-chat"</span>: [<span class="string">"chat"</span>],</span><br><span class="line">    <span class="string">"application/x-chess-pgn"</span>: [<span class="string">"pgn"</span>],</span><br><span class="line">    <span class="string">"application/x-chrome-extension"</span>: [<span class="string">"crx"</span>],</span><br><span class="line">    <span class="string">"application/x-cocoa"</span>: [<span class="string">"cco"</span>],</span><br><span class="line">    <span class="string">"application/x-conference"</span>: [<span class="string">"nsc"</span>],</span><br><span class="line">    <span class="string">"application/x-cpio"</span>: [<span class="string">"cpio"</span>],</span><br><span class="line">    <span class="string">"application/x-csh"</span>: [<span class="string">"csh"</span>],</span><br><span class="line">    <span class="string">"application/x-debian-package"</span>: [<span class="string">"udeb"</span>],</span><br><span class="line">    <span class="string">"application/x-dgc-compressed"</span>: [<span class="string">"dgc"</span>],</span><br><span class="line">    <span class="string">"application/x-director"</span>: [<span class="string">"dir"</span>, <span class="string">"dcr"</span>, <span class="string">"dxr"</span>, <span class="string">"cst"</span>, <span class="string">"cct"</span>, <span class="string">"cxt"</span>, <span class="string">"w3d"</span>, <span class="string">"fgd"</span>, <span class="string">"swa"</span>],</span><br><span class="line">    <span class="string">"application/x-doom"</span>: [<span class="string">"wad"</span>],</span><br><span class="line">    <span class="string">"application/x-dtbncx+xml"</span>: [<span class="string">"ncx"</span>],</span><br><span class="line">    <span class="string">"application/x-dtbook+xml"</span>: [<span class="string">"dtb"</span>],</span><br><span class="line">    <span class="string">"application/x-dtbresource+xml"</span>: [<span class="string">"res"</span>],</span><br><span class="line">    <span class="string">"application/x-dvi"</span>: [<span class="string">"dvi"</span>],</span><br><span class="line">    <span class="string">"application/x-envoy"</span>: [<span class="string">"evy"</span>],</span><br><span class="line">    <span class="string">"application/x-eva"</span>: [<span class="string">"eva"</span>],</span><br><span class="line">    <span class="string">"application/x-font-bdf"</span>: [<span class="string">"bdf"</span>],</span><br><span class="line">    <span class="string">"application/x-font-ghostscript"</span>: [<span class="string">"gsf"</span>],</span><br><span class="line">    <span class="string">"application/x-font-linux-psf"</span>: [<span class="string">"psf"</span>],</span><br><span class="line">    <span class="string">"application/x-font-otf"</span>: [],</span><br><span class="line">    <span class="string">"application/x-font-pcf"</span>: [<span class="string">"pcf"</span>],</span><br><span class="line">    <span class="string">"application/x-font-snf"</span>: [<span class="string">"snf"</span>],</span><br><span class="line">    <span class="string">"application/x-font-ttf"</span>: [<span class="string">"ttf"</span>, <span class="string">"ttc"</span>],</span><br><span class="line">    <span class="string">"application/x-font-type1"</span>: [<span class="string">"pfa"</span>, <span class="string">"pfb"</span>, <span class="string">"pfm"</span>, <span class="string">"afm"</span>],</span><br><span class="line">    <span class="string">"application/x-freearc"</span>: [<span class="string">"arc"</span>],</span><br><span class="line">    <span class="string">"application/x-futuresplash"</span>: [<span class="string">"spl"</span>],</span><br><span class="line">    <span class="string">"application/x-gca-compressed"</span>: [<span class="string">"gca"</span>],</span><br><span class="line">    <span class="string">"application/x-glulx"</span>: [<span class="string">"ulx"</span>],</span><br><span class="line">    <span class="string">"application/x-gnumeric"</span>: [<span class="string">"gnumeric"</span>],</span><br><span class="line">    <span class="string">"application/x-gramps-xml"</span>: [<span class="string">"gramps"</span>],</span><br><span class="line">    <span class="string">"application/x-gtar"</span>: [<span class="string">"gtar"</span>],</span><br><span class="line">    <span class="string">"application/x-hdf"</span>: [<span class="string">"hdf"</span>],</span><br><span class="line">    <span class="string">"application/x-httpd-php"</span>: [<span class="string">"php"</span>],</span><br><span class="line">    <span class="string">"application/x-install-instructions"</span>: [<span class="string">"install"</span>],</span><br><span class="line">    <span class="string">"application/x-iso9660-image"</span>: [],</span><br><span class="line">    <span class="string">"application/x-java-archive-diff"</span>: [<span class="string">"jardiff"</span>],</span><br><span class="line">    <span class="string">"application/x-java-jnlp-file"</span>: [<span class="string">"jnlp"</span>],</span><br><span class="line">    <span class="string">"application/x-latex"</span>: [<span class="string">"latex"</span>],</span><br><span class="line">    <span class="string">"application/x-lua-bytecode"</span>: [<span class="string">"luac"</span>],</span><br><span class="line">    <span class="string">"application/x-lzh-compressed"</span>: [<span class="string">"lzh"</span>, <span class="string">"lha"</span>],</span><br><span class="line">    <span class="string">"application/x-makeself"</span>: [<span class="string">"run"</span>],</span><br><span class="line">    <span class="string">"application/x-mie"</span>: [<span class="string">"mie"</span>],</span><br><span class="line">    <span class="string">"application/x-mobipocket-ebook"</span>: [<span class="string">"prc"</span>, <span class="string">"mobi"</span>],</span><br><span class="line">    <span class="string">"application/x-ms-application"</span>: [<span class="string">"application"</span>],</span><br><span class="line">    <span class="string">"application/x-ms-shortcut"</span>: [<span class="string">"lnk"</span>],</span><br><span class="line">    <span class="string">"application/x-ms-wmd"</span>: [<span class="string">"wmd"</span>],</span><br><span class="line">    <span class="string">"application/x-ms-wmz"</span>: [<span class="string">"wmz"</span>],</span><br><span class="line">    <span class="string">"application/x-ms-xbap"</span>: [<span class="string">"xbap"</span>],</span><br><span class="line">    <span class="string">"application/x-msaccess"</span>: [<span class="string">"mdb"</span>],</span><br><span class="line">    <span class="string">"application/x-msbinder"</span>: [<span class="string">"obd"</span>],</span><br><span class="line">    <span class="string">"application/x-mscardfile"</span>: [<span class="string">"crd"</span>],</span><br><span class="line">    <span class="string">"application/x-msclip"</span>: [<span class="string">"clp"</span>],</span><br><span class="line">    <span class="string">"application/x-msdos-program"</span>: [],</span><br><span class="line">    <span class="string">"application/x-msdownload"</span>: [<span class="string">"com"</span>, <span class="string">"bat"</span>],</span><br><span class="line">    <span class="string">"application/x-msmediaview"</span>: [<span class="string">"mvb"</span>, <span class="string">"m13"</span>, <span class="string">"m14"</span>],</span><br><span class="line">    <span class="string">"application/x-msmetafile"</span>: [<span class="string">"wmf"</span>, <span class="string">"emf"</span>, <span class="string">"emz"</span>],</span><br><span class="line">    <span class="string">"application/x-msmoney"</span>: [<span class="string">"mny"</span>],</span><br><span class="line">    <span class="string">"application/x-mspublisher"</span>: [<span class="string">"pub"</span>],</span><br><span class="line">    <span class="string">"application/x-msschedule"</span>: [<span class="string">"scd"</span>],</span><br><span class="line">    <span class="string">"application/x-msterminal"</span>: [<span class="string">"trm"</span>],</span><br><span class="line">    <span class="string">"application/x-mswrite"</span>: [<span class="string">"wri"</span>],</span><br><span class="line">    <span class="string">"application/x-netcdf"</span>: [<span class="string">"nc"</span>, <span class="string">"cdf"</span>],</span><br><span class="line">    <span class="string">"application/x-ns-proxy-autoconfig"</span>: [<span class="string">"pac"</span>],</span><br><span class="line">    <span class="string">"application/x-nzb"</span>: [<span class="string">"nzb"</span>],</span><br><span class="line">    <span class="string">"application/x-perl"</span>: [<span class="string">"pl"</span>, <span class="string">"pm"</span>],</span><br><span class="line">    <span class="string">"application/x-pilot"</span>: [],</span><br><span class="line">    <span class="string">"application/x-pkcs12"</span>: [<span class="string">"p12"</span>, <span class="string">"pfx"</span>],</span><br><span class="line">    <span class="string">"application/x-pkcs7-certificates"</span>: [<span class="string">"p7b"</span>, <span class="string">"spc"</span>],</span><br><span class="line">    <span class="string">"application/x-pkcs7-certreqresp"</span>: [<span class="string">"p7r"</span>],</span><br><span class="line">    <span class="string">"application/x-rar-compressed"</span>: [<span class="string">"rar"</span>],</span><br><span class="line">    <span class="string">"application/x-redhat-package-manager"</span>: [<span class="string">"rpm"</span>],</span><br><span class="line">    <span class="string">"application/x-research-info-systems"</span>: [<span class="string">"ris"</span>],</span><br><span class="line">    <span class="string">"application/x-sea"</span>: [<span class="string">"sea"</span>],</span><br><span class="line">    <span class="string">"application/x-sh"</span>: [<span class="string">"sh"</span>],</span><br><span class="line">    <span class="string">"application/x-shar"</span>: [<span class="string">"shar"</span>],</span><br><span class="line">    <span class="string">"application/x-shockwave-flash"</span>: [<span class="string">"swf"</span>],</span><br><span class="line">    <span class="string">"application/x-silverlight-app"</span>: [<span class="string">"xap"</span>],</span><br><span class="line">    <span class="string">"application/x-sql"</span>: [<span class="string">"sql"</span>],</span><br><span class="line">    <span class="string">"application/x-stuffit"</span>: [<span class="string">"sit"</span>],</span><br><span class="line">    <span class="string">"application/x-stuffitx"</span>: [<span class="string">"sitx"</span>],</span><br><span class="line">    <span class="string">"application/x-subrip"</span>: [<span class="string">"srt"</span>],</span><br><span class="line">    <span class="string">"application/x-sv4cpio"</span>: [<span class="string">"sv4cpio"</span>],</span><br><span class="line">    <span class="string">"application/x-sv4crc"</span>: [<span class="string">"sv4crc"</span>],</span><br><span class="line">    <span class="string">"application/x-t3vm-image"</span>: [<span class="string">"t3"</span>],</span><br><span class="line">    <span class="string">"application/x-tads"</span>: [<span class="string">"gam"</span>],</span><br><span class="line">    <span class="string">"application/x-tar"</span>: [<span class="string">"tar"</span>],</span><br><span class="line">    <span class="string">"application/x-tcl"</span>: [<span class="string">"tcl"</span>, <span class="string">"tk"</span>],</span><br><span class="line">    <span class="string">"application/x-tex"</span>: [<span class="string">"tex"</span>],</span><br><span class="line">    <span class="string">"application/x-tex-tfm"</span>: [<span class="string">"tfm"</span>],</span><br><span class="line">    <span class="string">"application/x-texinfo"</span>: [<span class="string">"texinfo"</span>, <span class="string">"texi"</span>],</span><br><span class="line">    <span class="string">"application/x-tgif"</span>: [<span class="string">"obj"</span>],</span><br><span class="line">    <span class="string">"application/x-ustar"</span>: [<span class="string">"ustar"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-hdd"</span>: [<span class="string">"hdd"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-ova"</span>: [<span class="string">"ova"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-ovf"</span>: [<span class="string">"ovf"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-vbox"</span>: [<span class="string">"vbox"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-vbox-extpack"</span>: [<span class="string">"vbox-extpack"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-vdi"</span>: [<span class="string">"vdi"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-vhd"</span>: [<span class="string">"vhd"</span>],</span><br><span class="line">    <span class="string">"application/x-virtualbox-vmdk"</span>: [<span class="string">"vmdk"</span>],</span><br><span class="line">    <span class="string">"application/x-wais-source"</span>: [<span class="string">"src"</span>],</span><br><span class="line">    <span class="string">"application/x-web-app-manifest+json"</span>: [<span class="string">"webapp"</span>],</span><br><span class="line">    <span class="string">"application/x-x509-ca-cert"</span>: [<span class="string">"der"</span>, <span class="string">"crt"</span>, <span class="string">"pem"</span>],</span><br><span class="line">    <span class="string">"application/x-xfig"</span>: [<span class="string">"fig"</span>],</span><br><span class="line">    <span class="string">"application/x-xliff+xml"</span>: [<span class="string">"xlf"</span>],</span><br><span class="line">    <span class="string">"application/x-xpinstall"</span>: [<span class="string">"xpi"</span>],</span><br><span class="line">    <span class="string">"application/x-xz"</span>: [<span class="string">"xz"</span>],</span><br><span class="line">    <span class="string">"application/x-zmachine"</span>: [<span class="string">"z1"</span>, <span class="string">"z2"</span>, <span class="string">"z3"</span>, <span class="string">"z4"</span>, <span class="string">"z5"</span>, <span class="string">"z6"</span>, <span class="string">"z7"</span>, <span class="string">"z8"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.dece.audio"</span>: [<span class="string">"uva"</span>, <span class="string">"uvva"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.digital-winds"</span>: [<span class="string">"eol"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.dra"</span>: [<span class="string">"dra"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.dts"</span>: [<span class="string">"dts"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.dts.hd"</span>: [<span class="string">"dtshd"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.lucent.voice"</span>: [<span class="string">"lvp"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.ms-playready.media.pya"</span>: [<span class="string">"pya"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.nuera.ecelp4800"</span>: [<span class="string">"ecelp4800"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.nuera.ecelp7470"</span>: [<span class="string">"ecelp7470"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.nuera.ecelp9600"</span>: [<span class="string">"ecelp9600"</span>],</span><br><span class="line">    <span class="string">"audio/vnd.rip"</span>: [<span class="string">"rip"</span>],</span><br><span class="line">    <span class="string">"audio/x-aac"</span>: [<span class="string">"aac"</span>],</span><br><span class="line">    <span class="string">"audio/x-aiff"</span>: [<span class="string">"aif"</span>, <span class="string">"aiff"</span>, <span class="string">"aifc"</span>],</span><br><span class="line">    <span class="string">"audio/x-caf"</span>: [<span class="string">"caf"</span>],</span><br><span class="line">    <span class="string">"audio/x-flac"</span>: [<span class="string">"flac"</span>],</span><br><span class="line">    <span class="string">"audio/x-m4a"</span>: [],</span><br><span class="line">    <span class="string">"audio/x-matroska"</span>: [<span class="string">"mka"</span>],</span><br><span class="line">    <span class="string">"audio/x-mpegurl"</span>: [<span class="string">"m3u"</span>],</span><br><span class="line">    <span class="string">"audio/x-ms-wax"</span>: [<span class="string">"wax"</span>],</span><br><span class="line">    <span class="string">"audio/x-ms-wma"</span>: [<span class="string">"wma"</span>],</span><br><span class="line">    <span class="string">"audio/x-pn-realaudio"</span>: [<span class="string">"ram"</span>, <span class="string">"ra"</span>],</span><br><span class="line">    <span class="string">"audio/x-pn-realaudio-plugin"</span>: [<span class="string">"rmp"</span>],</span><br><span class="line">    <span class="string">"audio/x-realaudio"</span>: [],</span><br><span class="line">    <span class="string">"audio/x-wav"</span>: [],</span><br><span class="line">    <span class="string">"chemical/x-cdx"</span>: [<span class="string">"cdx"</span>],</span><br><span class="line">    <span class="string">"chemical/x-cif"</span>: [<span class="string">"cif"</span>],</span><br><span class="line">    <span class="string">"chemical/x-cmdf"</span>: [<span class="string">"cmdf"</span>],</span><br><span class="line">    <span class="string">"chemical/x-cml"</span>: [<span class="string">"cml"</span>],</span><br><span class="line">    <span class="string">"chemical/x-csml"</span>: [<span class="string">"csml"</span>],</span><br><span class="line">    <span class="string">"chemical/x-xyz"</span>: [<span class="string">"xyz"</span>],</span><br><span class="line">    <span class="string">"image/prs.btif"</span>: [<span class="string">"btif"</span>],</span><br><span class="line">    <span class="string">"image/vnd.adobe.photoshop"</span>: [<span class="string">"psd"</span>],</span><br><span class="line">    <span class="string">"image/vnd.dece.graphic"</span>: [<span class="string">"uvi"</span>, <span class="string">"uvvi"</span>, <span class="string">"uvg"</span>, <span class="string">"uvvg"</span>],</span><br><span class="line">    <span class="string">"image/vnd.djvu"</span>: [<span class="string">"djvu"</span>, <span class="string">"djv"</span>],</span><br><span class="line">    <span class="string">"image/vnd.dvb.subtitle"</span>: [],</span><br><span class="line">    <span class="string">"image/vnd.dwg"</span>: [<span class="string">"dwg"</span>],</span><br><span class="line">    <span class="string">"image/vnd.dxf"</span>: [<span class="string">"dxf"</span>],</span><br><span class="line">    <span class="string">"image/vnd.fastbidsheet"</span>: [<span class="string">"fbs"</span>],</span><br><span class="line">    <span class="string">"image/vnd.fpx"</span>: [<span class="string">"fpx"</span>],</span><br><span class="line">    <span class="string">"image/vnd.fst"</span>: [<span class="string">"fst"</span>],</span><br><span class="line">    <span class="string">"image/vnd.fujixerox.edmics-mmr"</span>: [<span class="string">"mmr"</span>],</span><br><span class="line">    <span class="string">"image/vnd.fujixerox.edmics-rlc"</span>: [<span class="string">"rlc"</span>],</span><br><span class="line">    <span class="string">"image/vnd.ms-modi"</span>: [<span class="string">"mdi"</span>],</span><br><span class="line">    <span class="string">"image/vnd.ms-photo"</span>: [<span class="string">"wdp"</span>],</span><br><span class="line">    <span class="string">"image/vnd.net-fpx"</span>: [<span class="string">"npx"</span>],</span><br><span class="line">    <span class="string">"image/vnd.wap.wbmp"</span>: [<span class="string">"wbmp"</span>],</span><br><span class="line">    <span class="string">"image/vnd.xiff"</span>: [<span class="string">"xif"</span>],</span><br><span class="line">    <span class="string">"image/x-3ds"</span>: [<span class="string">"3ds"</span>],</span><br><span class="line">    <span class="string">"image/x-cmu-raster"</span>: [<span class="string">"ras"</span>],</span><br><span class="line">    <span class="string">"image/x-cmx"</span>: [<span class="string">"cmx"</span>],</span><br><span class="line">    <span class="string">"image/x-freehand"</span>: [<span class="string">"fh"</span>, <span class="string">"fhc"</span>, <span class="string">"fh4"</span>, <span class="string">"fh5"</span>, <span class="string">"fh7"</span>],</span><br><span class="line">    <span class="string">"image/x-icon"</span>: [<span class="string">"ico"</span>],</span><br><span class="line">    <span class="string">"image/x-jng"</span>: [<span class="string">"jng"</span>],</span><br><span class="line">    <span class="string">"image/x-mrsid-image"</span>: [<span class="string">"sid"</span>],</span><br><span class="line">    <span class="string">"image/x-ms-bmp"</span>: [],</span><br><span class="line">    <span class="string">"image/x-pcx"</span>: [<span class="string">"pcx"</span>],</span><br><span class="line">    <span class="string">"image/x-pict"</span>: [<span class="string">"pic"</span>, <span class="string">"pct"</span>],</span><br><span class="line">    <span class="string">"image/x-portable-anymap"</span>: [<span class="string">"pnm"</span>],</span><br><span class="line">    <span class="string">"image/x-portable-bitmap"</span>: [<span class="string">"pbm"</span>],</span><br><span class="line">    <span class="string">"image/x-portable-graymap"</span>: [<span class="string">"pgm"</span>],</span><br><span class="line">    <span class="string">"image/x-portable-pixmap"</span>: [<span class="string">"ppm"</span>],</span><br><span class="line">    <span class="string">"image/x-rgb"</span>: [<span class="string">"rgb"</span>],</span><br><span class="line">    <span class="string">"image/x-tga"</span>: [<span class="string">"tga"</span>],</span><br><span class="line">    <span class="string">"image/x-xbitmap"</span>: [<span class="string">"xbm"</span>],</span><br><span class="line">    <span class="string">"image/x-xpixmap"</span>: [<span class="string">"xpm"</span>],</span><br><span class="line">    <span class="string">"image/x-xwindowdump"</span>: [<span class="string">"xwd"</span>],</span><br><span class="line">    <span class="string">"model/vnd.collada+xml"</span>: [<span class="string">"dae"</span>],</span><br><span class="line">    <span class="string">"model/vnd.dwf"</span>: [<span class="string">"dwf"</span>],</span><br><span class="line">    <span class="string">"model/vnd.gdl"</span>: [<span class="string">"gdl"</span>],</span><br><span class="line">    <span class="string">"model/vnd.gtw"</span>: [<span class="string">"gtw"</span>],</span><br><span class="line">    <span class="string">"model/vnd.mts"</span>: [<span class="string">"mts"</span>],</span><br><span class="line">    <span class="string">"model/vnd.vtu"</span>: [<span class="string">"vtu"</span>],</span><br><span class="line">    <span class="string">"text/prs.lines.tag"</span>: [<span class="string">"dsc"</span>],</span><br><span class="line">    <span class="string">"text/vnd.curl"</span>: [<span class="string">"curl"</span>],</span><br><span class="line">    <span class="string">"text/vnd.curl.dcurl"</span>: [<span class="string">"dcurl"</span>],</span><br><span class="line">    <span class="string">"text/vnd.curl.mcurl"</span>: [<span class="string">"mcurl"</span>],</span><br><span class="line">    <span class="string">"text/vnd.curl.scurl"</span>: [<span class="string">"scurl"</span>],</span><br><span class="line">    <span class="string">"text/vnd.dvb.subtitle"</span>: [<span class="string">"sub"</span>],</span><br><span class="line">    <span class="string">"text/vnd.fly"</span>: [<span class="string">"fly"</span>],</span><br><span class="line">    <span class="string">"text/vnd.fmi.flexstor"</span>: [<span class="string">"flx"</span>],</span><br><span class="line">    <span class="string">"text/vnd.graphviz"</span>: [<span class="string">"gv"</span>],</span><br><span class="line">    <span class="string">"text/vnd.in3d.3dml"</span>: [<span class="string">"3dml"</span>],</span><br><span class="line">    <span class="string">"text/vnd.in3d.spot"</span>: [<span class="string">"spot"</span>],</span><br><span class="line">    <span class="string">"text/vnd.sun.j2me.app-descriptor"</span>: [<span class="string">"jad"</span>],</span><br><span class="line">    <span class="string">"text/vnd.wap.wml"</span>: [<span class="string">"wml"</span>],</span><br><span class="line">    <span class="string">"text/vnd.wap.wmlscript"</span>: [<span class="string">"wmls"</span>],</span><br><span class="line">    <span class="string">"text/x-asm"</span>: [<span class="string">"s"</span>, <span class="string">"asm"</span>],</span><br><span class="line">    <span class="string">"text/x-c"</span>: [<span class="string">"c"</span>, <span class="string">"cc"</span>, <span class="string">"cxx"</span>, <span class="string">"cpp"</span>, <span class="string">"h"</span>, <span class="string">"hh"</span>, <span class="string">"dic"</span>],</span><br><span class="line">    <span class="string">"text/x-component"</span>: [<span class="string">"htc"</span>],</span><br><span class="line">    <span class="string">"text/x-fortran"</span>: [<span class="string">"f"</span>, <span class="string">"for"</span>, <span class="string">"f77"</span>, <span class="string">"f90"</span>],</span><br><span class="line">    <span class="string">"text/x-handlebars-template"</span>: [<span class="string">"hbs"</span>],</span><br><span class="line">    <span class="string">"text/x-java-source"</span>: [<span class="string">"java"</span>],</span><br><span class="line">    <span class="string">"text/x-lua"</span>: [<span class="string">"lua"</span>],</span><br><span class="line">    <span class="string">"text/x-markdown"</span>: [<span class="string">"mkd"</span>],</span><br><span class="line">    <span class="string">"text/x-nfo"</span>: [<span class="string">"nfo"</span>],</span><br><span class="line">    <span class="string">"text/x-opml"</span>: [<span class="string">"opml"</span>],</span><br><span class="line">    <span class="string">"text/x-org"</span>: [],</span><br><span class="line">    <span class="string">"text/x-pascal"</span>: [<span class="string">"p"</span>, <span class="string">"pas"</span>],</span><br><span class="line">    <span class="string">"text/x-processing"</span>: [<span class="string">"pde"</span>],</span><br><span class="line">    <span class="string">"text/x-sass"</span>: [<span class="string">"sass"</span>],</span><br><span class="line">    <span class="string">"text/x-scss"</span>: [<span class="string">"scss"</span>],</span><br><span class="line">    <span class="string">"text/x-setext"</span>: [<span class="string">"etx"</span>],</span><br><span class="line">    <span class="string">"text/x-sfv"</span>: [<span class="string">"sfv"</span>],</span><br><span class="line">    <span class="string">"text/x-suse-ymp"</span>: [<span class="string">"ymp"</span>],</span><br><span class="line">    <span class="string">"text/x-uuencode"</span>: [<span class="string">"uu"</span>],</span><br><span class="line">    <span class="string">"text/x-vcalendar"</span>: [<span class="string">"vcs"</span>],</span><br><span class="line">    <span class="string">"text/x-vcard"</span>: [<span class="string">"vcf"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dece.hd"</span>: [<span class="string">"uvh"</span>, <span class="string">"uvvh"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dece.mobile"</span>: [<span class="string">"uvm"</span>, <span class="string">"uvvm"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dece.pd"</span>: [<span class="string">"uvp"</span>, <span class="string">"uvvp"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dece.sd"</span>: [<span class="string">"uvs"</span>, <span class="string">"uvvs"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dece.video"</span>: [<span class="string">"uvv"</span>, <span class="string">"uvvv"</span>],</span><br><span class="line">    <span class="string">"video/vnd.dvb.file"</span>: [<span class="string">"dvb"</span>],</span><br><span class="line">    <span class="string">"video/vnd.fvt"</span>: [<span class="string">"fvt"</span>],</span><br><span class="line">    <span class="string">"video/vnd.mpegurl"</span>: [<span class="string">"mxu"</span>, <span class="string">"m4u"</span>],</span><br><span class="line">    <span class="string">"video/vnd.ms-playready.media.pyv"</span>: [<span class="string">"pyv"</span>],</span><br><span class="line">    <span class="string">"video/vnd.uvvu.mp4"</span>: [<span class="string">"uvu"</span>, <span class="string">"uvvu"</span>],</span><br><span class="line">    <span class="string">"video/vnd.vivo"</span>: [<span class="string">"viv"</span>],</span><br><span class="line">    <span class="string">"video/x-f4v"</span>: [<span class="string">"f4v"</span>],</span><br><span class="line">    <span class="string">"video/x-fli"</span>: [<span class="string">"fli"</span>],</span><br><span class="line">    <span class="string">"video/x-flv"</span>: [<span class="string">"flv"</span>],</span><br><span class="line">    <span class="string">"video/x-m4v"</span>: [<span class="string">"m4v"</span>],</span><br><span class="line">    <span class="string">"video/x-matroska"</span>: [<span class="string">"mkv"</span>, <span class="string">"mk3d"</span>, <span class="string">"mks"</span>],</span><br><span class="line">    <span class="string">"video/x-mng"</span>: [<span class="string">"mng"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-asf"</span>: [<span class="string">"asf"</span>, <span class="string">"asx"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-vob"</span>: [<span class="string">"vob"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-wm"</span>: [<span class="string">"wm"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-wmv"</span>: [<span class="string">"wmv"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-wmx"</span>: [<span class="string">"wmx"</span>],</span><br><span class="line">    <span class="string">"video/x-ms-wvx"</span>: [<span class="string">"wvx"</span>],</span><br><span class="line">    <span class="string">"video/x-msvideo"</span>: [<span class="string">"avi"</span>],</span><br><span class="line">    <span class="string">"video/x-sgi-movie"</span>: [<span class="string">"movie"</span>],</span><br><span class="line">    <span class="string">"video/x-smv"</span>: [<span class="string">"smv"</span>],</span><br><span class="line">    <span class="string">"x-conference/x-cooltalk"</span>: [<span class="string">"ice"</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ul>
+<li>安装 pm2</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install pm2 -g</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js </span><br><span class="line"><span class="comment">#更多具体配置参数可以查看pm2官网</span></span><br><span class="line"><span class="comment">#http://pm2.keymetrics.io/docs/usage/quick-start/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>更多命令,可以查看pm2官网</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/服务器/" rel="tag"># 服务器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/oracle-operations/" rel="next" title="ORACLE 运维命令">
+                <i class="fa fa-chevron-left"></i> ORACLE 运维命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/19/docker/install_docker/" rel="prev" title="docker 安装,配置">
+                docker 安装,配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="李磊">
+            
+              <p class="site-author-name" itemprop="name">李磊</p>
+              <p class="site-description motion-element" itemprop="description">不做键盘侠！！！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mylyed" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github-alt"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://git.oschina.net/lil" target="_blank" title="码云">
+                      
+                        <i class="fa fa-fw fa-gitlab"></i>码云</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/u/2168032422" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-cai-40-13" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认配置如下"><span class="nav-number">1.</span> <span class="nav-text">默认配置如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">2.</span> <span class="nav-text">部署</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user-secret"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李磊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
