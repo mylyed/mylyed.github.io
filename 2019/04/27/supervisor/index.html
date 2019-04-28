@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="教程,springboot,运维,supervisor,">
+  <meta name="keywords" content="教程,运维,springboot,supervisor,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="安装supervisor官方安装教程 1pip install supervisor 如果环境没有 pip工具 12345wget supervisor下载地址tar -zxvf supervisor-x.x.x.tar.gz  #解压cd supervisor-x.x.xpython setup.py install #本地python版本为python2.7# python2.7 setup.">
-<meta name="keywords" content="教程,springboot,运维,supervisor">
+<meta name="keywords" content="教程,运维,springboot,supervisor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dsupervisor 简单教程">
 <meta property="og:url" content="https://mylyed.github.io/2019/04/27/supervisor/index.html">
 <meta property="og:site_name" content="李磊的笔记本">
 <meta property="og:description" content="安装supervisor官方安装教程 1pip install supervisor 如果环境没有 pip工具 12345wget supervisor下载地址tar -zxvf supervisor-x.x.x.tar.gz  #解压cd supervisor-x.x.xpython setup.py install #本地python版本为python2.7# python2.7 setup.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-28T08:54:06.953Z">
+<meta property="og:updated_time" content="2019-04-28T08:55:59.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dsupervisor 简单教程">
 <meta name="twitter:description" content="安装supervisor官方安装教程 1pip install supervisor 如果环境没有 pip工具 12345wget supervisor下载地址tar -zxvf supervisor-x.x.x.tar.gz  #解压cd supervisor-x.x.xpython setup.py install #本地python版本为python2.7# python2.7 setup.">
@@ -401,8 +401,8 @@
 <p>更改了配置文件需要重新加载配置文件，supervisor会重启各个引用<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure></p>
 <h3 id="supervisorctl-使用"><a href="#supervisorctl-使用" class="headerlink" title="supervisorctl 使用"></a>supervisorctl 使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">supervisord #启动supervisor</span><br><span class="line">supervisorctl reload #修改完配置文件后重新启动supervisor</span><br><span class="line">supervisorctl status #查看supervisor监管的进程状态</span><br><span class="line">supervisorctl start 进程名  #启动XXX进程</span><br><span class="line">supervisorctl stop 进程名 #停止XXX进程</span><br><span class="line">supervisorctl stop all #停止全部进程，注：start、restart、stop都不会载入最新的配置文件。</span><br><span class="line">supervisorctl update #根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启</span><br></pre></td></tr></table></figure>
 <h3 id="使用浏览器来管理进程"><a href="#使用浏览器来管理进程" class="headerlink" title="使用浏览器来管理进程"></a>使用浏览器来管理进程</h3><p>编辑/etc/supervisord.conf 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;配置内部HTTP-SERVER，注意0.0.0.0 是开放给任何IP访问的，</span><br><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=0.0.0.0:9001        ; ip_address:port specifier, *:port for all iface</span><br><span class="line">;登录管理界面需要的的用户名以及密码</span><br><span class="line">username=user              ; default is no username (open server)</span><br><span class="line">password=123               ; default is no password (open server)</span><br></pre></td></tr></table></figure></p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="命令运行不了"><a href="#命令运行不了" class="headerlink" title="命令运行不了"></a>命令运行不了</h3><p> 有可能是运行命令的权限不够 需要 sudo 命令运行不了</p>
-<h3 id="浏览器访问不了管理界面"><a href="#浏览器访问不了管理界面" class="headerlink" title="浏览器访问不了管理界面"></a>浏览器访问不了管理界面</h3><p> 有可能是linux防火墙不允许访问9001端口<br> 以centos为例：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=9001/tcp #防火墙加入9001端口</span><br><span class="line">firewall-cmd --reload　#重启防火墙 使端口生效</span><br></pre></td></tr></table></figure></p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="命令运行不了"><a href="#命令运行不了" class="headerlink" title="命令运行不了"></a>命令运行不了</h3><p> 有可能是运行命令的权限不够 需要 sudo 命令</p>
+<h3 id="浏览器访问不了管理界面"><a href="#浏览器访问不了管理界面" class="headerlink" title="浏览器访问不了管理界面"></a>浏览器访问不了管理界面</h3><p> 有可能是Linux防火墙不允许访问9001端口<br> 以centos7为例：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=9001/tcp #防火墙加入9001端口</span><br><span class="line">firewall-cmd --reload　#重启防火墙 使端口生效</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -422,9 +422,9 @@
           
             <a href="/tags/教程/" rel="tag"># 教程</a>
           
-            <a href="/tags/springboot/" rel="tag"># springboot</a>
-          
             <a href="/tags/运维/" rel="tag"># 运维</a>
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
           
             <a href="/tags/supervisor/" rel="tag"># supervisor</a>
           
