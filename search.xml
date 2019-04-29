@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问]]></title>
     <url>%2F2019%2F04%2F29%2Fspringboot%2Fspring-boot-https%2F</url>
-    <content type="text"><![CDATA[SSL证书生成生产环境是向证书供应商进行购买，在使用工具转换我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法 jks证书（java专用）1234keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650 #生成证书keytool -list -v -keystore keystore.jks # 查看生成的信息 PKCS121234keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 #生成证书keytool -list -v -storetype pkcs12 -keystore keystore.p12 #查看生成的信息 生成证书都会要求你输入密码，注意，请记住这个密码，后面springboot配置要用到。 JKS迁移成PKCS12证书12345keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.p12 -deststoretype pkcs12``` ### 证书供应商提供的证书 keytool -import -alias tomcat -file myCertificate.crt -keystore keystore.p12 -storepass password 12345678910111213141516171819## Spring Boot 启用https配置文件```text#访问的端口server.port=8443#自定义配置用于开启http端口访问http.port=8080#默认就是true 不用配置server.ssl.enabled=true #这用到生成证书时的密码server.ssl.key-password=111111#证书地址 如果是在jar里面 使用classpath:keystore.jksserver.ssl.key-store=./keystore.jks#证书alias 别名server.ssl.key-alias=tomcat#证书格式 还有 PKCS12server.ssl.key-store-type=jks 启动服务器 访问https 的 8488端口 应该就能访问了 http重定向到httpsspring boot 2.x 版本代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import org.apache.catalina.Context;import org.apache.catalina.connector.Connector;import org.apache.tomcat.util.descriptor.web.SecurityCollection;import org.apache.tomcat.util.descriptor.web.SecurityConstraint;import org.springframework.beans.factory.annotation.Value;import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;import org.springframework.boot.web.servlet.server.ServletWebServerFactory;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;@Configuration/*配置http自动转为https*/public class ConnectorConfig &#123; @Bean public ServletWebServerFactory servletWebServerFactory() &#123; TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory() &#123; @Override protected void postProcessContext(Context context) &#123; SecurityConstraint securityConstraint = new SecurityConstraint(); securityConstraint.setUserConstraint("CONFIDENTIAL");//机密的 SecurityCollection securityCollection = new SecurityCollection(); securityCollection.addPattern("/*"); securityConstraint.addCollection(securityCollection); context.addConstraint(securityConstraint); &#125; &#125;; factory.addAdditionalTomcatConnectors(httpConnector()); return factory; &#125; //https端口 @Value("$&#123;server.port&#125;") private int httpsPort; //http端口 @Value("$&#123;http.port&#125;") private int httpPort = 8080; @Bean public Connector httpConnector() &#123; Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol"); connector.setScheme("http"); connector.setPort(httpPort); connector.setSecure(false); connector.setRedirectPort(httpsPort); return connector; &#125;&#125; 访问8080端口 会自动跳转到 https 的端口 其他（非必要操作）获取分发给客户端的证书1keytool -export -keystore keystore.jks -alias tomcat -file myCertificate.crt jdk导入证书 方便java程序访问https访问时进行证书的验证1keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts 思考❓浏览器怎么和证书进行关联？通过别名么？ 别名设置成域名？]]></content>
+    <content type="text"><![CDATA[SSL证书生成生产环境是向证书供应商进行购买，在使用工具转换我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法 jks证书（java专用）12keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650 #生成证书keytool -list -v -keystore keystore.jks # 查看生成的信息 PKCS1212keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 #生成证书keytool -list -v -storetype pkcs12 -keystore keystore.p12 #查看生成的信息 生成证书都会要求你输入密码，注意，请记住这个密码，后面springboot配置要用到。 JKS迁移成PKCS12证书1234keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.p12 -deststoretype pkcs12``` ### 证书供应商提供的证书 keytool -import -alias tomcat -file myCertificate.crt -keystore keystore.p12 -storepass password1234567891011121314151617181920## Spring Boot 启用https配置文件```text#访问的端口server.port=8443#自定义配置用于开启http端口访问http.port=8080#默认就是true 不用配置server.ssl.enabled=true #这用到生成证书时的密码server.ssl.key-password=111111#证书地址 如果是在jar里面 使用classpath:keystore.jksserver.ssl.key-store=./keystore.jks#证书alias 别名server.ssl.key-alias=tomcat#证书格式 还有 PKCS12server.ssl.key-store-type=jks 启动服务器 访问https 的 8488端口 应该就能访问了 http重定向到httpsspring boot 2.x 版本代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import org.apache.catalina.Context;import org.apache.catalina.connector.Connector;import org.apache.tomcat.util.descriptor.web.SecurityCollection;import org.apache.tomcat.util.descriptor.web.SecurityConstraint;import org.springframework.beans.factory.annotation.Value;import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;import org.springframework.boot.web.servlet.server.ServletWebServerFactory;import org.springframework.context.annotation.Bean;import org.springframework.context.annotation.Configuration;@Configuration/*配置http自动转为https*/public class ConnectorConfig &#123; @Bean public ServletWebServerFactory servletWebServerFactory() &#123; TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory() &#123; @Override protected void postProcessContext(Context context) &#123; SecurityConstraint securityConstraint = new SecurityConstraint(); securityConstraint.setUserConstraint("CONFIDENTIAL");//机密的 SecurityCollection securityCollection = new SecurityCollection(); securityCollection.addPattern("/*"); securityConstraint.addCollection(securityCollection); context.addConstraint(securityConstraint); &#125; &#125;; factory.addAdditionalTomcatConnectors(httpConnector()); return factory; &#125; //https端口 @Value("$&#123;server.port&#125;") private int httpsPort; //http端口 @Value("$&#123;http.port&#125;") private int httpPort = 8080; @Bean public Connector httpConnector() &#123; Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol"); connector.setScheme("http"); connector.setPort(httpPort); connector.setSecure(false); connector.setRedirectPort(httpsPort); return connector; &#125;&#125; 访问8080端口 会自动跳转到 https 的端口 其他（非必要操作）获取分发给客户端的证书 1keytool -export -keystore keystore.jks -alias tomcat -file myCertificate.crt jdk导入证书 方便java程序访问https访问时进行证书的验证 1keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts 思考❓浏览器怎么和证书进行关联？通过别名么？ 别名设置成域名？]]></content>
       <categories>
         <category>java</category>
       </categories>
@@ -20,10 +20,10 @@
         <category>supervisor</category>
       </categories>
       <tags>
-        <tag>springboot</tag>
         <tag>教程</tag>
-        <tag>supervisor</tag>
+        <tag>springboot</tag>
         <tag>运维</tag>
+        <tag>supervisor</tag>
       </tags>
   </entry>
   <entry>
@@ -148,10 +148,10 @@
         <category>java</category>
       </categories>
       <tags>
+        <tag>教程</tag>
         <tag>java</tag>
         <tag>spring</tag>
         <tag>springboot</tag>
-        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -162,8 +162,8 @@
         <category>博客搭建</category>
       </categories>
       <tags>
-        <tag>教程</tag>
         <tag>hexo</tag>
+        <tag>教程</tag>
         <tag>nodejs</tag>
       </tags>
   </entry>
