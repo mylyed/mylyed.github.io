@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="教程,docker,">
+  <meta name="keywords" content="springboot,https,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本篇简单讲述了docker安装以及镜像加速">
-<meta name="keywords" content="教程,docker">
+<meta name="description" content="SSL证书生成生产环境是向证书供应商进行购买，在使用工具转换我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法 jks证书（java专用）1234keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650  #生成证书keytoo">
+<meta name="keywords" content="springboot,https">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker 安装,配置">
-<meta property="og:url" content="https://mylyed.github.io/2017/10/19/docker/install_docker/index.html">
+<meta property="og:title" content="SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问">
+<meta property="og:url" content="https://mylyed.github.io/2019/04/29/springboot/spring-boot-https/index.html">
 <meta property="og:site_name" content="李磊的笔记本">
-<meta property="og:description" content="本篇简单讲述了docker安装以及镜像加速">
+<meta property="og:description" content="SSL证书生成生产环境是向证书供应商进行购买，在使用工具转换我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法 jks证书（java专用）1234keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650  #生成证书keytoo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-27T14:37:16.410Z">
+<meta property="og:updated_time" content="2019-04-29T10:12:22.197Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker 安装,配置">
-<meta name="twitter:description" content="本篇简单讲述了docker安装以及镜像加速">
+<meta name="twitter:title" content="SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问">
+<meta name="twitter:description" content="SSL证书生成生产环境是向证书供应商进行购买，在使用工具转换我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法 jks证书（java专用）1234keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650  #生成证书keytoo">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://mylyed.github.io/2017/10/19/docker/install_docker/">
+  <link rel="canonical" href="https://mylyed.github.io/2019/04/29/springboot/spring-boot-https/">
 
 
 
 
 
-  <title>docker 安装,配置 | 李磊的笔记本</title>
+  <title>SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问 | 李磊的笔记本</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mylyed.github.io/2017/10/19/docker/install_docker/">
+    <link itemprop="mainEntityOfPage" href="https://mylyed.github.io/2019/04/29/springboot/spring-boot-https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="李磊">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker 安装,配置</h1>
+          <h1 class="post-title" itemprop="name headline">SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T00:00:00+08:00">
-                2017年10月19号
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-29T00:00:00+08:00">
+                2019年04月29号
               </time>
             
 
@@ -347,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -387,61 +387,19 @@
       
 
       
-        <p>本篇简单讲述了docker安装以及镜像加速<br><a id="more"></a><br>系统: CentOS7 </p>
-<h2 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h2><ul>
-<li>Community Edition CE 社区版本 免费</li>
-<li>Enterprise Edition EE 企业版本 收费 注重安全以及提供服务</li>
-</ul>
-<h2 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h2><p>较老版本的Docker被称为docker或docker-engine。如果安装了这些，需要卸载它们以及关联的依赖关系。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum remove docker \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="使用存储库进行安装"><a href="#使用存储库进行安装" class="headerlink" title="使用存储库进行安装"></a>使用存储库进行安装</h3><h4 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h4><ul>
-<li>1 安装所需的软件包</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2 设置yum源</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-<ul>
-<li>3 (可选) 设置是否安装edge和测试版本</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启 edge版本</span></span><br><span class="line">$ sudo yum-config-manager --<span class="built_in">enable</span> docker-ce-edge</span><br><span class="line"><span class="comment"># 开启 测试版本</span></span><br><span class="line">$ sudo yum-config-manager --<span class="built_in">enable</span> docker-ce-test</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">$ sudo yum-config-manager --<span class="built_in">disable</span> docker-ce-edge</span><br><span class="line">$ sudo yum-config-manager --<span class="built_in">disable</span> docker-ce-test</span><br></pre></td></tr></table></figure>
-<ul>
-<li>4 安装docker ce</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install docker-ce</span><br></pre></td></tr></table></figure>
-<p>如果有多个版本并存,请选择一个人进行安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出可用的版本</span></span><br><span class="line">$ yum list docker-ce --showduplicates | sort -r</span><br><span class="line"></span><br><span class="line">docker-ce.x86_64            17.09.ce-1.el7.centos             docker-ce-stable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本</span></span><br><span class="line">$ sudo yum install &lt;完全限定的包名称&gt; <span class="comment">#如:docker-ce-17.06.1.ce</span></span><br></pre></td></tr></table></figure>
-<h3 id="使rpm包进行安装"><a href="#使rpm包进行安装" class="headerlink" title="使rpm包进行安装"></a>使rpm包进行安装</h3><ul>
-<li>1下载rpm包<ul>
-<li>下载地址: <a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/" target="_blank" rel="noopener">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a> </li>
-</ul>
-</li>
-<li>2 使用rpm包进行安装</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install /path/to/package.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="使用shell脚本进行安装"><a href="#使用shell脚本进行安装" class="headerlink" title="使用shell脚本进行安装"></a>使用shell脚本进行安装</h3><ul>
-<li>脚本需要root或sudo权限才能运行。因此，在运行脚本之前，应仔细检查和审核脚本</li>
-<li>如果Docker已经安装在主机上，则不要使用脚本进行安装。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ sudo sh get-docker.sh</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 </span></span><br><span class="line">$ sudo systemctl start docker</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">$ sudo systemctl stop docker</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">$ sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-<h2 id="运行docker"><a href="#运行docker" class="headerlink" title="运行docker"></a>运行docker</h2><p>运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-<h2 id="使用国内镜像进行加速下载"><a href="#使用国内镜像进行加速下载" class="headerlink" title="使用国内镜像进行加速下载"></a>使用国内镜像进行加速下载</h2><ul>
-<li>编辑 配置文件 /etc/docker/daemon.json</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"registry-mirrors"</span>: [</span><br><span class="line">        <span class="string">"加速地址"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"insecure-registries"</span>: [] #这个是用于私有仓库 不使用https的情况</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  使用 daocloud 进行加速 文档: <a href="http://www.daocloud.io/mirror#accelerator-doc" target="_blank" rel="noopener">http://www.daocloud.io/mirror#accelerator-doc</a></p>
-<p>  国内还有网易,阿里等镜像</p>
-<p>官方国内镜像 <a href="https://www.docker-cn.com/registry-mirror" target="_blank" rel="noopener">https://www.docker-cn.com/registry-mirror</a></p>
-<ul>
-<li><p>重启docker才能生效 脚本看上面</p>
-</li>
-<li><p>查看是否生效</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> $ docker info</span><br><span class="line"></span><br><span class="line">******</span><br><span class="line">Registry Mirrors:</span><br><span class="line"> http://92bfccda.m.daocloud.io/</span><br><span class="line">Live Restore Enabled: <span class="literal">false</span></span><br><span class="line"><span class="comment">#看到 Registry Mirrors 就说明生效了</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <h2 id="SSL证书生成"><a href="#SSL证书生成" class="headerlink" title="SSL证书生成"></a>SSL证书生成</h2><p>生产环境是向证书供应商进行购买，在使用工具转换<br>我们着使用java自带的工具进行生成，可以使用keytool –help查看具体用法</p>
+<h3 id="jks证书（java专用）"><a href="#jks证书（java专用）" class="headerlink" title="jks证书（java专用）"></a>jks证书（java专用）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650  #生成证书</span><br><span class="line"></span><br><span class="line">keytool -list -v -keystore keystore.jks # 查看生成的信息</span><br></pre></td></tr></table></figure>
+<h3 id="PKCS12"><a href="#PKCS12" class="headerlink" title="PKCS12"></a>PKCS12</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">keytool -genkeypair -alias tomcat -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 #生成证书</span><br><span class="line"></span><br><span class="line">keytool -list -v -storetype pkcs12 -keystore keystore.p12 #查看生成的信息</span><br></pre></td></tr></table></figure>
+<p>生成证书都会要求你输入密码，注意，请记住这个密码，后面springboot配置要用到。</p>
+<h3 id="JKS迁移成PKCS12证书"><a href="#JKS迁移成PKCS12证书" class="headerlink" title="JKS迁移成PKCS12证书"></a>JKS迁移成PKCS12证书</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -srckeystore keystore.jks -destkeystore keystore.p12 -deststoretype pkcs12</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 证书供应商提供的证书</span></span></span><br></pre></td></tr></table></figure>
+<p>keytool -import -alias tomcat -file myCertificate.crt -keystore keystore.p12 -storepass password</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## Spring Boot 启用https</span><br><span class="line">配置文件</span><br><span class="line">```text</span><br><span class="line">#访问的端口</span><br><span class="line">server.port=8443</span><br><span class="line">#自定义配置用于开启http端口访问</span><br><span class="line">http.port=8080</span><br><span class="line"></span><br><span class="line">#默认就是true 不用配置</span><br><span class="line">server.ssl.enabled=true </span><br><span class="line">#这用到生成证书时的密码</span><br><span class="line">server.ssl.key-password=111111</span><br><span class="line">#证书地址 如果是在jar里面 使用classpath:keystore.jks</span><br><span class="line">server.ssl.key-store=./keystore.jks</span><br><span class="line">#证书alias 别名</span><br><span class="line">server.ssl.key-alias=tomcat</span><br><span class="line">#证书格式 还有 PKCS12</span><br><span class="line">server.ssl.key-store-type=jks</span><br></pre></td></tr></table></figure>
+<p>启动服务器 访问https 的 8488端口 应该就能访问了</p>
+<h2 id="http重定向到https"><a href="#http重定向到https" class="headerlink" title="http重定向到https"></a>http重定向到https</h2><p>spring boot 2.x 版本代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.catalina.Context;</span><br><span class="line"><span class="keyword">import</span> org.apache.catalina.connector.Connector;</span><br><span class="line"><span class="keyword">import</span> org.apache.tomcat.util.descriptor.web.SecurityCollection;</span><br><span class="line"><span class="keyword">import</span> org.apache.tomcat.util.descriptor.web.SecurityConstraint;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.servlet.server.ServletWebServerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="comment">/*配置http自动转为https*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectorConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletWebServerFactory <span class="title">servletWebServerFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        TomcatServletWebServerFactory factory = <span class="keyword">new</span> TomcatServletWebServerFactory() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">postProcessContext</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">                SecurityConstraint securityConstraint = <span class="keyword">new</span> SecurityConstraint();</span><br><span class="line">                securityConstraint.setUserConstraint(<span class="string">"CONFIDENTIAL"</span>);<span class="comment">//机密的</span></span><br><span class="line">                SecurityCollection securityCollection = <span class="keyword">new</span> SecurityCollection();</span><br><span class="line">                securityCollection.addPattern(<span class="string">"/*"</span>);</span><br><span class="line">                securityConstraint.addCollection(securityCollection);</span><br><span class="line">                context.addConstraint(securityConstraint);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        factory.addAdditionalTomcatConnectors(httpConnector());</span><br><span class="line">        <span class="keyword">return</span> factory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//https端口</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;server.port&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> httpsPort;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//http端口</span></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;http.port&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> httpPort = <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Connector <span class="title">httpConnector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Connector connector = <span class="keyword">new</span> Connector(<span class="string">"org.apache.coyote.http11.Http11NioProtocol"</span>);</span><br><span class="line">        connector.setScheme(<span class="string">"http"</span>);</span><br><span class="line">        connector.setPort(httpPort);</span><br><span class="line">        connector.setSecure(<span class="keyword">false</span>);</span><br><span class="line">        connector.setRedirectPort(httpsPort);</span><br><span class="line">        <span class="keyword">return</span> connector;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>访问8080端口 会自动跳转到 https 的端口</p>
+<h2 id="其他（非必要操作）"><a href="#其他（非必要操作）" class="headerlink" title="其他（非必要操作）"></a>其他（非必要操作）</h2><p>获取分发给客户端的证书<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -export -keystore keystore.jks -alias tomcat -file myCertificate.crt</span><br></pre></td></tr></table></figure></p>
+<p>jdk导入证书 方便java程序访问https访问时进行证书的验证<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -importcert -file myCertificate.crt -alias tomcat -keystore $JDK_HOME/jre/lib/security/cacerts</span><br></pre></td></tr></table></figure></p>
+<h2 id="思考❓"><a href="#思考❓" class="headerlink" title="思考❓"></a>思考❓</h2><p>浏览器怎么和证书进行关联？通过别名么？ 别名设置成域名？</p>
 
       
     </div>
@@ -459,9 +417,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/教程/" rel="tag"># 教程</a>
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/https/" rel="tag"># https</a>
           
         </div>
       
@@ -474,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/15/nodejs-file-servier/" rel="next" title="Node js 文件服务器">
-                <i class="fa fa-chevron-left"></i> Node js 文件服务器
+              <a href="/2019/04/27/supervisor/" rel="next" title="dsupervisor 简单教程">
+                <i class="fa fa-chevron-left"></i> dsupervisor 简单教程
               </a>
             
           </div>
@@ -483,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/20/docker/install_harbor/" rel="prev" title="harbor安装">
-                harbor安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -644,7 +598,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本选择"><span class="nav-number">1.</span> <span class="nav-text">版本选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载旧版本"><span class="nav-number">2.</span> <span class="nav-text">卸载旧版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用存储库进行安装"><span class="nav-number">3.1.</span> <span class="nav-text">使用存储库进行安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置yum源"><span class="nav-number">3.1.1.</span> <span class="nav-text">设置yum源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使rpm包进行安装"><span class="nav-number">3.2.</span> <span class="nav-text">使rpm包进行安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用shell脚本进行安装"><span class="nav-number">3.3.</span> <span class="nav-text">使用shell脚本进行安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动docker"><span class="nav-number">4.</span> <span class="nav-text">启动docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行docker"><span class="nav-number">5.</span> <span class="nav-text">运行docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用国内镜像进行加速下载"><span class="nav-number">6.</span> <span class="nav-text">使用国内镜像进行加速下载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL证书生成"><span class="nav-number">1.</span> <span class="nav-text">SSL证书生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jks证书（java专用）"><span class="nav-number">1.1.</span> <span class="nav-text">jks证书（java专用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PKCS12"><span class="nav-number">1.2.</span> <span class="nav-text">PKCS12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JKS迁移成PKCS12证书"><span class="nav-number">1.3.</span> <span class="nav-text">JKS迁移成PKCS12证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http重定向到https"><span class="nav-number">2.</span> <span class="nav-text">http重定向到https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他（非必要操作）"><span class="nav-number">3.</span> <span class="nav-text">其他（非必要操作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考❓"><span class="nav-number">4.</span> <span class="nav-text">思考❓</span></a></li></ol></div>
             
 
           </div>
