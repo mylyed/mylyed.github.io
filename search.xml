@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[MySQL8json特性]]></title>
     <url>%2F2019%2F11%2F08%2Fdatabases%2Fmysql8%2F</url>
-    <content type="text"><![CDATA[起因最近重构单据中心的数据层，以满住公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MySQL版本？MySQL对json的支持是在5.7版本开始支持的。而需要使用的JSON_TABLE函数是在8.0版本才支持。 JSON函数官方文档 函数名 描述 JSON_VALID() JSON值是否是有效的 JSON_UNQUOTE() JSON值而言 JSON_TYPE() JSON值类型 JSON_STORAGE_SIZE() 用于一个JSON文件的二进制表示形式存储空间；一个JSON柱，空间时使用的文档插入到任何部分更新之前， JSON_SET() 将数据插入到JSON文档 JSON_SEARCH() 在JSON文件价值路径 JSON_REPLACE() 在JSON文件的值替换 JSON_REMOVE() 从JSON文件中删除数据 JSON_QUOTE() 引用JSON文档 JSON_PRETTY() 版画在人类可读的格式JSON文档，每个数组元素或对象成员打印在新的行中，缩进两个空格就其母。 JSON_OBJECT() 创建JSON对象 JSON_MERGE_PRESERVE() 合并的JSON文件，保存重复键 JSON_MERGE_PATCH() 合并的JSON文件，免去重复键的值 JSON_MERGE()（废弃的5.7.22） 合并的JSON文件，保存重复键。不json_merge_preserve()的同义词 JSON_LENGTH() 在JSON文档中的元素数 JSON_KEYS() 从JSON文件密钥数组 JSON_INSERT() 将数据插入到JSON文档 JSON_EXTRACT() 从JSON文档返回数据 JSON_DEPTH() JSON文档的最大深度 JSON_CONTAINS_PATH() 无论是JSON文件包含任何数据路径 JSON_CONTAINS() 是否包含特定对象的JSON文档路径 JSON_ARRAY_INSERT() 插入JSON数组 JSON_ARRAY_APPEND() JSON文件追加数据 JSON_ARRAY() 创建JSON数组 JSON_APPEND()（废弃的5.7.9） JSON文件追加数据 -&gt;&gt; 在评估路径和结束引语结果返回JSON列值；相当于json_unquote（json_extract()）。 -&gt; 在评估路径返回JSON列值；相当于json_extract()。 JSON_TABLE函数的应用官方说明 读取单据行数据123456789101112131415SELECT jt.*FROM document_content dc, JSON_TABLE ( `content`, '$.Lines[*]' COLUMNS ( ID VARCHAR (100) PATH "$.ID", Price VARCHAR (100) PATH "$.Price", TaxClassificationCode VARCHAR (100) PATH "$.TaxClassificationCode" ) ) AS jtWHERE dc.id=168718 提高json检索速度很遗憾mysql原生并不支持json列中的属性索引，但是我们可以通过mysql的虚拟列（5.7版本支持）间接的为json中的某些属性创建索引，原理就是为json中的属性创建虚拟列，然后通过给虚拟列建立索引，从而间接的给属性创建了索引。 建立虚拟列在MySQL 5.7中，支持两种 Generated Column，即Virtual Generated Column Stored Generated Column 前者只将Generated Column保存在数据字典中（表的元数据），并不会将这一列数据持久化到磁盘上；后者会将Generated Column持久化到磁盘上，而不是每次读取的时候计算所得。很明显，后者存放了可以通过已有数据计算而得的数据，需要更多的磁盘空间，与Virtual Column相比并没有优势，因此，MySQL 5.7中，不指定Generated Column的类型，默认是Virtual Column。12fieldname &lt;type&gt; [ GENERATED ALWAYS ] AS ( &lt;expression&gt; ) [ VIRTUAL|STORED ] [ UNIQUE [KEY] ] [ [PRIMARY] KEY ] [ NOT NULL ] [ COMMENT &lt;text&gt; ] 创建表123456CREATE TABLE 表 ( id INT UNSIGNED NOT NULL primary key auto_increment, json字段名 JSON NOT NULL, 虚拟列字段名 数据类型 GENERATED ALWAYS AS (`json字段名` -&gt;&gt; '$.字段') NOT NULL -- 虚拟列); 添加索引跟添加一般索引一样12CREATE INDEX `索引名称` ON `表`(`虚拟列名`); 缺点这种方法只能只能对json的某个单值属性或者给数组中的某一个特定位置上的元素有效，如果你想给对象数组中的所有元素的某个属性使用索引，那么最后你只能匹配数组中的所有对象的该属性或者使用like,但是使用like的话就不能使用索引，也就是说对于这种情况是不可用的。]]></content>
+    <content type="text"><![CDATA[起因最近重构单据中心的数据层，以满足公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MySQL版本？MySQL对json的支持是在5.7版本开始支持的。而需要使用的JSON_TABLE函数是在8.0版本才支持。 JSON函数官方文档 函数名 描述 JSON_VALID() JSON值是否是有效的 JSON_UNQUOTE() JSON值而言 JSON_TYPE() JSON值类型 JSON_STORAGE_SIZE() 用于一个JSON文件的二进制表示形式存储空间；一个JSON柱，空间时使用的文档插入到任何部分更新之前， JSON_SET() 将数据插入到JSON文档 JSON_SEARCH() 在JSON文件价值路径 JSON_REPLACE() 在JSON文件的值替换 JSON_REMOVE() 从JSON文件中删除数据 JSON_QUOTE() 引用JSON文档 JSON_PRETTY() 版画在人类可读的格式JSON文档，每个数组元素或对象成员打印在新的行中，缩进两个空格就其母。 JSON_OBJECT() 创建JSON对象 JSON_MERGE_PRESERVE() 合并的JSON文件，保存重复键 JSON_MERGE_PATCH() 合并的JSON文件，免去重复键的值 JSON_MERGE()（废弃的5.7.22） 合并的JSON文件，保存重复键。不json_merge_preserve()的同义词 JSON_LENGTH() 在JSON文档中的元素数 JSON_KEYS() 从JSON文件密钥数组 JSON_INSERT() 将数据插入到JSON文档 JSON_EXTRACT() 从JSON文档返回数据 JSON_DEPTH() JSON文档的最大深度 JSON_CONTAINS_PATH() 无论是JSON文件包含任何数据路径 JSON_CONTAINS() 是否包含特定对象的JSON文档路径 JSON_ARRAY_INSERT() 插入JSON数组 JSON_ARRAY_APPEND() JSON文件追加数据 JSON_ARRAY() 创建JSON数组 JSON_APPEND()（废弃的5.7.9） JSON文件追加数据 -&gt;&gt; 在评估路径和结束引语结果返回JSON列值；相当于json_unquote（json_extract()）。 -&gt; 在评估路径返回JSON列值；相当于json_extract()。 JSON_TABLE函数的应用官方说明 读取单据行数据123456789101112131415SELECT jt.*FROM document_content dc, JSON_TABLE ( `content`, '$.Lines[*]' COLUMNS ( ID VARCHAR (100) PATH "$.ID", Price VARCHAR (100) PATH "$.Price", TaxClassificationCode VARCHAR (100) PATH "$.TaxClassificationCode" ) ) AS jtWHERE dc.id=168718 提高json检索速度很遗憾mysql原生并不支持json列中的属性索引，但是我们可以通过mysql的虚拟列（5.7版本支持）间接的为json中的某些属性创建索引，原理就是为json中的属性创建虚拟列，然后通过给虚拟列建立索引，从而间接的给属性创建了索引。 建立虚拟列在MySQL 5.7中，支持两种 Generated Column，即Virtual Generated Column Stored Generated Column 前者只将Generated Column保存在数据字典中（表的元数据），并不会将这一列数据持久化到磁盘上；后者会将Generated Column持久化到磁盘上，而不是每次读取的时候计算所得。很明显，后者存放了可以通过已有数据计算而得的数据，需要更多的磁盘空间，与Virtual Column相比并没有优势，因此，MySQL 5.7中，不指定Generated Column的类型，默认是Virtual Column。12fieldname &lt;type&gt; [ GENERATED ALWAYS ] AS ( &lt;expression&gt; ) [ VIRTUAL|STORED ] [ UNIQUE [KEY] ] [ [PRIMARY] KEY ] [ NOT NULL ] [ COMMENT &lt;text&gt; ] 创建表123456CREATE TABLE 表 ( id INT UNSIGNED NOT NULL primary key auto_increment, json字段名 JSON NOT NULL, 虚拟列字段名 数据类型 GENERATED ALWAYS AS (`json字段名` -&gt;&gt; '$.字段') NOT NULL -- 虚拟列); 添加索引跟添加一般索引一样12CREATE INDEX `索引名称` ON `表`(`虚拟列名`); 缺点这种方法只能只能对json的某个单值属性或者给数组中的某一个特定位置上的元素有效，如果你想给对象数组中的所有元素的某个属性使用索引，那么最后你只能匹配数组中的所有对象的该属性或者使用like,但是使用like的话就不能使用索引，也就是说对于这种情况是不可用的。]]></content>
       <categories>
         <category>mysql</category>
       </categories>
@@ -45,8 +45,8 @@
         <category>supervisor</category>
       </categories>
       <tags>
-        <tag>教程</tag>
         <tag>springboot</tag>
+        <tag>教程</tag>
         <tag>运维</tag>
         <tag>supervisor</tag>
       </tags>
@@ -173,10 +173,10 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>教程</tag>
         <tag>java</tag>
         <tag>spring</tag>
         <tag>springboot</tag>
+        <tag>教程</tag>
       </tags>
   </entry>
   <entry>
@@ -187,8 +187,8 @@
         <category>博客搭建</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
         <tag>教程</tag>
+        <tag>hexo</tag>
         <tag>nodejs</tag>
       </tags>
   </entry>

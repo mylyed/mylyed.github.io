@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="起因最近重构单据中心的数据层，以满住公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
+<meta name="description" content="起因最近重构单据中心的数据层，以满足公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
 <meta name="keywords" content="mysql,databases">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL8json特性">
 <meta property="og:url" content="https://mylyed.github.io/2019/11/08/databases/mysql8/index.html">
 <meta property="og:site_name" content="李磊的笔记本">
-<meta property="og:description" content="起因最近重构单据中心的数据层，以满住公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
+<meta property="og:description" content="起因最近重构单据中心的数据层，以满足公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-08T02:36:36.178Z">
+<meta property="og:updated_time" content="2019-11-11T08:35:21.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL8json特性">
-<meta name="twitter:description" content="起因最近重构单据中心的数据层，以满住公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
+<meta name="twitter:description" content="起因最近重构单据中心的数据层，以满足公司业务发展需求。目前用的是MySQL5.4的版本，公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8 为什么选择MySQL8而不是其他MyS">
 
 
 
@@ -387,7 +387,7 @@
       
 
       
-        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最近重构单据中心的数据层，以满住公司业务发展需求。目前用的是MySQL5.4的版本，<br>公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，<br>但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。<br>单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8</p>
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最近重构单据中心的数据层，以满足公司业务发展需求。目前用的是MySQL5.4的版本，<br>公司的单据中心设计方案为：大JSON存储单据内容，再辅助各个子单据小表，达到搜索目的，<br>但随着单据类型的增多和字段增加，以及业务方越来愈多，这种方案不能很好的满住需求。<br>单据中心需要能检索json的能力，在技术选项上有ES，MonggoDB，PostgreSQL，MySQL8</p>
 <h1 id="为什么选择MySQL8而不是其他MySQL版本？"><a href="#为什么选择MySQL8而不是其他MySQL版本？" class="headerlink" title="为什么选择MySQL8而不是其他MySQL版本？"></a>为什么选择MySQL8而不是其他MySQL版本？</h1><p>MySQL对json的支持是在5.7版本开始支持的。而需要使用的JSON_TABLE函数是在8.0版本才支持。</p>
 <h1 id="JSON函数"><a href="#JSON函数" class="headerlink" title="JSON函数"></a>JSON函数</h1><p><a href="https://dev.mysql.com/doc/refman/5.7/en/json-function-reference.html" target="_blank" rel="noopener">官方文档</a></p>
 <table>
