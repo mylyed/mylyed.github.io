@@ -73,9 +73,9 @@
       </categories>
       <tags>
         <tag>教程</tag>
-        <tag>运维</tag>
         <tag>springboot</tag>
         <tag>supervisor</tag>
+        <tag>运维</tag>
       </tags>
   </entry>
   <entry>
@@ -129,6 +129,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[jenkins安装]]></title>
+    <url>%2F2017%2F10%2F20%2Fdocker%2Finstall_jenkins%2F</url>
+    <content type="text"><![CDATA[本篇简单讲述了jenkins安装以及使用 未完待续 还没有整理]]></content>
+      <categories>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+        <tag>jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[harbor安装]]></title>
     <url>%2F2017%2F10%2F20%2Fdocker%2Finstall_harbor%2F</url>
     <content type="text"><![CDATA[本篇简单讲述了Harbor安装以及docker配合的配置 Harbor简介Harbor是vmware公司 基于 docker registry 做的一个企业级私有registry 开源协议是Apache 2协议 官方详细介绍 环境依赖 Python 2.7或以上 Docker 1.10或以上 Docker Compose 1.6.0或以上 安装 把大象装冰箱里总共分几步? ;-) 1 下载安装包 2 配置harbor.cfg文件 主要配置hostname 注意不能为127.0.0.1和localhost 可以用ip以及域名, 其他详细配置 如果想更改harbor保存文件的位置,请编辑docker-compose.yml文件 修改docker-compose的挂载点. 修改完后记得运行prepare脚本 重新生成docker-compose配置文件 3 运行install.sh脚本-&gt;安装和启动harbor 验证 访问刚刚配置hostname(如果配置的是域名形式,请不要忘了配置hosts) 能看到界面就是启动成功 docker提交镜像到harbor 实际提交的还是registry 在harbor进行注册和创建项目(请记住项目名) docker 登录 1$ docker login 配置的hostname -u harbor注册的用户 -p 注册的密码 构建镜像以及推送镜像 123$ docker pull ubuntu$ docker tag ubuntu 配置的hostname/项目名/镜像名$ docker push 配置的hostname/项目名/镜像名 推送的出错 原因:docker push 默认是 https 但是harbor我们没有配置https 解决办法:编辑 配置文件 /etc/docker/daemon.json 123&#123; "insecure-registries": ["加入配置的hostname"]&#125; 修改完后记得重启docker 再试一试 docker push #验证 1 到harbor网站去查看是否推送成功 2 其他docker 拉取 刚刚推送的镜像 1$ docker pull 配置的hostname/项目名/镜像名]]></content>
@@ -140,18 +152,6 @@
         <tag>docker</tag>
         <tag>harbor</tag>
         <tag>registry</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[jenkins安装]]></title>
-    <url>%2F2017%2F10%2F20%2Fdocker%2Finstall_jenkins%2F</url>
-    <content type="text"><![CDATA[本篇简单讲述了jenkins安装以及使用 未完待续 还没有整理]]></content>
-      <categories>
-        <category>jenkins</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-        <tag>jenkins</tag>
       </tags>
   </entry>
   <entry>
