@@ -66,30 +66,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpingBoot 程序 部署</title>
-    <url>/2017/06/09/spring-d/</url>
-    <content><![CDATA[<p>1，maven插件：          </p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>2，mvn clean package 打成jar包 当看到 BUILD SUCCESS 代表成功！</p>
-<p>3，上传jar包到服务器上 这jar包有点大</p>
-<p>4，编写shell脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f tpid <span class="comment">#删除tpid文件</span></span><br><span class="line"><span class="built_in">nohup</span> java -jar springboot.jar &gt; cmd.out 2&gt;&amp;1 &amp; <span class="comment">#这里可以配置使用的配置文件  把控制台输出流输出到cmd.out文件</span></span><br><span class="line"><span class="built_in">echo</span> $! &gt; tpid <span class="comment">#记录进程id 以便杀死进程</span></span><br><span class="line"><span class="built_in">echo</span> Start Success! <span class="comment">#输出成功的信息</span></span><br></pre></td></tr></table></figure>
-
-<p>5，关闭</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> tpid 可以查看进程编号，或ps -ef | grep java 查询springboot程序进程，使用<span class="built_in">kill</span> 命令结束 ，用法如下</span><br><span class="line"><span class="built_in">kill</span> -15 pid，是先关闭和其有关的程序，再将其关闭</span><br><span class="line"><span class="built_in">kill</span> -9 pid，是不顾后果的强制终止(如果的你的速度够快，有时候是和ctrl＋c是一样的)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-        <tag>java</tag>
-        <tag>spring</tag>
-        <tag>springboot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Node js 文件服务器</title>
     <url>/2017/10/15/nodejs-file-servier/</url>
     <content><![CDATA[<p>用nodejs 写一个文件服务器(还需改进)<br> <span id="more"></span></p>
@@ -120,6 +96,30 @@
         <tag>js</tag>
         <tag>javascript</tag>
         <tag>服务器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpingBoot 程序 部署</title>
+    <url>/2017/06/09/spring-d/</url>
+    <content><![CDATA[<p>1，maven插件：          </p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>  </span><br><span class="line"> <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>2，mvn clean package 打成jar包 当看到 BUILD SUCCESS 代表成功！</p>
+<p>3，上传jar包到服务器上 这jar包有点大</p>
+<p>4，编写shell脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f tpid <span class="comment">#删除tpid文件</span></span><br><span class="line"><span class="built_in">nohup</span> java -jar springboot.jar &gt; cmd.out 2&gt;&amp;1 &amp; <span class="comment">#这里可以配置使用的配置文件  把控制台输出流输出到cmd.out文件</span></span><br><span class="line"><span class="built_in">echo</span> $! &gt; tpid <span class="comment">#记录进程id 以便杀死进程</span></span><br><span class="line"><span class="built_in">echo</span> Start Success! <span class="comment">#输出成功的信息</span></span><br></pre></td></tr></table></figure>
+
+<p>5，关闭</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> tpid 可以查看进程编号，或ps -ef | grep java 查询springboot程序进程，使用<span class="built_in">kill</span> 命令结束 ，用法如下</span><br><span class="line"><span class="built_in">kill</span> -15 pid，是先关闭和其有关的程序，再将其关闭</span><br><span class="line"><span class="built_in">kill</span> -9 pid，是不顾后果的强制终止(如果的你的速度够快，有时候是和ctrl＋c是一样的)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+        <tag>java</tag>
+        <tag>spring</tag>
+        <tag>springboot</tag>
       </tags>
   </entry>
   <entry>
@@ -347,86 +347,6 @@
       </tags>
   </entry>
   <entry>
-    <title>docker 安装,配置</title>
-    <url>/2017/10/19/docker/install_docker/</url>
-    <content><![CDATA[<p>本篇简单讲述了docker安装以及镜像加速</p>
-<span id="more"></span>
-<p>系统: CentOS7 </p>
-<h2 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h2><ul>
-<li>Community Edition CE 社区版本 免费</li>
-<li>Enterprise Edition EE 企业版本 收费 注重安全以及提供服务</li>
-</ul>
-<h2 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h2><p>较老版本的Docker被称为docker或docker-engine。如果安装了这些，需要卸载它们以及关联的依赖关系。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum remove docker \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="使用存储库进行安装"><a href="#使用存储库进行安装" class="headerlink" title="使用存储库进行安装"></a>使用存储库进行安装</h3><h4 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h4><ul>
-<li>1 安装所需的软件包</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>2 设置yum源</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>3 (可选) 设置是否安装edge和测试版本</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开启 edge版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">enable</span> docker-ce-edge</span><br><span class="line"><span class="comment"># 开启 测试版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">enable</span> docker-ce-test</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">disable</span> docker-ce-edge</span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">disable</span> docker-ce-test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>4 安装docker ce</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install docker-ce</span><br></pre></td></tr></table></figure>
-<p>如果有多个版本并存,请选择一个人进行安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出可用的版本</span></span><br><span class="line">$ yum list docker-ce --showduplicates | <span class="built_in">sort</span> -r</span><br><span class="line"></span><br><span class="line">docker-ce.x86_64            17.09.ce-1.el7.centos             docker-ce-stable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum install &lt;完全限定的包名称&gt; <span class="comment">#如:docker-ce-17.06.1.ce</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="使rpm包进行安装"><a href="#使rpm包进行安装" class="headerlink" title="使rpm包进行安装"></a>使rpm包进行安装</h3><ul>
-<li>1下载rpm包<ul>
-<li>下载地址: <a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a></li>
-</ul>
-</li>
-<li>2 使用rpm包进行安装</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install /path/to/package.rpm</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="使用shell脚本进行安装"><a href="#使用shell脚本进行安装" class="headerlink" title="使用shell脚本进行安装"></a>使用shell脚本进行安装</h3><ul>
-<li>脚本需要root或sudo权限才能运行。因此，在运行脚本之前，应仔细检查和审核脚本</li>
-<li>如果Docker已经安装在主机上，则不要使用脚本进行安装。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ <span class="built_in">sudo</span> sh get-docker.sh</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 </span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl start docker</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl stop docker</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="运行docker"><a href="#运行docker" class="headerlink" title="运行docker"></a>运行docker</h2><p>运行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker run hello-world</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用国内镜像进行加速下载"><a href="#使用国内镜像进行加速下载" class="headerlink" title="使用国内镜像进行加速下载"></a>使用国内镜像进行加速下载</h2><ul>
-<li>编辑 配置文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;加速地址&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span> #这个是用于私有仓库 不使用https的情况</span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>  使用 daocloud 进行加速 文档: <a href="http://www.daocloud.io/mirror#accelerator-doc">http://www.daocloud.io/mirror#accelerator-doc</a></p>
-<p>  国内还有网易,阿里等镜像</p>
-<p>官方国内镜像 <a href="https://www.docker-cn.com/registry-mirror">https://www.docker-cn.com/registry-mirror</a></p>
-<ul>
-<li><p>重启docker才能生效 脚本看上面</p>
-</li>
-<li><p>查看是否生效</p>
-</li>
-</ul>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> $ docker info</span><br><span class="line"></span><br><span class="line">******</span><br><span class="line">Registry Mirrors:</span><br><span class="line"> http://92bfccda.m.daocloud.io/</span><br><span class="line">Live Restore Enabled: <span class="literal">false</span></span><br><span class="line"><span class="comment">#看到 Registry Mirrors 就说明生效了</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>harbor安装</title>
     <url>/2017/10/20/docker/install_harbor/</url>
     <content><![CDATA[<p>本篇简单讲述了Harbor安装以及docker配合的配置</p>
@@ -504,6 +424,86 @@
       <tags>
         <tag>教程</tag>
         <tag>jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker 安装,配置</title>
+    <url>/2017/10/19/docker/install_docker/</url>
+    <content><![CDATA[<p>本篇简单讲述了docker安装以及镜像加速</p>
+<span id="more"></span>
+<p>系统: CentOS7 </p>
+<h2 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h2><ul>
+<li>Community Edition CE 社区版本 免费</li>
+<li>Enterprise Edition EE 企业版本 收费 注重安全以及提供服务</li>
+</ul>
+<h2 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h2><p>较老版本的Docker被称为docker或docker-engine。如果安装了这些，需要卸载它们以及关联的依赖关系。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum remove docker \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="使用存储库进行安装"><a href="#使用存储库进行安装" class="headerlink" title="使用存储库进行安装"></a>使用存储库进行安装</h3><h4 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h4><ul>
+<li>1 安装所需的软件包</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install -y yum-utils \</span><br><span class="line">  device-mapper-persistent-data \</span><br><span class="line">  lvm2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2 设置yum源</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3 (可选) 设置是否安装edge和测试版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 开启 edge版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">enable</span> docker-ce-edge</span><br><span class="line"><span class="comment"># 开启 测试版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">enable</span> docker-ce-test</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">disable</span> docker-ce-edge</span><br><span class="line">$ <span class="built_in">sudo</span> yum-config-manager --<span class="built_in">disable</span> docker-ce-test</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>4 安装docker ce</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install docker-ce</span><br></pre></td></tr></table></figure>
+<p>如果有多个版本并存,请选择一个人进行安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列出可用的版本</span></span><br><span class="line">$ yum list docker-ce --showduplicates | <span class="built_in">sort</span> -r</span><br><span class="line"></span><br><span class="line">docker-ce.x86_64            17.09.ce-1.el7.centos             docker-ce-stable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本</span></span><br><span class="line">$ <span class="built_in">sudo</span> yum install &lt;完全限定的包名称&gt; <span class="comment">#如:docker-ce-17.06.1.ce</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="使rpm包进行安装"><a href="#使rpm包进行安装" class="headerlink" title="使rpm包进行安装"></a>使rpm包进行安装</h3><ul>
+<li>1下载rpm包<ul>
+<li>下载地址: <a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a></li>
+</ul>
+</li>
+<li>2 使用rpm包进行安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install /path/to/package.rpm</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="使用shell脚本进行安装"><a href="#使用shell脚本进行安装" class="headerlink" title="使用shell脚本进行安装"></a>使用shell脚本进行安装</h3><ul>
+<li>脚本需要root或sudo权限才能运行。因此，在运行脚本之前，应仔细检查和审核脚本</li>
+<li>如果Docker已经安装在主机上，则不要使用脚本进行安装。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ <span class="built_in">sudo</span> sh get-docker.sh</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 启动 </span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl start docker</span><br><span class="line"><span class="comment"># 停止</span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl stop docker</span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">$ <span class="built_in">sudo</span> systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="运行docker"><a href="#运行docker" class="headerlink" title="运行docker"></a>运行docker</h2><p>运行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用国内镜像进行加速下载"><a href="#使用国内镜像进行加速下载" class="headerlink" title="使用国内镜像进行加速下载"></a>使用国内镜像进行加速下载</h2><ul>
+<li>编辑 配置文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;加速地址&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;insecure-registries&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span> #这个是用于私有仓库 不使用https的情况</span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  使用 daocloud 进行加速 文档: <a href="http://www.daocloud.io/mirror#accelerator-doc">http://www.daocloud.io/mirror#accelerator-doc</a></p>
+<p>  国内还有网易,阿里等镜像</p>
+<p>官方国内镜像 <a href="https://www.docker-cn.com/registry-mirror">https://www.docker-cn.com/registry-mirror</a></p>
+<ul>
+<li><p>重启docker才能生效 脚本看上面</p>
+</li>
+<li><p>查看是否生效</p>
+</li>
+</ul>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> $ docker info</span><br><span class="line"></span><br><span class="line">******</span><br><span class="line">Registry Mirrors:</span><br><span class="line"> http://92bfccda.m.daocloud.io/</span><br><span class="line">Live Restore Enabled: <span class="literal">false</span></span><br><span class="line"><span class="comment">#看到 Registry Mirrors 就说明生效了</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -708,6 +708,42 @@
       </tags>
   </entry>
   <entry>
+    <title>websocket 断线重连方案</title>
+    <url>/2019/03/20/websocket/websocket/</url>
+    <content><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最近向海关上报支付单时，加密过程只能用海关提供的websocket服务进行加签。<br>在使用过程中，由于海关的服务不够稳定 socket经常中断，所以需要对websocket 进行断线重连</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>不停的检查websocket的连接状态，对于已经关闭连接的websocket进行重新初始化（因为断掉的websocket不能进行重新连接）</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignDataWebSocketClient</span> <span class="keyword">extends</span> <span class="title class_">WebSocketClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    Producer producer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> serverUri</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SignDataWebSocketClient</span><span class="params">(URI serverUri, Producer producer)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(serverUri);</span><br><span class="line">        <span class="built_in">this</span>.producer = producer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(ServerHandshake arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onOpen打开链接,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onMessage,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">        log.debug(<span class="string">&quot;收到消息:&quot;</span> + arg0);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSON.parseObject(arg0);</span><br><span class="line">            <span class="type">String</span> <span class="variable">_status</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_status&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">_method</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_method&quot;</span>);</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">_id</span> <span class="operator">=</span> jsonObject.getInteger(<span class="string">&quot;_id&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;cus-sec_SpcSignDataAsPEM&quot;</span>.equals(_method) &amp;&amp; <span class="string">&quot;00&quot;</span>.equals(_status)) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">_args</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_args&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="type">JSONObject</span> <span class="variable">args</span> <span class="operator">=</span> JSON.parseObject(_args);</span><br><span class="line">                <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> args.getBoolean(<span class="string">&quot;Result&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="type">JSONObject</span> <span class="variable">resp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">                resp.put(<span class="string">&quot;orderSubNo&quot;</span>, map.remove(_id));</span><br><span class="line">                resp.put(<span class="string">&quot;success&quot;</span>, result);</span><br><span class="line">                <span class="keyword">if</span> (result) &#123;</span><br><span class="line">                    <span class="comment">//签名成功</span></span><br><span class="line">                    <span class="type">JSONArray</span> <span class="variable">data</span> <span class="operator">=</span> args.getJSONArray(<span class="string">&quot;Data&quot;</span>);</span><br><span class="line">                    <span class="type">String</span> <span class="variable">signValueStr</span> <span class="operator">=</span> data.getString(<span class="number">0</span>);</span><br><span class="line">                    log.debug(<span class="string">&quot;签名成功:&#123;&#125;&quot;</span>, signValueStr);</span><br><span class="line">                    resp.put(<span class="string">&quot;signValue&quot;</span>, signValueStr);</span><br><span class="line">                    resp.put(<span class="string">&quot;certNo&quot;</span>, data.getString(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    log.error(<span class="string">&quot;签名失败:&#123;&#125;&quot;</span>, args.getString(<span class="string">&quot;Error&quot;</span>));</span><br><span class="line">                    resp.put(<span class="string">&quot;error&quot;</span>, args.getString(<span class="string">&quot;Error&quot;</span>));</span><br><span class="line">                &#125;</span><br><span class="line">                producer.produce(resp.toJSONString().getBytes());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onError</span><span class="params">(Exception arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onError当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">        arg0.printStackTrace();</span><br><span class="line">        log.error(<span class="string">&quot;发生错误已关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="type">int</span> arg0, String arg1, <span class="type">boolean</span> arg2)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onClose链接关闭,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; map = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">AtomicInteger</span> <span class="variable">count</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">cusSecSpcSignDataAsPEM</span><span class="params">(Payload payload)</span> <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> count.incrementAndGet();</span><br><span class="line">        map.put(id, payload.getOrderSubNo());</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        jsonObject.put(<span class="string">&quot;_method&quot;</span>, <span class="string">&quot;cus-sec_SpcSignDataAsPEM&quot;</span>);</span><br><span class="line">        jsonObject.put(<span class="string">&quot;_id&quot;</span>, id);</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">pargs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        pargs.put(<span class="string">&quot;inData&quot;</span>, payload.getInData());</span><br><span class="line">        <span class="type">String</span> <span class="variable">passwd</span> <span class="operator">=</span> PropertiesUtil.getProperty(<span class="string">&quot;passwd&quot;</span>);</span><br><span class="line">        log.debug(<span class="string">&quot;passwd=&#123;&#125;&quot;</span>, passwd);</span><br><span class="line">        pargs.put(<span class="string">&quot;passwd&quot;</span>, passwd);</span><br><span class="line">        jsonObject.put(<span class="string">&quot;args&quot;</span>, pargs);</span><br><span class="line">        log.debug(<span class="string">&quot;&#123;&#125;:发送消息:&#123;&#125;&quot;</span>, payload.getOrderSubNo(), jsonObject.toJSONString());</span><br><span class="line">        <span class="type">byte</span>[] str = jsonObject.toJSONString().getBytes(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        <span class="type">FramedataImpl1</span> <span class="variable">framedataImpl1</span> <span class="operator">=</span> FramedataImpl1.get(Framedata.Opcode.TEXT);</span><br><span class="line">        <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.wrap(str);</span><br><span class="line">        framedataImpl1.setPayload(byteBuffer);</span><br><span class="line">        <span class="built_in">this</span>.sendFrame(framedataImpl1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PayloadSender</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line"></span><br><span class="line">    Producer producer;</span><br><span class="line">    URI serverUri;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> serverUri</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PayloadSender</span><span class="params">(URI serverUri, Producer producer)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.serverUri = serverUri;</span><br><span class="line">        <span class="built_in">this</span>.producer = producer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Queue&lt;Payload&gt; payloads = <span class="keyword">new</span> <span class="title class_">ConcurrentLinkedQueue</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SignDataWebSocketClient client;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 消费消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">producePayload</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (!payloads.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//调用海关的加签方法</span></span><br><span class="line">                client.cusSecSpcSignDataAsPEM(payloads.poll());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提交消息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> payload 消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">submitPayload</span><span class="params">(Payload payload)</span> &#123;</span><br><span class="line">        payloads.add(payload);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (client == <span class="literal">null</span></span><br><span class="line">                        ||</span><br><span class="line">                        WebSocket.READYSTATE.CLOSING.equals(client.getReadyState())</span><br><span class="line">                        ||</span><br><span class="line">                        WebSocket.READYSTATE.CLOSED.equals(client.getReadyState())</span><br><span class="line">                        ) &#123;</span><br><span class="line">                    log.debug(<span class="string">&quot;客户端未初始化或者客户端连接关闭&quot;</span>);</span><br><span class="line">                    <span class="comment">//client 未初始化 或者关闭</span></span><br><span class="line">                    client = <span class="keyword">new</span> <span class="title class_">SignDataWebSocketClient</span>(serverUri, producer);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (NOT_YET_CONNECTED.equals(client.getReadyState())) &#123;</span><br><span class="line">                        <span class="comment">// client 未连接</span></span><br><span class="line">                        <span class="type">boolean</span> <span class="variable">isConnect</span> <span class="operator">=</span> client.connectBlocking();</span><br><span class="line">                        <span class="keyword">if</span> (isConnect) &#123;</span><br><span class="line">                            producePayload();</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">//连接失败</span></span><br><span class="line">                            log.error(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (WebSocket.READYSTATE.OPEN.equals(client.getReadyState())) &#123;</span><br><span class="line">                        producePayload();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                client = <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>WebSocketClient只能连接一次的原因</p>
+<pre><code class="java">
+    /**
+     * Initiates the websocket connection. This method does not block.
+     */
+    public void connect() &#123;
+        if( writeThread != null )
+            throw new IllegalStateException( &quot;WebSocketClient objects are not reuseable&quot; );
+        writeThread = new Thread( this );
+        writeThread.start();
+    &#125;
+
+···
+
+
+ 
+
+</code></pre>
+]]></content>
+      <categories>
+        <category>websocket</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>websocket</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue bootstrap  带分页表格</title>
     <url>/2017/12/20/vue/vue-bootstrap-page/</url>
     <content><![CDATA[<p>前端渲染分页表格整体解决方案<br> <span id="more"></span></p>
@@ -743,42 +779,6 @@
         <tag>bootstrap</tag>
         <tag>page</tag>
         <tag>分页方案</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>websocket 断线重连方案</title>
-    <url>/2019/03/20/websocket/websocket/</url>
-    <content><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>最近向海关上报支付单时，加密过程只能用海关提供的websocket服务进行加签。<br>在使用过程中，由于海关的服务不够稳定 socket经常中断，所以需要对websocket 进行断线重连</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>不停的检查websocket的连接状态，对于已经关闭连接的websocket进行重新初始化（因为断掉的websocket不能进行重新连接）</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SignDataWebSocketClient</span> <span class="keyword">extends</span> <span class="title class_">WebSocketClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    Producer producer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> serverUri</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SignDataWebSocketClient</span><span class="params">(URI serverUri, Producer producer)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(serverUri);</span><br><span class="line">        <span class="built_in">this</span>.producer = producer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(ServerHandshake arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onOpen打开链接,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onMessage,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">        log.debug(<span class="string">&quot;收到消息:&quot;</span> + arg0);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> JSON.parseObject(arg0);</span><br><span class="line">            <span class="type">String</span> <span class="variable">_status</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_status&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">_method</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_method&quot;</span>);</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">_id</span> <span class="operator">=</span> jsonObject.getInteger(<span class="string">&quot;_id&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;cus-sec_SpcSignDataAsPEM&quot;</span>.equals(_method) &amp;&amp; <span class="string">&quot;00&quot;</span>.equals(_status)) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">_args</span> <span class="operator">=</span> jsonObject.getString(<span class="string">&quot;_args&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="type">JSONObject</span> <span class="variable">args</span> <span class="operator">=</span> JSON.parseObject(_args);</span><br><span class="line">                <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> args.getBoolean(<span class="string">&quot;Result&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="type">JSONObject</span> <span class="variable">resp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">                resp.put(<span class="string">&quot;orderSubNo&quot;</span>, map.remove(_id));</span><br><span class="line">                resp.put(<span class="string">&quot;success&quot;</span>, result);</span><br><span class="line">                <span class="keyword">if</span> (result) &#123;</span><br><span class="line">                    <span class="comment">//签名成功</span></span><br><span class="line">                    <span class="type">JSONArray</span> <span class="variable">data</span> <span class="operator">=</span> args.getJSONArray(<span class="string">&quot;Data&quot;</span>);</span><br><span class="line">                    <span class="type">String</span> <span class="variable">signValueStr</span> <span class="operator">=</span> data.getString(<span class="number">0</span>);</span><br><span class="line">                    log.debug(<span class="string">&quot;签名成功:&#123;&#125;&quot;</span>, signValueStr);</span><br><span class="line">                    resp.put(<span class="string">&quot;signValue&quot;</span>, signValueStr);</span><br><span class="line">                    resp.put(<span class="string">&quot;certNo&quot;</span>, data.getString(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    log.error(<span class="string">&quot;签名失败:&#123;&#125;&quot;</span>, args.getString(<span class="string">&quot;Error&quot;</span>));</span><br><span class="line">                    resp.put(<span class="string">&quot;error&quot;</span>, args.getString(<span class="string">&quot;Error&quot;</span>));</span><br><span class="line">                &#125;</span><br><span class="line">                producer.produce(resp.toJSONString().getBytes());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onError</span><span class="params">(Exception arg0)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onError当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">        arg0.printStackTrace();</span><br><span class="line">        log.error(<span class="string">&quot;发生错误已关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(<span class="type">int</span> arg0, String arg1, <span class="type">boolean</span> arg2)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;onClose链接关闭,当前状态&#123;&#125;&quot;</span>, getReadyState());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; map = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">AtomicInteger</span> <span class="variable">count</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">cusSecSpcSignDataAsPEM</span><span class="params">(Payload payload)</span> <span class="keyword">throws</span> UnsupportedEncodingException &#123;</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">id</span> <span class="operator">=</span> count.incrementAndGet();</span><br><span class="line">        map.put(id, payload.getOrderSubNo());</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jsonObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        jsonObject.put(<span class="string">&quot;_method&quot;</span>, <span class="string">&quot;cus-sec_SpcSignDataAsPEM&quot;</span>);</span><br><span class="line">        jsonObject.put(<span class="string">&quot;_id&quot;</span>, id);</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">pargs</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        pargs.put(<span class="string">&quot;inData&quot;</span>, payload.getInData());</span><br><span class="line">        <span class="type">String</span> <span class="variable">passwd</span> <span class="operator">=</span> PropertiesUtil.getProperty(<span class="string">&quot;passwd&quot;</span>);</span><br><span class="line">        log.debug(<span class="string">&quot;passwd=&#123;&#125;&quot;</span>, passwd);</span><br><span class="line">        pargs.put(<span class="string">&quot;passwd&quot;</span>, passwd);</span><br><span class="line">        jsonObject.put(<span class="string">&quot;args&quot;</span>, pargs);</span><br><span class="line">        log.debug(<span class="string">&quot;&#123;&#125;:发送消息:&#123;&#125;&quot;</span>, payload.getOrderSubNo(), jsonObject.toJSONString());</span><br><span class="line">        <span class="type">byte</span>[] str = jsonObject.toJSONString().getBytes(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        <span class="type">FramedataImpl1</span> <span class="variable">framedataImpl1</span> <span class="operator">=</span> FramedataImpl1.get(Framedata.Opcode.TEXT);</span><br><span class="line">        <span class="type">ByteBuffer</span> <span class="variable">byteBuffer</span> <span class="operator">=</span> ByteBuffer.wrap(str);</span><br><span class="line">        framedataImpl1.setPayload(byteBuffer);</span><br><span class="line">        <span class="built_in">this</span>.sendFrame(framedataImpl1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PayloadSender</span> <span class="keyword">extends</span> <span class="title class_">Thread</span> &#123;</span><br><span class="line"></span><br><span class="line">    Producer producer;</span><br><span class="line">    URI serverUri;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> serverUri</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PayloadSender</span><span class="params">(URI serverUri, Producer producer)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.serverUri = serverUri;</span><br><span class="line">        <span class="built_in">this</span>.producer = producer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Queue&lt;Payload&gt; payloads = <span class="keyword">new</span> <span class="title class_">ConcurrentLinkedQueue</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SignDataWebSocketClient client;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 消费消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">producePayload</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (!payloads.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//调用海关的加签方法</span></span><br><span class="line">                client.cusSecSpcSignDataAsPEM(payloads.poll());</span><br><span class="line">            &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 提交消息</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> payload 消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">submitPayload</span><span class="params">(Payload payload)</span> &#123;</span><br><span class="line">        payloads.add(payload);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (client == <span class="literal">null</span></span><br><span class="line">                        ||</span><br><span class="line">                        WebSocket.READYSTATE.CLOSING.equals(client.getReadyState())</span><br><span class="line">                        ||</span><br><span class="line">                        WebSocket.READYSTATE.CLOSED.equals(client.getReadyState())</span><br><span class="line">                        ) &#123;</span><br><span class="line">                    log.debug(<span class="string">&quot;客户端未初始化或者客户端连接关闭&quot;</span>);</span><br><span class="line">                    <span class="comment">//client 未初始化 或者关闭</span></span><br><span class="line">                    client = <span class="keyword">new</span> <span class="title class_">SignDataWebSocketClient</span>(serverUri, producer);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (NOT_YET_CONNECTED.equals(client.getReadyState())) &#123;</span><br><span class="line">                        <span class="comment">// client 未连接</span></span><br><span class="line">                        <span class="type">boolean</span> <span class="variable">isConnect</span> <span class="operator">=</span> client.connectBlocking();</span><br><span class="line">                        <span class="keyword">if</span> (isConnect) &#123;</span><br><span class="line">                            producePayload();</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">//连接失败</span></span><br><span class="line">                            log.error(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">                            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;连接失败&quot;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (WebSocket.READYSTATE.OPEN.equals(client.getReadyState())) &#123;</span><br><span class="line">                        producePayload();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                client = <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>WebSocketClient只能连接一次的原因</p>
-<pre><code class="java">
-    /**
-     * Initiates the websocket connection. This method does not block.
-     */
-    public void connect() &#123;
-        if( writeThread != null )
-            throw new IllegalStateException( &quot;WebSocketClient objects are not reuseable&quot; );
-        writeThread = new Thread( this );
-        writeThread.start();
-    &#125;
-
-···
-
-
- 
-
-</code></pre>
-]]></content>
-      <categories>
-        <category>websocket</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>websocket</tag>
       </tags>
   </entry>
   <entry>
