@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+  
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/cuphead.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/cuphead.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="教程,运维,springboot,supervisor," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装supervisor官方安装教程 1pip install supervisor 如果环境没有 pip工具 12345wget supervisor下载地址tar -zxvf supervisor-x.x.x.tar.gz  #解压cd supervisor-x.x.xpython setup.py install #本地python版本为python2.7# python2.7 setup.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dsupervisor 简单教程">
+<meta property="og:url" content="https://mylyed.github.io/2019/04/27/supervisor/index.html">
+<meta property="og:site_name" content="李磊的笔记本">
+<meta property="og:description" content="安装supervisor官方安装教程 1pip install supervisor 如果环境没有 pip工具 12345wget supervisor下载地址tar -zxvf supervisor-x.x.x.tar.gz  #解压cd supervisor-x.x.xpython setup.py install #本地python版本为python2.7# python2.7 setup.">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-04-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-24T08:59:11.849Z">
+<meta property="article:author" content="李磊">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="supervisor">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mylyed.github.io/2019/04/27/supervisor/"/>
+
+
+
+
+
+  <title>dsupervisor 简单教程 | 李磊的笔记本</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李磊的笔记本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">纸上得来终觉浅，绝知此事要躬行。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mylyed.github.io/2019/04/27/supervisor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李磊的笔记本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dsupervisor 简单教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-27T00:00:00+08:00">
+                2019年04月27号
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/supervisor/" itemprop="url" rel="index">
+                    <span itemprop="name">supervisor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安装supervisor"><a href="#安装supervisor" class="headerlink" title="安装supervisor"></a>安装supervisor</h2><p><a href="http://www.supervisord.org/installing.html">官方安装教程</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
+<p>如果环境没有 pip工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget supervisor下载地址</span><br><span class="line">tar -zxvf supervisor-x.x.x.tar.gz  <span class="comment">#解压</span></span><br><span class="line"><span class="built_in">cd</span> supervisor-x.x.x</span><br><span class="line">python setup.py install <span class="comment">#本地python版本为python2.7</span></span><br><span class="line"><span class="comment"># python2.7 setup.py install #本地python版本为python3以上</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动supervisor"><a href="#启动supervisor" class="headerlink" title="启动supervisor"></a>启动supervisor</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisord -c /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="检查是否启动成功"><a href="#检查是否启动成功" class="headerlink" title="检查是否启动成功"></a>检查是否启动成功</h3><p>可以通过查看进程列表方式进行判断</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep supervisord</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="etc-supervisord-conf-文件"><a href="#etc-supervisord-conf-文件" class="headerlink" title="&#x2F;etc&#x2F;supervisord.conf 文件"></a>&#x2F;etc&#x2F;supervisord.conf 文件</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line">; Sample supervisor config file.</span><br><span class="line">;</span><br><span class="line">; For more information on the config file, please see:</span><br><span class="line">; http://supervisord.org/configuration.html</span><br><span class="line">;</span><br><span class="line">; Notes:</span><br><span class="line">;  - Shell expansion (&quot;~&quot; or &quot;$HOME&quot;) is not supported.  Environment</span><br><span class="line">;    variables can be expanded using this syntax: &quot;%(ENV_HOME)s&quot;.</span><br><span class="line">;  - Quotes around values are not supported, except in the case of</span><br><span class="line">;    the environment= options as shown below.</span><br><span class="line">;  - Comments must have a leading space: &quot;a=b ;comment&quot; not &quot;a=b;comment&quot;.</span><br><span class="line">;  - Command will be truncated if it looks like a config file comment, e.g.</span><br><span class="line">;    &quot;command=bash -c &#x27;foo ; bar&#x27;&quot; will truncate to &quot;command=bash -c &#x27;foo &quot;.</span><br><span class="line"></span><br><span class="line">[unix_http_server]</span><br><span class="line">file=/tmp/supervisor.sock   ; the path to the socket file</span><br><span class="line">;chmod=0700                 ; socket file mode (default 0700)</span><br><span class="line">;chown=nobody:nogroup       ; socket file uid:gid owner</span><br><span class="line">;username=user              ; default is no username (open server)</span><br><span class="line">;password=123               ; default is no password (open server)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">;配置内部HTTP-SERVER，注意0.0.0.0 是开放给任何IP访问的，</span><br><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=0.0.0.0:9001        ; ip_address:port specifier, *:port for all iface</span><br><span class="line">;登录管理界面需要的的用户名以及密码</span><br><span class="line">username=user              ; default is no username (open server)</span><br><span class="line">password=123               ; default is no password (open server)</span><br><span class="line"></span><br><span class="line">[supervisord]</span><br><span class="line">logfile=/tmp/supervisord.log ; main log file; default $CWD/supervisord.log</span><br><span class="line">logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB</span><br><span class="line">logfile_backups=10           ; # of main logfile backups; 0 means none, default 10</span><br><span class="line">loglevel=info                ; log level; default info; others: debug,warn,trace</span><br><span class="line">pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid</span><br><span class="line">nodaemon=false               ; start in foreground if true; default false</span><br><span class="line">minfds=1024                  ; min. avail startup file descriptors; default 1024</span><br><span class="line">minprocs=200                 ; min. avail process descriptors;default 200</span><br><span class="line">;umask=022                   ; process file creation umask; default 022</span><br><span class="line">;user=supervisord            ; setuid to this UNIX account at startup; recommended if root</span><br><span class="line">;identifier=supervisor       ; supervisord identifier, default is &#x27;supervisor&#x27;</span><br><span class="line">;directory=/tmp              ; default is not to cd during start</span><br><span class="line">;nocleanup=true              ; don&#x27;t clean up tempfiles at start; default false</span><br><span class="line">;childlogdir=/tmp            ; &#x27;AUTO&#x27; child log dir, default $TEMP</span><br><span class="line">;environment=KEY=&quot;value&quot;     ; key value pairs to add to environment</span><br><span class="line">;strip_ansi=false            ; strip ansi escape codes in logs; def. false</span><br><span class="line"></span><br><span class="line">; The rpcinterface:supervisor section must remain in the config file for</span><br><span class="line">; RPC (supervisorctl/web interface) to work.  Additional interfaces may be</span><br><span class="line">; added by defining them in separate [rpcinterface:x] sections.</span><br><span class="line"></span><br><span class="line">[rpcinterface:supervisor]</span><br><span class="line">supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface</span><br><span class="line"></span><br><span class="line">; The supervisorctl section configures how supervisorctl will connect to</span><br><span class="line">; supervisord.  configure it match the settings in either the unix_http_server</span><br><span class="line">; or inet_http_server section.</span><br><span class="line"></span><br><span class="line">[supervisorctl]</span><br><span class="line">serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket</span><br><span class="line">;serverurl=http://127.0.0.1:9001 ; use an http:// url to specify an inet socket</span><br><span class="line">;username=chris              ; should be same as in [*_http_server] if set</span><br><span class="line">;password=123                ; should be same as in [*_http_server] if set</span><br><span class="line">;prompt=mysupervisor         ; cmd line prompt (default &quot;supervisor&quot;)</span><br><span class="line">;history_file=~/.sc_history  ; use readline history if available</span><br><span class="line"></span><br><span class="line">; The sample program section below shows all possible program subsection values.</span><br><span class="line">; Create one or more &#x27;real&#x27; program: sections to be able to control them under</span><br><span class="line">; supervisor.</span><br><span class="line"></span><br><span class="line">;[program:theprogramname]</span><br><span class="line">;command=/bin/cat              ; the program (relative uses PATH, can take args)</span><br><span class="line">;process_name=%(program_name)s ; process_name expr (default %(program_name)s)</span><br><span class="line">;numprocs=1                    ; number of processes copies to start (def 1)</span><br><span class="line">;directory=/tmp                ; directory to cwd to before exec (def no cwd)</span><br><span class="line">;umask=022                     ; umask for process (default None)</span><br><span class="line">;priority=999                  ; the relative start priority (default 999)</span><br><span class="line">;autostart=true                ; start at supervisord start (default: true)</span><br><span class="line">;startsecs=1                   ; # of secs prog must stay up to be running (def. 1)</span><br><span class="line">;startretries=3                ; max # of serial start failures when starting (default 3)</span><br><span class="line">;autorestart=unexpected        ; when to restart if exited after running (def: unexpected)</span><br><span class="line">;exitcodes=0                   ; &#x27;expected&#x27; exit codes used with autorestart (default 0)</span><br><span class="line">;stopsignal=QUIT               ; signal used to kill process (default TERM)</span><br><span class="line">;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)</span><br><span class="line">;stopasgroup=false             ; send stop signal to the UNIX process group (default false)</span><br><span class="line">;killasgroup=false             ; SIGKILL the UNIX process group (def false)</span><br><span class="line">;user=chrism                   ; setuid to this UNIX account to run the program</span><br><span class="line">;redirect_stderr=true          ; redirect proc stderr to stdout (default false)</span><br><span class="line">;stdout_logfile=/a/path        ; stdout log path, NONE for none; default AUTO</span><br><span class="line">;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span><br><span class="line">;stdout_logfile_backups=10     ; # of stdout logfile backups (0 means none, default 10)</span><br><span class="line">;stdout_capture_maxbytes=1MB   ; number of bytes in &#x27;capturemode&#x27; (default 0)</span><br><span class="line">;stdout_events_enabled=false   ; emit events on stdout writes (default false)</span><br><span class="line">;stdout_syslog=false           ; send stdout to syslog with process name (default false)</span><br><span class="line">;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO</span><br><span class="line">;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span><br><span class="line">;stderr_logfile_backups=10     ; # of stderr logfile backups (0 means none, default 10)</span><br><span class="line">;stderr_capture_maxbytes=1MB   ; number of bytes in &#x27;capturemode&#x27; (default 0)</span><br><span class="line">;stderr_events_enabled=false   ; emit events on stderr writes (default false)</span><br><span class="line">;stderr_syslog=false           ; send stderr to syslog with process name (default false)</span><br><span class="line">;environment=A=&quot;1&quot;,B=&quot;2&quot;       ; process environment additions (def no adds)</span><br><span class="line">;serverurl=AUTO                ; override serverurl computation (childutils)</span><br><span class="line"></span><br><span class="line">; The sample eventlistener section below shows all possible eventlistener</span><br><span class="line">; subsection values.  Create one or more &#x27;real&#x27; eventlistener: sections to be</span><br><span class="line">; able to handle event notifications sent by supervisord.</span><br><span class="line"></span><br><span class="line">;[eventlistener:theeventlistenername]</span><br><span class="line">;command=/bin/eventlistener    ; the program (relative uses PATH, can take args)</span><br><span class="line">;process_name=%(program_name)s ; process_name expr (default %(program_name)s)</span><br><span class="line">;numprocs=1                    ; number of processes copies to start (def 1)</span><br><span class="line">;events=EVENT                  ; event notif. types to subscribe to (req&#x27;d)</span><br><span class="line">;buffer_size=10                ; event buffer queue size (default 10)</span><br><span class="line">;directory=/tmp                ; directory to cwd to before exec (def no cwd)</span><br><span class="line">;umask=022                     ; umask for process (default None)</span><br><span class="line">;priority=-1                   ; the relative start priority (default -1)</span><br><span class="line">;autostart=true                ; start at supervisord start (default: true)</span><br><span class="line">;startsecs=1                   ; # of secs prog must stay up to be running (def. 1)</span><br><span class="line">;startretries=3                ; max # of serial start failures when starting (default 3)</span><br><span class="line">;autorestart=unexpected        ; autorestart if exited after running (def: unexpected)</span><br><span class="line">;exitcodes=0                   ; &#x27;expected&#x27; exit codes used with autorestart (default 0)</span><br><span class="line">;stopsignal=QUIT               ; signal used to kill process (default TERM)</span><br><span class="line">;stopwaitsecs=10               ; max num secs to wait b4 SIGKILL (default 10)</span><br><span class="line">;stopasgroup=false             ; send stop signal to the UNIX process group (default false)</span><br><span class="line">;killasgroup=false             ; SIGKILL the UNIX process group (def false)</span><br><span class="line">;user=chrism                   ; setuid to this UNIX account to run the program</span><br><span class="line">;redirect_stderr=false         ; redirect_stderr=true is not allowed for eventlisteners</span><br><span class="line">;stdout_logfile=/a/path        ; stdout log path, NONE for none; default AUTO</span><br><span class="line">;stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span><br><span class="line">;stdout_logfile_backups=10     ; # of stdout logfile backups (0 means none, default 10)</span><br><span class="line">;stdout_events_enabled=false   ; emit events on stdout writes (default false)</span><br><span class="line">;stdout_syslog=false           ; send stdout to syslog with process name (default false)</span><br><span class="line">;stderr_logfile=/a/path        ; stderr log path, NONE for none; default AUTO</span><br><span class="line">;stderr_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)</span><br><span class="line">;stderr_logfile_backups=10     ; # of stderr logfile backups (0 means none, default 10)</span><br><span class="line">;stderr_events_enabled=false   ; emit events on stderr writes (default false)</span><br><span class="line">;stderr_syslog=false           ; send stderr to syslog with process name (default false)</span><br><span class="line">;environment=A=&quot;1&quot;,B=&quot;2&quot;       ; process environment additions</span><br><span class="line">;serverurl=AUTO                ; override serverurl computation (childutils)</span><br><span class="line"></span><br><span class="line">; The sample group section below shows all possible group values.  Create one</span><br><span class="line">; or more &#x27;real&#x27; group: sections to create &quot;heterogeneous&quot; process groups.</span><br><span class="line"></span><br><span class="line">;[group:thegroupname]</span><br><span class="line">;programs=progname1,progname2  ; each refers to &#x27;x&#x27; in [program:x] definitions</span><br><span class="line">;priority=999                  ; the relative start priority (default 999)</span><br><span class="line"></span><br><span class="line">; The [include] section can just contain the &quot;files&quot; setting.  This</span><br><span class="line">; setting can list multiple files (separated by whitespace or</span><br><span class="line">; newlines).  It can also contain wildcards.  The filenames are</span><br><span class="line">; interpreted as relative to this file.  Included files *cannot*</span><br><span class="line">; include files themselves.</span><br><span class="line"></span><br><span class="line">;[include]</span><br><span class="line">;files = relative/directory/*.ini</span><br><span class="line"></span><br><span class="line">;引入其他配置文件</span><br><span class="line">[include]</span><br><span class="line">files=/etc/supervisor/*.conf</span><br></pre></td></tr></table></figure>
+<p>###自定义配置文件</p>
+<p>&#x2F;etc&#x2F;supervisor&#x2F;spring-boot-demo.conf 文件</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">; 设置进程的名称，使用 supervisorctl 来管理进程时需要使用该进程名</span><br><span class="line">[program:spring-boot-demo] </span><br><span class="line">;运行的命令</span><br><span class="line">command=java -jar demo-0.0.1-SNAPSHOT.jar</span><br><span class="line">;numprocs=1                 ; 默认为1 进程数量 </span><br><span class="line">;process_name=%(program_name)s   ; 默认为 %(program_name)s，即 [program:x] 中的 x</span><br><span class="line">directory=/root/demo/target ; 执行 command 之前，先切换到工作目录</span><br><span class="line">;user=spring-boot                 ; 使用 哪个 用户来启动该进程 linux要有该用户</span><br><span class="line">; 程序崩溃时自动重启，重启次数是有限制的，默认为3次</span><br><span class="line">autorestart=true            </span><br><span class="line">redirect_stderr=true        ; 重定向输出的日志</span><br><span class="line">stdout_logfile = /var/log/supervisord/spring-boot-demo.log	;日志文件位置</span><br><span class="line">loglevel=info</span><br></pre></td></tr></table></figure>
+<p>以下是我在网上找的全部的配置说明</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">;[program:theprogramname]      ;这个就是咱们要管理的子进程了，&quot;:&quot;后面的是名字，最好别乱写和实际进程</span><br><span class="line">                                有点关联最好。这样的program我们可以设置一个或多个，一个program就是</span><br><span class="line">                                要被管理的一个进程</span><br><span class="line">;command=/bin/cat              ; 这个就是我们的要启动进程的命令路径了，可以带参数</span><br><span class="line">                                例子：/home/test.py -a &#x27;hehe&#x27;</span><br><span class="line">                                有一点需要注意的是，我们的command只能是那种在终端运行的进程，不能是</span><br><span class="line">                                守护进程。这个想想也知道了，比如说command=service httpd start。</span><br><span class="line">                                httpd这个进程被linux的service管理了，我们的supervisor再去启动这个命令</span><br><span class="line">                                这已经不是严格意义的子进程了。</span><br><span class="line">                                这个是个必须设置的项</span><br><span class="line">;process_name=%(program_name)s ; 这个是进程名，如果我们下面的numprocs参数为1的话，就不用管这个参数</span><br><span class="line">                                 了，它默认值%(program_name)s也就是上面的那个program冒号后面的名字，</span><br><span class="line">                                 但是如果numprocs为多个的话，那就不能这么干了。想想也知道，不可能每个</span><br><span class="line">                                 进程都用同一个进程名吧。</span><br><span class="line"></span><br><span class="line">                                </span><br><span class="line">;numprocs=1                    ; 启动进程的数目。当不为1时，就是进程池的概念，注意process_name的设置</span><br><span class="line">                                 默认为1    。。非必须设置</span><br><span class="line">;directory=/tmp                ; 进程运行前，会前切换到这个目录</span><br><span class="line">                                 默认不设置。。。非必须设置</span><br><span class="line">;umask=022                     ; 进程掩码，默认none，非必须</span><br><span class="line">;priority=999                  ; 子进程启动关闭优先级，优先级低的，最先启动，关闭的时候最后关闭</span><br><span class="line">                                 默认值为999 。。非必须设置</span><br><span class="line">;autostart=true                ; 如果是true的话，子进程将在supervisord启动后被自动启动</span><br><span class="line">                                 默认就是true   。。非必须设置</span><br><span class="line">;autorestart=unexpected        ; 这个是设置子进程挂掉后自动重启的情况，有三个选项，false,unexpected</span><br><span class="line">                                 和true。如果为false的时候，无论什么情况下，都不会被重新启动，</span><br><span class="line">                                 如果为unexpected，只有当进程的退出码不在下面的exitcodes里面定义的退 </span><br><span class="line">                                 出码的时候，才会被自动重启。当为true的时候，只要子进程挂掉，将会被无</span><br><span class="line">                                 条件的重启</span><br><span class="line">;startsecs=1                   ; 这个选项是子进程启动多少秒之后，此时状态如果是running，则我们认为启</span><br><span class="line">                                 动成功了</span><br><span class="line">                                 默认值为1 。。非必须设置</span><br><span class="line">;startretries=3                ; 当进程启动失败后，最大尝试启动的次数。。当超过3次后，supervisor将把</span><br><span class="line">                                 此进程的状态置为FAIL</span><br><span class="line">                                 默认值为3 。。非必须设置</span><br><span class="line">;exitcodes=0,2                 ; 注意和上面的的autorestart=unexpected对应。。exitcodes里面的定义的</span><br><span class="line">                                 退出码是expected的。</span><br><span class="line">;stopsignal=QUIT               ; 进程停止信号，可以为TERM, HUP, INT, QUIT, KILL, USR1, or USR2等信号</span><br><span class="line">                                  默认为TERM 。。当用设定的信号去干掉进程，退出码会被认为是expected</span><br><span class="line">                                  非必须设置</span><br><span class="line">;stopwaitsecs=10               ; 这个是当我们向子进程发送stopsignal信号后，到系统返回信息</span><br><span class="line">                                 给supervisord，所等待的最大时间。 超过这个时间，supervisord会向该</span><br><span class="line">                                 子进程发送一个强制kill的信号。</span><br><span class="line">                                 默认为10秒。。非必须设置</span><br><span class="line">;stopasgroup=false             ; 这个东西主要用于，supervisord管理的子进程，这个子进程本身还有</span><br><span class="line">                                 子进程。那么我们如果仅仅干掉supervisord的子进程的话，子进程的子进程</span><br><span class="line">                                 有可能会变成孤儿进程。所以咱们可以设置可个选项，把整个该子进程的</span><br><span class="line">                                 整个进程组都干掉。 设置为true的话，一般killasgroup也会被设置为true。</span><br><span class="line">                                 需要注意的是，该选项发送的是stop信号</span><br><span class="line">                                 默认为false。。非必须设置。。</span><br><span class="line">;killasgroup=false             ; 这个和上面的stopasgroup类似，不过发送的是kill信号</span><br><span class="line">;user=chrism                   ; 如果supervisord是root启动，我们在这里设置这个非root用户，可以用来</span><br><span class="line">                                 管理该program</span><br><span class="line">                                 默认不设置。。。非必须设置项</span><br><span class="line">;redirect_stderr=true          ; 如果为true，则stderr的日志会被写入stdout日志文件中</span><br><span class="line">                                 默认为false，非必须设置</span><br><span class="line">;stdout_logfile=/a/path        ; 子进程的stdout的日志路径，可以指定路径，AUTO，none等三个选项。</span><br><span class="line">                                 设置为none的话，将没有日志产生。设置为AUTO的话，将随机找一个地方</span><br><span class="line">                                 生成日志文件，而且当supervisord重新启动的时候，以前的日志文件会被</span><br><span class="line">                                 清空。当 redirect_stderr=true的时候，sterr也会写进这个日志文件</span><br><span class="line">;stdout_logfile_maxbytes=1MB   ; 日志文件最大大小，和[supervisord]中定义的一样。默认为50</span><br><span class="line">;stdout_logfile_backups=10     ; 和[supervisord]定义的一样。默认10</span><br><span class="line">;stdout_capture_maxbytes=1MB   ; 这个东西是设定capture管道的大小，当值不为0的时候，子进程可以从stdout</span><br><span class="line">                                 发送信息，而supervisor可以根据信息，发送相应的event。</span><br><span class="line">                                 默认为0，为0的时候表达关闭管道。。。非必须项</span><br><span class="line">;stdout_events_enabled=false   ; 当设置为ture的时候，当子进程由stdout向文件描述符中写日志的时候，将</span><br><span class="line">                                 触发supervisord发送PROCESS_LOG_STDOUT类型的event</span><br><span class="line">                                 默认为false。。。非必须设置</span><br><span class="line">;stderr_logfile=/a/path        ; 这个东西是设置stderr写的日志路径，当redirect_stderr=true。这个就不用</span><br><span class="line">                                 设置了，设置了也是白搭。因为它会被写入stdout_logfile的同一个文件中</span><br><span class="line">                                 默认为AUTO，也就是随便找个地存，supervisord重启被清空。。非必须设置</span><br><span class="line">;stderr_logfile_maxbytes=1MB   ; 这个出现好几次了，就不重复了</span><br><span class="line">;stderr_logfile_backups=10     ; 这个也是</span><br><span class="line">;stderr_capture_maxbytes=1MB   ; 这个一样，和stdout_capture一样。 默认为0，关闭状态</span><br><span class="line">;stderr_events_enabled=false   ; 这个也是一样，默认为false</span><br><span class="line">;environment=A=&quot;1&quot;,B=&quot;2&quot;       ; 这个是该子进程的环境变量，和别的子进程是不共享的</span><br><span class="line">;serverurl=AUTO                ; </span><br></pre></td></tr></table></figure>
+
+
+<p>更改了配置文件需要重新加载配置文件，supervisor会重启各个引用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl reload</span><br></pre></td></tr></table></figure>
+<h3 id="supervisorctl-使用"><a href="#supervisorctl-使用" class="headerlink" title="supervisorctl 使用"></a>supervisorctl 使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">supervisord #启动supervisor</span><br><span class="line">supervisorctl reload #修改完配置文件后重新启动supervisor</span><br><span class="line">supervisorctl status #查看supervisor监管的进程状态</span><br><span class="line">supervisorctl start 进程名  #启动XXX进程</span><br><span class="line">supervisorctl stop 进程名 #停止XXX进程</span><br><span class="line">supervisorctl stop all #停止全部进程，注：start、restart、stop都不会载入最新的配置文件。</span><br><span class="line">supervisorctl update #根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="使用浏览器来管理进程"><a href="#使用浏览器来管理进程" class="headerlink" title="使用浏览器来管理进程"></a>使用浏览器来管理进程</h3><p>编辑&#x2F;etc&#x2F;supervisord.conf 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;配置内部HTTP-SERVER，注意0.0.0.0 是开放给任何IP访问的，</span><br><span class="line">[inet_http_server]         ; inet (TCP) server disabled by default</span><br><span class="line">port=0.0.0.0:9001        ; ip_address:port specifier, *:port for all iface</span><br><span class="line">;登录管理界面需要的的用户名以及密码</span><br><span class="line">username=user              ; default is no username (open server)</span><br><span class="line">password=123               ; default is no password (open server)</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="命令运行不了"><a href="#命令运行不了" class="headerlink" title="命令运行不了"></a>命令运行不了</h3><p> 有可能是运行命令的权限不够 需要 sudo 命令</p>
+<h3 id="浏览器访问不了管理界面"><a href="#浏览器访问不了管理界面" class="headerlink" title="浏览器访问不了管理界面"></a>浏览器访问不了管理界面</h3><p> 有可能是Linux防火墙不允许访问9001端口<br> 以centos7为例：<br> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=9001/tcp #防火墙加入9001端口</span><br><span class="line">firewall-cmd --reload　#重启防火墙 使端口生效</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%99%E7%A8%8B/" rel="tag"># 教程</a>
+          
+            <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
+          
+            <a href="/tags/springboot/" rel="tag"># springboot</a>
+          
+            <a href="/tags/supervisor/" rel="tag"># supervisor</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/websocket/websocket/" rel="next" title="websocket 断线重连方案">
+                <i class="fa fa-chevron-left"></i> websocket 断线重连方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/29/springboot/spring-boot-https/" rel="prev" title="SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问">
+                SpingBoot2 配置HTTPS,并实现HTTP访问自动转HTTPS访问 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/mylyed" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://git.oschina.net/lil" target="_blank" title="码云">
+                      
+                        <i class="fa fa-fw fa-gitlab"></i>码云</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/u/2168032422" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/li-cai-40-13" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85supervisor"><span class="nav-number">1.</span> <span class="nav-text">安装supervisor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">生成配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8supervisor"><span class="nav-number">2.2.</span> <span class="nav-text">启动supervisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%98%AF%E5%90%A6%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F"><span class="nav-number">2.3.</span> <span class="nav-text">检查是否启动成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-supervisord-conf-%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">&#x2F;etc&#x2F;supervisord.conf 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#supervisorctl-%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">supervisorctl 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9D%A5%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B"><span class="nav-number">3.3.</span> <span class="nav-text">使用浏览器来管理进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">4.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C%E4%B8%8D%E4%BA%86"><span class="nav-number">4.1.</span> <span class="nav-text">命令运行不了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">浏览器访问不了管理界面</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李磊</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
