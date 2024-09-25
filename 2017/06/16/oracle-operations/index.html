@@ -1,100 +1,32 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/cuphead.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/cuphead.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-  
-  
-    
-    
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mylyed.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-  
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/cuphead.ico?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/cuphead.ico?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="运维,oracle," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="本文是本人在运维过程中常用的脚本">
+  <meta name="description" content="本文是本人在运维过程中常用的脚本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ORACLE 运维命令">
 <meta property="og:url" content="https://mylyed.github.io/2017/06/16/oracle-operations/index.html">
 <meta property="og:site_name" content="李磊的笔记本">
 <meta property="og:description" content="本文是本人在运维过程中常用的脚本">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-06-16T01:35:30.000Z">
 <meta property="article:modified_time" content="2024-09-24T08:59:11.848Z">
 <meta property="article:author" content="李磊">
@@ -102,39 +34,18 @@
 <meta property="article:tag" content="oracle">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="https://mylyed.github.io/2017/06/16/oracle-operations/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="https://mylyed.github.io/2017/06/16/oracle-operations/"/>
-
-
-
-
 
   <title>ORACLE 运维命令 | 李磊的笔记本</title>
   
@@ -144,254 +55,199 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">李磊的笔记本</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">纸上得来终觉浅，绝知此事要躬行。</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李磊的笔记本</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">纸上得来终觉浅，绝知此事要躬行。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
- </div>
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://mylyed.github.io/2017/06/16/oracle-operations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="李磊">
+      <meta itemprop="description" content="不做键盘侠！！！">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="李磊的笔记本">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">ORACLE 运维命令</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          ORACLE 运维命令
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T09:35:30+08:00">
-                2017年06月16号
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017年06月16号 09:35:30" itemprop="dateCreated datePublished" datetime="2017-06-16T09:35:30+08:00">2017年06月16号</time>
             </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024年09月24号 16:59:11" itemprop="dateModified" datetime="2024-09-24T16:59:11+08:00">2024年09月24号</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h2 id="本文是本人在运维过程中常用的脚本-bash脚本"><a href="#本文是本人在运维过程中常用的脚本-bash脚本" class="headerlink" title="本文是本人在运维过程中常用的脚本### bash脚本"></a>本文是本人在运维过程中常用的脚本<br><span id="more"></span><br>### bash脚本<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--查看数据库字符集</span></span><br><span class="line"><span class="keyword">select</span> userenv(<span class="string">&#x27;language&#x27;</span>) nls_lang <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--dmp文件第2、3字节记录的字符集</span></span><br><span class="line"><span class="keyword">select</span> nls_charset_name(to_number(<span class="string">&#x27;0354&#x27;</span>,<span class="string">&#x27;xxxx&#x27;</span>)) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--关闭、启用外键</span></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;alter table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27; enable constraint &#x27;</span><span class="operator">||</span>constraint_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">from</span> user_constraints <span class="keyword">where</span> constraint_type<span class="operator">=</span><span class="string">&#x27;R&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;alter table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27; disable constraint &#x27;</span><span class="operator">||</span>constraint_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">from</span> user_constraints <span class="keyword">where</span> constraint_type<span class="operator">=</span><span class="string">&#x27;R&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--禁用、启用用户创建的触发器</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;alter trigger &#x27;</span><span class="operator">||</span> OBJECT_NAME <span class="operator">||</span><span class="string">&#x27; disable;&#x27;</span> <span class="keyword">FROM</span> DBA_OBJECTS <span class="keyword">WHERE</span> OBJECT_TYPE<span class="operator">=</span><span class="string">&#x27;TRIGGER&#x27;</span> <span class="keyword">and</span> owner<span class="operator">=</span><span class="string">&#x27;YO_ONLINE&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> OBJECT_NAME;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;alter trigger &#x27;</span><span class="operator">||</span> OBJECT_NAME <span class="operator">||</span><span class="string">&#x27; enable;&#x27;</span> <span class="keyword">FROM</span> DBA_OBJECTS <span class="keyword">WHERE</span> OBJECT_TYPE<span class="operator">=</span><span class="string">&#x27;TRIGGER&#x27;</span> <span class="keyword">and</span> owner<span class="operator">=</span><span class="string">&#x27;YO_ONLINE&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> OBJECT_NAME;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除表数据</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;truncate table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">FROM</span> ALL_TABLES <span class="keyword">WHERE</span> OWNER<span class="operator">=</span><span class="string">&#x27;YO_TEST&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;drop table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">FROM</span> ALL_TABLES <span class="keyword">WHERE</span> OWNER<span class="operator">=</span><span class="string">&#x27;YO_TEST&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ATS.NUM_ROWS,ATS.TABLE_NAME <span class="keyword">FROM</span> ALL_TABLES ATS <span class="keyword">WHERE</span> ATS.OWNER<span class="operator">=</span><span class="string">&#x27;YO_ONLINE&#x27;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ATS.TABLE_NAME <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--设置显示宽度、长度</span></span><br><span class="line"><span class="keyword">show</span> pagesize; <span class="comment">--查看目前的pagesize</span></span><br><span class="line"><span class="keyword">set</span> pagesize <span class="number">300</span>; <span class="comment">--设置pagesize为300</span></span><br><span class="line"><span class="keyword">show</span> linesize; <span class="comment">--查看当前的linesize宽度</span></span><br><span class="line"><span class="keyword">set</span> linesize <span class="number">300</span>; <span class="comment">--设置linesize宽度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--修改字符集</span></span><br><span class="line">sqlplus <span class="operator">/</span>nolog</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">connect</span> sys<span class="operator">/</span>sys <span class="keyword">as</span> sysdba</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span>SHUTDOWN IMMEDIATE</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span>STARTUP MOUNT;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> ENABLE RESTRICTED SESSION;  </span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> <span class="keyword">SET</span> JOB_QUEUE_PROCESSES<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> <span class="keyword">SET</span> AQ_TM_PROCESSES<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> DATABASE <span class="keyword">OPEN</span>;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> DATABASE <span class="type">CHARACTER</span> <span class="keyword">SET</span> INTERNAL_USE ZHS16GBK; <span class="operator">/</span><span class="operator">/</span>跳过超子集检测</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span><span class="keyword">ALTER</span> DATABASE <span class="type">national</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> INTERNAL ZHS16GBK;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span>SHUTDOWN IMMEDIATE;</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span>STARTUP</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> conn <span class="operator">/</span><span class="keyword">as</span> sysdba</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">Connected.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> shutdown immediate;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">Database closed.</span><br><span class="line"></span><br><span class="line">Database dismounted.</span><br><span class="line"></span><br><span class="line">ORACLE instance shut down.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> startup mount</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">ORACLE instance started.</span><br><span class="line"></span><br><span class="line">Total <span class="keyword">System</span> <span class="keyword">Global</span> Area  <span class="number">236000356</span> bytes</span><br><span class="line"></span><br><span class="line">Fixed Size                   <span class="number">451684</span> bytes</span><br><span class="line"></span><br><span class="line">Variable Size             <span class="number">201326592</span> bytes</span><br><span class="line"></span><br><span class="line">Database Buffers           <span class="number">33554432</span> bytes</span><br><span class="line"></span><br><span class="line">Redo Buffers                 <span class="number">667648</span> bytes</span><br><span class="line"></span><br><span class="line">Database mounted.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> ENABLE RESTRICTED SESSION;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">System</span> altered.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> <span class="keyword">SET</span> JOB_QUEUE_PROCESSES<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">System</span> altered.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> <span class="keyword">SET</span> AQ_TM_PROCESSES<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">System</span> altered.</span><br><span class="line"></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">alter</span> database <span class="keyword">open</span>;</span><br><span class="line"></span><br><span class="line">Database altered.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">ALTER</span> DATABASE <span class="type">CHARACTER</span> <span class="keyword">SET</span> AL32UTF8; <span class="comment">--ZHS16GBK;</span></span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE <span class="type">CHARACTER</span> <span class="keyword">SET</span> ZHS16GBK</span><br><span class="line"></span><br><span class="line"><span class="operator">*</span></span><br><span class="line"></span><br><span class="line">ERROR <span class="keyword">at</span> line <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">ORA<span class="number">-12712</span>: <span class="keyword">new</span> <span class="type">character</span> <span class="keyword">set</span> must be a superset <span class="keyword">of</span> <span class="keyword">old</span> <span class="type">character</span> <span class="keyword">set</span></span><br><span class="line"></span><br><span class="line">提示我们的字符集：新字符集必须为旧字符集的超集，这时我们可以跳过超集的检查做更改：</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">ALTER</span> DATABASE <span class="type">character</span> <span class="keyword">set</span> INTERNAL_USE AL32UTF8;  <span class="comment">--ZHS16GBK;</span></span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">Database altered.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v$nls_parameters;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">略</span><br><span class="line"></span><br><span class="line"><span class="number">19</span> <span class="keyword">rows</span> selected.</span><br><span class="line"></span><br><span class="line">重启检查是否更改完成：</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> shutdown immediate;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">Database closed.</span><br><span class="line"></span><br><span class="line">Database dismounted.</span><br><span class="line">ORACLE instance shut down.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> startup</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">ORACLE instance started.</span><br><span class="line">Total <span class="keyword">System</span> <span class="keyword">Global</span> Area  <span class="number">236000356</span> bytes</span><br><span class="line">Fixed Size                   <span class="number">451684</span> bytes</span><br><span class="line">Variable Size             <span class="number">201326592</span> bytes</span><br><span class="line">Database Buffers           <span class="number">33554432</span> bytes</span><br><span class="line">Redo Buffers                 <span class="number">667648</span> bytes</span><br><span class="line">Database mounted.</span><br><span class="line">Database opened.</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v$nls_parameters;</span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line">略</span><br><span class="line"><span class="number">19</span> <span class="keyword">rows</span> selected.</span><br><span class="line"></span><br><span class="line">D、client端字符集修改</span><br><span class="line"></span><br><span class="line">在 <span class="operator">/</span>home<span class="operator">/</span>oracle与 <span class="operator">/</span>root用户目录下的.bash_profile中</span><br><span class="line"></span><br><span class="line">添加或修改 export NLS_LANG<span class="operator">=</span>&quot;AMERICAN_AMERICA.UTF8&quot; 语句</span><br><span class="line"></span><br><span class="line">关闭当前ssh窗口。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--导出、导入</span></span><br><span class="line">exp</span><br><span class="line">imp cross_dev<span class="operator">/</span>sss<span class="variable">@cross_test</span> fromuser<span class="operator">=</span>cross_dev touser<span class="operator">=</span>cross_dev <span class="keyword">rows</span><span class="operator">=</span>y indexes<span class="operator">=</span>n ignore<span class="operator">=</span>y <span class="keyword">commit</span><span class="operator">=</span>y file<span class="operator">=</span>d:\cross_dev.dmp</span><br><span class="line"></span><br><span class="line"><span class="comment">--oracle server字符集</span></span><br><span class="line"><span class="keyword">select</span> userenv(<span class="string">&#x27;language&#x27;</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--oracle dmp字符集</span></span><br><span class="line">用oracle的exp工具导出的dmp文件也包含了字符集信息，dmp文件的第<span class="number">2</span>和第<span class="number">3</span>个字节记录了dmp文件的字符集。如果dmp文件不大，比如只有几M或几十M，</span><br><span class="line">可以用UltraEdit打开(<span class="number">16</span>进制方式)，看第<span class="number">2</span>第<span class="number">3</span>个字节的内容，如<span class="number">0354</span>，然后用以下<span class="keyword">SQL</span>查出它对应的字符集:</span><br><span class="line"><span class="keyword">select</span> nls_charset_name(to_number(<span class="string">&#x27;0354&#x27;</span>,<span class="string">&#x27;xxxx&#x27;</span>)) <span class="keyword">from</span> dual;</span><br><span class="line">如果dmp文件很大，比如有<span class="number">2</span>G以上(这也是最常见的情况)，用文本编辑器打开很慢或者完全打不开，可以用以下命令(在unix主机上):</span><br><span class="line">cat exp.dmp <span class="operator">|</span>od <span class="operator">-</span>x<span class="operator">|</span>head <span class="number">-1</span><span class="operator">|</span>awk <span class="string">&#x27;&#123;print $2 $3&#125;&#x27;</span><span class="operator">|</span>cut <span class="operator">-</span>c <span class="number">3</span><span class="number">-6</span></span><br><span class="line">然后用上述<span class="keyword">SQL</span>也可以得到它对应的字符集。</span><br><span class="line"></span><br><span class="line"><span class="comment">--oracle client端的字符集</span></span><br><span class="line">$echo $NLS_LANG</span><br><span class="line"></span><br><span class="line">(<span class="number">1</span>).数据库服务器字符集</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> nls_database_parameters</span><br><span class="line">来源于props$，是表示数据库的字符集。</span><br><span class="line"></span><br><span class="line">(<span class="number">2</span>).客户端字符集环境</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> nls_instance_parameters</span><br><span class="line">其来源于v$<span class="keyword">parameter</span>，表示客户端的字符集的设置，可能是参数文件，环境变量或者是注册表</span><br><span class="line"></span><br><span class="line">(<span class="number">3</span>).会话字符集环境</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> nls_session_parameters</span><br><span class="line">来源于v$nls_parameters，表示会话自己的设置，可能是会话的环境变量或者是<span class="keyword">alter</span> session完成，如果会话没有特殊的设置，将与nls_instance_parameters一致。</span><br><span class="line"></span><br><span class="line">(<span class="number">4</span>).客户端的字符集要求与服务器一致，才能正确显示数据库的非Ascii字符。</span><br><span class="line">如果多个设置存在的时候，NLS作用优先级别：<span class="keyword">Sql</span> <span class="keyword">function</span> <span class="operator">&gt;</span> <span class="keyword">alter</span> session <span class="operator">&gt;</span> 环境变量或注册表<span class="operator">&gt;</span> 参数文件<span class="operator">&gt;</span> 数据库默认参数</span><br><span class="line"></span><br><span class="line">字符集要求一致，但是语言设置却可以不同，语言设置建议用英文。如字符集是zhs16gbk，则nls_lang可以是American_America.zhs16gbk。</span><br><span class="line"></span><br><span class="line"><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span>导入数据<span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span></span><br><span class="line"><span class="comment">--登录oracle的sqlplus</span></span><br><span class="line">sqlplus <span class="operator">/</span> <span class="keyword">as</span> sysdba;</span><br><span class="line"></span><br><span class="line"><span class="comment">--查看主数据库归档日志的sequence是否一致</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(sequence#) <span class="keyword">from</span> v$archived_log;</span><br><span class="line"></span><br><span class="line"><span class="comment">---查看当前的数据库文件（表空间）存放位置：</span></span><br><span class="line"> <span class="keyword">select</span> name <span class="keyword">from</span> v$datafile;</span><br><span class="line"></span><br><span class="line"><span class="comment">--创建表空间</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>space yoonline datafile <span class="string">&#x27;/data/app/oracle/oradata/orcl/yoonline01.dbf&#x27;</span> size <span class="number">3072</span>m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>space yoonline datafile <span class="string">&#x27;/data/app/oracle/oradata/yo/yoonline01.dbf&#x27;</span> size <span class="number">4096</span>m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span>space yotest datafile <span class="string">&#x27;/data/app/oracle/oradata/orcl/yotest01.dbf&#x27;</span> size <span class="number">4096</span>m;</span><br><span class="line">　<span class="number">3000</span>m指的是<span class="number">3000</span>MB,<span class="number">10</span>G</span><br><span class="line"></span><br><span class="line"><span class="comment">--创建用户并指定表空间</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> yo_online identified <span class="keyword">by</span> yo_online123 <span class="keyword">default</span> tablespace yoonline;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> yo_test identified <span class="keyword">by</span> yo_test123 <span class="keyword">default</span> tablespace yotest;</span><br><span class="line"></span><br><span class="line"><span class="comment">--给用户授权</span></span><br><span class="line"><span class="keyword">grant</span> dba,<span class="keyword">connect</span>,resource <span class="keyword">to</span> yo_online;</span><br><span class="line"></span><br><span class="line"><span class="comment">--查询服务器端的字符集</span></span><br><span class="line"><span class="keyword">select</span> userenv(<span class="string">&#x27;language&#x27;</span>) <span class="keyword">from</span> dual;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除用户所有表</span></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;drop table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">from</span> cat <span class="keyword">where</span> table_type<span class="operator">=</span><span class="string">&#x27;TABLE&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--退出sqlplus,设置client端字符集与服务端一致</span></span><br><span class="line">export NLS_LANG<span class="operator">=</span>AMERICAN_AMERICA.AL32UTF8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--批量建表</span></span><br><span class="line"></span><br><span class="line">在命令窗口执行</span><br><span class="line">@（<span class="keyword">sql</span>文件位置）</span><br><span class="line"></span><br><span class="line"><span class="comment">--关闭、启用外键</span></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;alter table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27; enable constraint &#x27;</span><span class="operator">||</span>constraint_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">from</span> user_constraints <span class="keyword">where</span> constraint_type<span class="operator">=</span><span class="string">&#x27;R&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;alter table &#x27;</span><span class="operator">||</span>table_name<span class="operator">||</span><span class="string">&#x27; disable constraint &#x27;</span><span class="operator">||</span>constraint_name<span class="operator">||</span><span class="string">&#x27;;&#x27;</span> <span class="keyword">from</span> user_constraints <span class="keyword">where</span> constraint_type<span class="operator">=</span><span class="string">&#x27;R&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--禁用、启用用户创建的触发器</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;alter trigger &#x27;</span><span class="operator">||</span> OBJECT_NAME <span class="operator">||</span><span class="string">&#x27; disable;&#x27;</span> <span class="keyword">FROM</span> DBA_OBJECTS <span class="keyword">WHERE</span> OBJECT_TYPE<span class="operator">=</span><span class="string">&#x27;TRIGGER&#x27;</span> <span class="keyword">and</span> owner<span class="operator">=</span><span class="string">&#x27;YO_ONLINE&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> OBJECT_NAME;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;alter trigger &#x27;</span><span class="operator">||</span> OBJECT_NAME <span class="operator">||</span><span class="string">&#x27; enable;&#x27;</span> <span class="keyword">FROM</span> DBA_OBJECTS <span class="keyword">WHERE</span> OBJECT_TYPE<span class="operator">=</span><span class="string">&#x27;TRIGGER&#x27;</span> <span class="keyword">and</span> owner<span class="operator">=</span><span class="string">&#x27;YO_ONLINE&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> OBJECT_NAME;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--修改表的字段长度</span></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;ALTER TABLE &#x27;</span><span class="operator">||</span>TABLE_NAME<span class="operator">||</span><span class="string">&#x27; MODIFY &#x27;</span><span class="operator">||</span>COLUMN_NAME<span class="operator">||</span><span class="string">&#x27; VARCHAR2(1000);&#x27;</span> <span class="keyword">from</span> user_tab_columns <span class="keyword">where</span> data_type<span class="operator">=</span><span class="string">&#x27;VARCHAR2&#x27;</span> <span class="keyword">AND</span> DATA_LENGTH<span class="operator">&gt;=</span><span class="number">100</span> <span class="keyword">AND</span> DATA_LENGTH<span class="operator">&lt;</span><span class="number">1000</span> <span class="keyword">and</span> TABLE_NAME <span class="keyword">like</span> <span class="string">&#x27;T%&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;ALTER TABLE &#x27;</span><span class="operator">||</span>TABLE_NAME<span class="operator">||</span><span class="string">&#x27; MODIFY &#x27;</span><span class="operator">||</span>COLUMN_NAME<span class="operator">||</span><span class="string">&#x27; VARCHAR2(200);&#x27;</span> <span class="keyword">from</span> user_tab_columns <span class="keyword">where</span> data_type<span class="operator">=</span><span class="string">&#x27;VARCHAR2&#x27;</span> <span class="keyword">AND</span> DATA_LENGTH<span class="operator">&lt;</span><span class="number">100</span> <span class="keyword">and</span> TABLE_NAME <span class="keyword">like</span> <span class="string">&#x27;T%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">### expdp导出 impdp导入数据</span><br><span class="line">sqlplus <span class="operator">/</span> <span class="keyword">as</span> sysdba</span><br><span class="line"><span class="keyword">execute</span> dbms_metadata_util.load_stylesheets;</span><br><span class="line"></span><br><span class="line">expdp yogs<span class="operator">/</span>yogsdbserver<span class="variable">@orcl</span> TABLES<span class="operator">=</span>t_bs_test dumpfile<span class="operator">=</span>expdp.dmp logfile<span class="operator">=</span>expdp.log DIRECTORY<span class="operator">=</span>dpdata;</span><br><span class="line"></span><br></pre></td></tr></table></figure></h2><h2 id="扩展表空间"><a href="#扩展表空间" class="headerlink" title="扩展表空间"></a>扩展表空间</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
@@ -417,287 +273,196 @@
 <li>导入数据<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">imp 用户/密码 fromuser=备份数据用户 touser=要导入数据的用户 rows=y indexes=n ignore=y commit=y file=dmp文件地址</span><br><span class="line"><span class="comment"># 如果导入数据量大 加入 feedback=10000 buffer=20480000 参数可以根据实际情况调整</span></span><br><span class="line"><span class="comment"># 例子</span></span><br><span class="line">./imp yo_test/yo_test123 fromuser=yo_online touser=yo_test rows=y indexes=n ignore=y commit=y feedback=10000 buffer=20480000 file=/data/orabak/oracleBack_201605222219.dmp</span><br></pre></td></tr></table></figure></li>
 </ul>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
-          
-            <a href="/tags/oracle/" rel="tag"># oracle</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/06/09/spring-d/" rel="next" title="SpingBoot 程序 部署">
-                <i class="fa fa-chevron-left"></i> SpingBoot 程序 部署
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
+              <a href="/tags/oracle/" rel="tag"># oracle</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/15/nodejs-file-servier/" rel="prev" title="Node js 文件服务器">
-                Node js 文件服务器 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/06/09/spring-d/" rel="prev" title="SpingBoot 程序 部署">
+      <i class="fa fa-chevron-left"></i> SpingBoot 程序 部署
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/15/nodejs-file-servier/" rel="next" title="Node js 文件服务器">
+      Node js 文件服务器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="" />
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">17</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/mylyed" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://git.oschina.net/lil" target="_blank" title="码云">
-                      
-                        <i class="fa fa-fw fa-gitlab"></i>码云</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="http://weibo.com/u/2168032422" target="_blank" title="微博">
-                      
-                        <i class="fa fa-fw fa-weibo"></i>微博</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://www.zhihu.com/people/li-cai-40-13" target="_blank" title="知乎">
-                      
-                        <i class="fa fa-fw fa-globe"></i>知乎</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E6%98%AF%E6%9C%AC%E4%BA%BA%E5%9C%A8%E8%BF%90%E7%BB%B4%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%84%9A%E6%9C%AC-bash%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">本文是本人在运维过程中常用的脚本### bash脚本123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227228229230231232233234235236237238239--查看数据库字符集select userenv(&#39;language&#39;) nls_lang from dual;--dmp文件第2、3字节记录的字符集select nls_charset_name(to_number(&#39;0354&#39;,&#39;xxxx&#39;)) from dual;--关闭、启用外键select &#39;alter table &#39;||table_name||&#39; enable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;select &#39;alter table &#39;||table_name||&#39; disable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;--禁用、启用用户创建的触发器SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; disable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; enable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;--删除表数据SELECT &#39;truncate table &#39;||table_name||&#39;;&#39; FROM ALL_TABLES WHERE OWNER&#x3D;&#39;YO_TEST&#39;;select &#39;drop table &#39;||table_name||&#39;;&#39; FROM ALL_TABLES WHERE OWNER&#x3D;&#39;YO_TEST&#39;;SELECT ATS.NUM_ROWS,ATS.TABLE_NAME FROM ALL_TABLES ATS WHERE ATS.OWNER&#x3D;&#39;YO_ONLINE&#39; ORDER BY ATS.TABLE_NAME ASC;--设置显示宽度、长度show pagesize; --查看目前的pagesizeset pagesize 300; --设置pagesize为300show linesize; --查看当前的linesize宽度set linesize 300; --设置linesize宽度--修改字符集sqlplus &#x2F;nologSQL&gt;connect sys&#x2F;sys as sysdbaSQL&gt;SHUTDOWN IMMEDIATESQL&gt;STARTUP MOUNT;SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;  SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES&#x3D;0;SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES&#x3D;0;SQL&gt;ALTER DATABASE OPEN;SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK; &#x2F;&#x2F;跳过超子集检测SQL&gt;ALTER DATABASE national CHARACTER SET INTERNAL ZHS16GBK;SQL&gt;SHUTDOWN IMMEDIATE;SQL&gt;STARTUP&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; conn &#x2F;as sysdba&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Connected.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; shutdown immediate;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database closed.Database dismounted.ORACLE instance shut down.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; startup mount&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ORACLE instance started.Total System Global Area  236000356 bytesFixed Size                   451684 bytesVariable Size             201326592 bytesDatabase Buffers           33554432 bytesRedo Buffers                 667648 bytesDatabase mounted.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM ENABLE RESTRICTED SESSION;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM SET JOB_QUEUE_PROCESSES&#x3D;0;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM SET AQ_TM_PROCESSES&#x3D;0;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.SQL&gt; alter database open;Database altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER DATABASE CHARACTER SET AL32UTF8; --ZHS16GBK;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ALTER DATABASE CHARACTER SET ZHS16GBK*ERROR at line 1:ORA-12712: new character set must be a superset of old character set提示我们的字符集：新字符集必须为旧字符集的超集，这时我们可以跳过超集的检查做更改：&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER DATABASE character set INTERNAL_USE AL32UTF8;  --ZHS16GBK;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; select * from v$nls_parameters;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;略19 rows selected.重启检查是否更改完成：&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; shutdown immediate;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database closed.Database dismounted.ORACLE instance shut down.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; startup&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ORACLE instance started.Total System Global Area  236000356 bytesFixed Size                   451684 bytesVariable Size             201326592 bytesDatabase Buffers           33554432 bytesRedo Buffers                 667648 bytesDatabase mounted.Database opened.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; select * from v$nls_parameters;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;略19 rows selected.D、client端字符集修改在 &#x2F;home&#x2F;oracle与 &#x2F;root用户目录下的.bash_profile中添加或修改 export NLS_LANG&#x3D;&quot;AMERICAN_AMERICA.UTF8&quot; 语句关闭当前ssh窗口。--导出、导入expimp cross_dev&#x2F;sss@cross_test fromuser&#x3D;cross_dev touser&#x3D;cross_dev rows&#x3D;y indexes&#x3D;n ignore&#x3D;y commit&#x3D;y file&#x3D;d:\cross_dev.dmp--oracle server字符集select userenv(&#39;language&#39;) from dual;--oracle dmp字符集用oracle的exp工具导出的dmp文件也包含了字符集信息，dmp文件的第2和第3个字节记录了dmp文件的字符集。如果dmp文件不大，比如只有几M或几十M，可以用UltraEdit打开(16进制方式)，看第2第3个字节的内容，如0354，然后用以下SQL查出它对应的字符集:select nls_charset_name(to_number(&#39;0354&#39;,&#39;xxxx&#39;)) from dual;如果dmp文件很大，比如有2G以上(这也是最常见的情况)，用文本编辑器打开很慢或者完全打不开，可以用以下命令(在unix主机上):cat exp.dmp |od -x|head -1|awk &#39;{print $2 $3}&#39;|cut -c 3-6然后用上述SQL也可以得到它对应的字符集。--oracle client端的字符集$echo $NLS_LANG(1).数据库服务器字符集select * from nls_database_parameters来源于props$，是表示数据库的字符集。(2).客户端字符集环境select * from nls_instance_parameters其来源于v$parameter，表示客户端的字符集的设置，可能是参数文件，环境变量或者是注册表(3).会话字符集环境select * from nls_session_parameters来源于v$nls_parameters，表示会话自己的设置，可能是会话的环境变量或者是alter session完成，如果会话没有特殊的设置，将与nls_instance_parameters一致。(4).客户端的字符集要求与服务器一致，才能正确显示数据库的非Ascii字符。如果多个设置存在的时候，NLS作用优先级别：Sql function &gt; alter session &gt; 环境变量或注册表&gt; 参数文件&gt; 数据库默认参数字符集要求一致，但是语言设置却可以不同，语言设置建议用英文。如字符集是zhs16gbk，则nls_lang可以是American_America.zhs16gbk。&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;导入数据&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;--登录oracle的sqlplussqlplus &#x2F; as sysdba;--查看主数据库归档日志的sequence是否一致select max(sequence#) from v$archived_log;---查看当前的数据库文件（表空间）存放位置： select name from v$datafile;--创建表空间create tablespace yoonline datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;orcl&#x2F;yoonline01.dbf&#39; size 3072m;create tablespace yoonline datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;yo&#x2F;yoonline01.dbf&#39; size 4096m;create tablespace yotest datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;orcl&#x2F;yotest01.dbf&#39; size 4096m;　3000m指的是3000MB,10G--创建用户并指定表空间create user yo_online identified by yo_online123 default tablespace yoonline;create user yo_test identified by yo_test123 default tablespace yotest;--给用户授权grant dba,connect,resource to yo_online;--查询服务器端的字符集select userenv(&#39;language&#39;) from dual;--删除用户所有表select &#39;drop table &#39;||table_name||&#39;;&#39; from cat where table_type&#x3D;&#39;TABLE&#39;;--退出sqlplus,设置client端字符集与服务端一致export NLS_LANG&#x3D;AMERICAN_AMERICA.AL32UTF8--批量建表在命令窗口执行@（sql文件位置）--关闭、启用外键select &#39;alter table &#39;||table_name||&#39; enable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;select &#39;alter table &#39;||table_name||&#39; disable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;--禁用、启用用户创建的触发器SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; disable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; enable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;--修改表的字段长度select &#39;ALTER TABLE &#39;||TABLE_NAME||&#39; MODIFY &#39;||COLUMN_NAME||&#39; VARCHAR2(1000);&#39; from user_tab_columns where data_type&#x3D;&#39;VARCHAR2&#39; AND DATA_LENGTH&gt;&#x3D;100 AND DATA_LENGTH&lt;1000 and TABLE_NAME like &#39;T%&#39;;select &#39;ALTER TABLE &#39;||TABLE_NAME||&#39; MODIFY &#39;||COLUMN_NAME||&#39; VARCHAR2(200);&#39; from user_tab_columns where data_type&#x3D;&#39;VARCHAR2&#39; AND DATA_LENGTH&lt;100 and TABLE_NAME like &#39;T%&#39;;### expdp导出 impdp导入数据sqlplus &#x2F; as sysdbaexecute dbms_metadata_util.load_stylesheets;expdp yogs&#x2F;yogsdbserver@orcl TABLES&#x3D;t_bs_test dumpfile&#x3D;expdp.dmp logfile&#x3D;expdp.log DIRECTORY&#x3D;dpdata;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">扩展表空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">1.增加数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%8B%E5%8A%A8%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%B0%BA%E5%AF%B8"><span class="nav-number">2.3.</span> <span class="nav-text">2.手动增加数据文件尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E6%89%A9%E5%B1%95"><span class="nav-number">2.4.</span> <span class="nav-text">3.设定数据文件自动扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E5%90%8E%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF"><span class="nav-number">2.5.</span> <span class="nav-text">设定后查看表空间信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8oracle"><span class="nav-number">2.6.</span> <span class="nav-text">启动oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.7.</span> <span class="nav-text">导入备份数据</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">李磊</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a></div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E6%98%AF%E6%9C%AC%E4%BA%BA%E5%9C%A8%E8%BF%90%E7%BB%B4%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E8%84%9A%E6%9C%AC-bash%E8%84%9A%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">本文是本人在运维过程中常用的脚本### bash脚本123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195196197198199200201202203204205206207208209210211212213214215216217218219220221222223224225226227228229230231232233234235236237238239--查看数据库字符集select userenv(&#39;language&#39;) nls_lang from dual;--dmp文件第2、3字节记录的字符集select nls_charset_name(to_number(&#39;0354&#39;,&#39;xxxx&#39;)) from dual;--关闭、启用外键select &#39;alter table &#39;||table_name||&#39; enable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;select &#39;alter table &#39;||table_name||&#39; disable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;--禁用、启用用户创建的触发器SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; disable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; enable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;--删除表数据SELECT &#39;truncate table &#39;||table_name||&#39;;&#39; FROM ALL_TABLES WHERE OWNER&#x3D;&#39;YO_TEST&#39;;select &#39;drop table &#39;||table_name||&#39;;&#39; FROM ALL_TABLES WHERE OWNER&#x3D;&#39;YO_TEST&#39;;SELECT ATS.NUM_ROWS,ATS.TABLE_NAME FROM ALL_TABLES ATS WHERE ATS.OWNER&#x3D;&#39;YO_ONLINE&#39; ORDER BY ATS.TABLE_NAME ASC;--设置显示宽度、长度show pagesize; --查看目前的pagesizeset pagesize 300; --设置pagesize为300show linesize; --查看当前的linesize宽度set linesize 300; --设置linesize宽度--修改字符集sqlplus &#x2F;nologSQL&gt;connect sys&#x2F;sys as sysdbaSQL&gt;SHUTDOWN IMMEDIATESQL&gt;STARTUP MOUNT;SQL&gt;ALTER SYSTEM ENABLE RESTRICTED SESSION;  SQL&gt;ALTER SYSTEM SET JOB_QUEUE_PROCESSES&#x3D;0;SQL&gt;ALTER SYSTEM SET AQ_TM_PROCESSES&#x3D;0;SQL&gt;ALTER DATABASE OPEN;SQL&gt;ALTER DATABASE CHARACTER SET INTERNAL_USE ZHS16GBK; &#x2F;&#x2F;跳过超子集检测SQL&gt;ALTER DATABASE national CHARACTER SET INTERNAL ZHS16GBK;SQL&gt;SHUTDOWN IMMEDIATE;SQL&gt;STARTUP&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; conn &#x2F;as sysdba&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Connected.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; shutdown immediate;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database closed.Database dismounted.ORACLE instance shut down.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; startup mount&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ORACLE instance started.Total System Global Area  236000356 bytesFixed Size                   451684 bytesVariable Size             201326592 bytesDatabase Buffers           33554432 bytesRedo Buffers                 667648 bytesDatabase mounted.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM ENABLE RESTRICTED SESSION;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM SET JOB_QUEUE_PROCESSES&#x3D;0;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER SYSTEM SET AQ_TM_PROCESSES&#x3D;0;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;System altered.SQL&gt; alter database open;Database altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER DATABASE CHARACTER SET AL32UTF8; --ZHS16GBK;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ALTER DATABASE CHARACTER SET ZHS16GBK*ERROR at line 1:ORA-12712: new character set must be a superset of old character set提示我们的字符集：新字符集必须为旧字符集的超集，这时我们可以跳过超集的检查做更改：&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; ALTER DATABASE character set INTERNAL_USE AL32UTF8;  --ZHS16GBK;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database altered.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; select * from v$nls_parameters;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;略19 rows selected.重启检查是否更改完成：&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; shutdown immediate;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;Database closed.Database dismounted.ORACLE instance shut down.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; startup&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;ORACLE instance started.Total System Global Area  236000356 bytesFixed Size                   451684 bytesVariable Size             201326592 bytesDatabase Buffers           33554432 bytesRedo Buffers                 667648 bytesDatabase mounted.Database opened.&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;SQL&gt; select * from v$nls_parameters;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;略19 rows selected.D、client端字符集修改在 &#x2F;home&#x2F;oracle与 &#x2F;root用户目录下的.bash_profile中添加或修改 export NLS_LANG&#x3D;&quot;AMERICAN_AMERICA.UTF8&quot; 语句关闭当前ssh窗口。--导出、导入expimp cross_dev&#x2F;sss@cross_test fromuser&#x3D;cross_dev touser&#x3D;cross_dev rows&#x3D;y indexes&#x3D;n ignore&#x3D;y commit&#x3D;y file&#x3D;d:\cross_dev.dmp--oracle server字符集select userenv(&#39;language&#39;) from dual;--oracle dmp字符集用oracle的exp工具导出的dmp文件也包含了字符集信息，dmp文件的第2和第3个字节记录了dmp文件的字符集。如果dmp文件不大，比如只有几M或几十M，可以用UltraEdit打开(16进制方式)，看第2第3个字节的内容，如0354，然后用以下SQL查出它对应的字符集:select nls_charset_name(to_number(&#39;0354&#39;,&#39;xxxx&#39;)) from dual;如果dmp文件很大，比如有2G以上(这也是最常见的情况)，用文本编辑器打开很慢或者完全打不开，可以用以下命令(在unix主机上):cat exp.dmp |od -x|head -1|awk &#39;{print $2 $3}&#39;|cut -c 3-6然后用上述SQL也可以得到它对应的字符集。--oracle client端的字符集$echo $NLS_LANG(1).数据库服务器字符集select * from nls_database_parameters来源于props$，是表示数据库的字符集。(2).客户端字符集环境select * from nls_instance_parameters其来源于v$parameter，表示客户端的字符集的设置，可能是参数文件，环境变量或者是注册表(3).会话字符集环境select * from nls_session_parameters来源于v$nls_parameters，表示会话自己的设置，可能是会话的环境变量或者是alter session完成，如果会话没有特殊的设置，将与nls_instance_parameters一致。(4).客户端的字符集要求与服务器一致，才能正确显示数据库的非Ascii字符。如果多个设置存在的时候，NLS作用优先级别：Sql function &gt; alter session &gt; 环境变量或注册表&gt; 参数文件&gt; 数据库默认参数字符集要求一致，但是语言设置却可以不同，语言设置建议用英文。如字符集是zhs16gbk，则nls_lang可以是American_America.zhs16gbk。&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;导入数据&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;--登录oracle的sqlplussqlplus &#x2F; as sysdba;--查看主数据库归档日志的sequence是否一致select max(sequence#) from v$archived_log;---查看当前的数据库文件（表空间）存放位置： select name from v$datafile;--创建表空间create tablespace yoonline datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;orcl&#x2F;yoonline01.dbf&#39; size 3072m;create tablespace yoonline datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;yo&#x2F;yoonline01.dbf&#39; size 4096m;create tablespace yotest datafile &#39;&#x2F;data&#x2F;app&#x2F;oracle&#x2F;oradata&#x2F;orcl&#x2F;yotest01.dbf&#39; size 4096m;　3000m指的是3000MB,10G--创建用户并指定表空间create user yo_online identified by yo_online123 default tablespace yoonline;create user yo_test identified by yo_test123 default tablespace yotest;--给用户授权grant dba,connect,resource to yo_online;--查询服务器端的字符集select userenv(&#39;language&#39;) from dual;--删除用户所有表select &#39;drop table &#39;||table_name||&#39;;&#39; from cat where table_type&#x3D;&#39;TABLE&#39;;--退出sqlplus,设置client端字符集与服务端一致export NLS_LANG&#x3D;AMERICAN_AMERICA.AL32UTF8--批量建表在命令窗口执行@（sql文件位置）--关闭、启用外键select &#39;alter table &#39;||table_name||&#39; enable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;select &#39;alter table &#39;||table_name||&#39; disable constraint &#39;||constraint_name||&#39;;&#39; from user_constraints where constraint_type&#x3D;&#39;R&#39;;--禁用、启用用户创建的触发器SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; disable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;SELECT &#39;alter trigger &#39;|| OBJECT_NAME ||&#39; enable;&#39; FROM DBA_OBJECTS WHERE OBJECT_TYPE&#x3D;&#39;TRIGGER&#39; and owner&#x3D;&#39;YO_ONLINE&#39; order by OBJECT_NAME;--修改表的字段长度select &#39;ALTER TABLE &#39;||TABLE_NAME||&#39; MODIFY &#39;||COLUMN_NAME||&#39; VARCHAR2(1000);&#39; from user_tab_columns where data_type&#x3D;&#39;VARCHAR2&#39; AND DATA_LENGTH&gt;&#x3D;100 AND DATA_LENGTH&lt;1000 and TABLE_NAME like &#39;T%&#39;;select &#39;ALTER TABLE &#39;||TABLE_NAME||&#39; MODIFY &#39;||COLUMN_NAME||&#39; VARCHAR2(200);&#39; from user_tab_columns where data_type&#x3D;&#39;VARCHAR2&#39; AND DATA_LENGTH&lt;100 and TABLE_NAME like &#39;T%&#39;;### expdp导出 impdp导入数据sqlplus &#x2F; as sysdbaexecute dbms_metadata_util.load_stylesheets;expdp yogs&#x2F;yogsdbserver@orcl TABLES&#x3D;t_bs_test dumpfile&#x3D;expdp.dmp logfile&#x3D;expdp.log DIRECTORY&#x3D;dpdata;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">扩展表空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">1.增加数据文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%8B%E5%8A%A8%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%B0%BA%E5%AF%B8"><span class="nav-number">2.3.</span> <span class="nav-text">2.手动增加数据文件尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E8%87%AA%E5%8A%A8%E6%89%A9%E5%B1%95"><span class="nav-number">2.4.</span> <span class="nav-text">3.设定数据文件自动扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%AE%9A%E5%90%8E%E6%9F%A5%E7%9C%8B%E8%A1%A8%E7%A9%BA%E9%97%B4%E4%BF%A1%E6%81%AF"><span class="nav-number">2.5.</span> <span class="nav-text">设定后查看表空间信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8oracle"><span class="nav-number">2.6.</span> <span class="nav-text">启动oracle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE"><span class="nav-number">2.7.</span> <span class="nav-text">导入备份数据</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李磊"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">李磊</p>
+  <div class="site-description" itemprop="description">不做键盘侠！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/yourname" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/yourname" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李磊</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -707,443 +472,20 @@
 
 
 
-
-
-
-
-
-
-
-
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+<script src="/js/local-search.js"></script>
 
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
 
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
 
   
 
